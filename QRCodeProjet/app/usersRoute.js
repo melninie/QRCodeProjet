@@ -1,4 +1,5 @@
 var User=require('./Models/usersModel');
+var CheckLog=require('./CheckLogin');
 
 // app/usersRoute.js
 module.exports = function(app, passport) {
@@ -8,12 +9,7 @@ module.exports = function(app, passport) {
     // =====================================
     // show the lists of users form
 
-    exports.list = function(req, res){
-
-
-    };
-
-    app.get('/users', function(req, res) {
+    app.get('/users', CheckLog, function(req, res) {
 
         var query = User.ObtAllUsers(function(err,rows)
         {
