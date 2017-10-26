@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap-theme.min.js"></script>
     <style type="text/css">
         .bs-example{
             margin: 20px;
@@ -25,7 +24,7 @@
         <a href="#etudiant" class="list-group-item " data-toggle="collapse" data-parent="#MainMenu"><strong>Etudiants</strong></a>
         <div class="collapse" id="etudiant">
             <% for(var i=0; i<=data.length-1; i++) {%>
-            <a href="/profile" class="list-group-item"><%=JSON.stringify(data[i].id)%> - <%=JSON.stringify(data[i].nomU)%> - <%=JSON.stringify(data[i].prenomU)%> - <%=JSON.stringify(data[i].promotionU)%> </a>
+            <a href="/profile" class="list-group-item"><%=JSON.stringify(data[i].id)%> - <%=JSON.stringify(data[i].nomU)%> - <%=JSON.stringify(data[i].prenomU)%> - <%=JSON.stringify(data[i].promotionU)%></a>
             <% } %>
         </div>
         <a href="#enseignant" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu"><strong>Enseignants</strong></a>
