@@ -24,26 +24,26 @@
     <div class="list-group panel">
         <a href="#etudiant" class="list-group-item " data-toggle="collapse" data-parent="#MainMenu"><strong>Etudiants</strong></a>
         <div class="collapse" id="etudiant">
-            <% for(var i=0; i<=data.length-1; i++) {%>
-            <a href="/profile" class="list-group-item"><%=JSON.stringify(data[i].id)%> - <%=JSON.stringify(data[i].nomU)%> - <%=JSON.stringify(data[i].prenomU)%> - <%=JSON.stringify(data[i].promotionU)%></a>
+            <% for(var i=0; i<=etudiants.length-1; i++) {%>
+            <a href="/profile" class="list-group-item"><%=(etudiants[i].nomU.toUpperCase())%> <%=(etudiants[i].prenomU)%>  <%=(etudiants[i].promotionU)%></a>
             <% } %>
         </div>
         <a href="#enseignant" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu"><strong>Enseignants</strong></a>
         <div class="collapse" id="enseignant">
-            <a href="/profile" class="list-group-item">enseignants 1</a>
-            <a href="/profile" class="list-group-item">enseignants 2</a>
-            <a href="/profile" class="list-group-item">enseignants 3</a>
-            <a href="/profile" class="list-group-item">enseignants 4</a>
+            <% for(var i=0; i<=enseignants.length-1; i++) {%>
+            <a href="/profile" class="list-group-item"><%=(enseignants[i].nomU.toUpperCase())%> <%=(enseignants[i].prenomU)%></a>
+            <% } %>
         </div>
         <a href="#administration" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu"><strong>Administration</strong></a>
         <div class="collapse" id="administration">
-            <a href="/profile" class="list-group-item">Subitem 1</a>
-            <a href="/profile" class="list-group-item">Subitem 2</a>
-            <a href="/profile" class="list-group-item">Subitem 3</a>
+            <% for(var i=0; i<=administration.length-1; i++) {%>
+            <a href="/profile" class="list-group-item"><%=(administration[i].nomU.toUpperCase())%> <%=(administration[i].prenomU)%></a>
+            <% } %>
         </div>
     </div>
 
 
 </div>
+
 </body>
 </html>
