@@ -1,4 +1,4 @@
-var CheckLog=require('./CheckLogin');
+var CheckLog=require('../CheckLogin');
 
 // app/routes.js
 module.exports = function(app, passport) {
