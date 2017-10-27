@@ -9,7 +9,7 @@ module.exports = function(app, passport) {
     // =====================================
     // show the lists of users form
 
-    app.get('/users', CheckLog, function(req, res) {
+    app.get('/users', function(req, res, next) {CheckLog(req, res, next, "ADMIN");},function(req, res) {
 
         var tabEtu = [];
         var tabEns = [];

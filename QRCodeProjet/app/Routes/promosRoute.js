@@ -9,7 +9,7 @@ module.exports = function(app, passport) {
     // =====================================
     // show the lists of users form
 
-    app.get('/promotions/:id?', CheckLog, function(req, res) {
+    app.get('/promotions/:id?', CheckLog, function(req, res, next) {CheckLog(req, res, next, "ADMIN");},function(req, res) {
 
         if(req.params.id) {
             var query = Promo.ObtPromoId(req.params.id, function(err,rows)
