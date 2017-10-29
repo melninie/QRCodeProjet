@@ -6,7 +6,7 @@ var router = require('express').Router();
 // PROMOTIONS ==========================
 // =====================================
 
-router.get('/promotions/:id?', CheckLog, function(req, res, next) {CheckLog(req, res, next, "ADMIN");},function(req, res) {
+router.get('/promotions/:id?', function(req, res, next) {CheckLog(req, res, next, "ADMIN");},function(req, res) {
 
     if(req.params.id) {
         var query = Promo.ObtPromoId(req.params.id, function(err,rows)

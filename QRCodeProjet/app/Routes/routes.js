@@ -21,11 +21,13 @@ module.exports = function(app, passport) {
 	});
 
 	// process the login form
-	app.post('/login', passport.authenticate('local-login', {
-            successRedirect : '/profile', // redirect to the secure profile section
+	app.post('/login', function(req, res) {
+		var returnTo = req.session.returnTo||'profile';
+		passport.authenticate('local-login', {
+            successRedirect : returnTo, // redirect to the secure profile section
             failureRedirect : '/login', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
-		}),
+		})(req, res	);/*,
         function(req, res) {
             console.log("hello");
 
@@ -35,7 +37,7 @@ module.exports = function(app, passport) {
               req.session.cookie.expires = false;
             }
         res.redirect('/');
-    });
+    }*/});
 
 	// =====================================
 	// SIGNUP ==============================
@@ -58,7 +60,7 @@ module.exports = function(app, passport) {
 	// =====================================
 	// we will want this protected so you have to be logged in to visit
 	// we will use route middleware to verify this (the isLoggedIn function)
-	app.get('/profile', CheckLog, function(req, res) {
+	app.get('/profile', function(req, res, next) {CheckLog(req, res, next, "ADMIN");},function(req, res) {
 		res.render('profile.ejs', {
 			user : req.user // get the user out of session and pass to template
 		});

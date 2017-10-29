@@ -92,6 +92,7 @@ module.exports = function(passport) {
         },
         function(req, username, password, done) { // callback with email and password from our form
             connection.query("SELECT * FROM users WHERE username = ?",[username], function(err, rows){
+
                 if (err)
                     return done(err);
                 if (!rows.length) {

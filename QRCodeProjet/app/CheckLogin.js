@@ -8,5 +8,6 @@ module.exports= function (req, res, next, role)
                 return next();
 
         // if they aren't redirect them to the home page
-        res.redirect('/');
+        req.session.returnTo = req.originalUrl;
+        res.redirect('/login');
     };
