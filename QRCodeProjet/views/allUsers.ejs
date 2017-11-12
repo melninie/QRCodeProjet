@@ -15,7 +15,7 @@
                                 <div><%=(etudiants[i].nomU.toUpperCase())%> <%=(etudiants[i].prenomU)%>  <%=(etudiants[i].promotionU)%></div>
                             </div>
                             <div class="col-md-2">
-                                <span class="pull-right"><a onclick="deleteItems('<%= etudiants[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
+                                <span class="pull-right"><a href="/admin/users" onclick="deleteItems('<%= etudiants[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
                                 <span class="pull-right"><a href="/admin/users/<%= etudiants[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
                             </div>
                         </div>

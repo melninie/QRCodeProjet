@@ -71,12 +71,8 @@ var router = require('express').Router();
                 if (err)
                     console.log("Error Selecting : %s ", err);
 
-                res.render('allUsers.ejs', {page_title: "allUsers"});
            });
         }
-
-        //req.method = "GET";
-        //res.redirect('localhost:8080/admin/users');
     });
 
 module.exports = router;
