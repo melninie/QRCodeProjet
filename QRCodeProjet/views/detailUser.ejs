@@ -1,14 +1,16 @@
 <!doctype html>
 <html>
 <head>
-
+    <title>Détail Utilisateur</title>
+    <% include layout %>
 </head>
+
 <body>
     <h1>JE SUIS DANS LA VUE DETAIL USER !!!! YOUPI </h1>
-
-    <button onclick="deleteUser()" type="button">Confirm</button>
-
+    <h1><%=(user[0].nomU.toUpperCase())%> <%=(user[0].prenomU)%>  <%=(user[0].promotionU)%></h1>
 </body>
+</html>
+
 
 
 

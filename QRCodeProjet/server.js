@@ -9,10 +9,11 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var app = express();
 var port = process.env.PORT || 8080;
-var cors = require('cors');
 
 var passport = require('passport');
 var flash = require('connect-flash');
+
+var cors = require('cors');
 
 // configuration ===============================================================
 // connect to our database
@@ -39,17 +40,12 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-app.use(require('cors')());
-/*app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET", "PUT", "POST", "DELETE", "OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    next();
-});
-app.options('*', cors());*/
-
 // routes ======================================================================
 require('./app/Routes/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+
+app.use(express.static(__dirname + '/assets'));
+
+app.use(cors());
 
 app.use('/admin', require('./app/Routes/usersRoute.js'));
 app.use('/admin', require('./app/Routes/promosRoute.js'));

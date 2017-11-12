@@ -7,15 +7,18 @@ var router = require('express').Router();
 // =====================================
 // show the lists of users form
 
-    app.get('/users/:id?', CheckLog, function(req, res)
+    router.get('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
     {
         if(req.param("id")) {
             var query = User.ObtUserId(req.param("id"), function(err,rows)
             {
                 if(err)
                     console.log("Error Selecting : %s ",err );
-
-                res.render('detailUser.ejs',{page_title:"detailUser", data:rows});
+                if(rows.length<=0)
+                {
+                    res.render('errorRessource.ejs',{page_title:"Error", ressource:"/admin/users/"+req.param("id")});
+                }
+                res.render('detailUser.ejs',{page_title:"detailUser", user:rows});
             });
         }
         else
@@ -37,12 +40,13 @@ var router = require('express').Router();
                     else
                         tabAdmin.push(element);
                 });
-                res.render('allUsers.ejs',{page_title:"allUsers", etudiants:tabEtu, enseignants:tabEns, administration:tabAdmin, chemin:"users/"});
+                res.render('allUsers.ejs',{page_title:"allUsers", etudiants:tabEtu, enseignants:tabEns, administration:tabAdmin, chemin:"admin/users/"});
             });
         }
     });
-
-    app.put('/users/:id?', CheckLog, function(req, res) {
+/*
+    router.put('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMIN");}, function(req, res)
+    {
         if (req.param("id")) {
 
             var form = req.body;
@@ -58,25 +62,22 @@ var router = require('express').Router();
                 res.render('detailUser.ejs', {page_title: "detailUser"});
             });
         }
-    });
+    });*/
 
-    app.delete('/users/:id?', CheckLog, function(req, res)
+    router.delete('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
     {
-        console.log("ICI !!");
-        console.log(req.param("id"));
-
-        if (req.param("id")) {
-            console.log("LA !!")
-
+        if(req.param("id")) {
             var query = User.DelUserId(req.param("id"), function (err, rows) {
                 if (err)
                     console.log("Error Selecting : %s ", err);
 
-
                 res.render('allUsers.ejs', {page_title: "allUsers"});
-            });
+           });
         }
+
+        //req.method = "GET";
+        //res.redirect('localhost:8080/admin/users');
     });
 
-};
+module.exports = router;
 

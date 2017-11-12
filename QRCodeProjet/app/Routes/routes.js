@@ -27,8 +27,8 @@ module.exports = function(app, passport) {
             successRedirect : returnTo, // redirect to the secure profile section
             failureRedirect : '/login', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
-		})(req, res	);/*,
-        function(req, res) {
+		})(req, res	);
+		/*function(req, res) {
             console.log("hello");
 
             if (req.body.remember) {
@@ -36,8 +36,9 @@ module.exports = function(app, passport) {
             } else {
               req.session.cookie.expires = false;
             }
-        res.redirect('/');
-    }*/});
+	      res.redirect('/');
+    	}*/
+	});
 
 	// =====================================
 	// SIGNUP ==============================
@@ -60,7 +61,7 @@ module.exports = function(app, passport) {
 	// =====================================
 	// we will want this protected so you have to be logged in to visit
 	// we will use route middleware to verify this (the isLoggedIn function)
-	app.get('/profile', function(req, res, next) {CheckLog(req, res, next, "ADMIN");},function(req, res) {
+	app.get('/profile', function(req, res, next) {CheckLog(req, res, next, "ADMINISTRATION");},function(req, res) {
 		res.render('profile.ejs', {
 			user : req.user // get the user out of session and pass to template
 		});

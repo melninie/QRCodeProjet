@@ -1,54 +1,40 @@
 <html>
-<head>
-    <title>Node Admin</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script language="JavaScript" type="text/javascript">
-        function deleteUser(idUser) {
-            $.ajax({
-                url: "http://localhost:8080/<%= chemin %>"+idUser,
-                type: 'delete',
-            });
-        }
-    </script>
-
-    <style type="text/css">
-        .bs-example{
-            margin: 20px;
-        }
-        body 		{
-            padding-top:80px;
-        }
-
-    </style>
-</head>
-<body>
-
-<div class="container" id="MainMenu">
-    <div class="list-group panel">
-        <a href="#etudiant" class="list-group-item " data-toggle="collapse" data-parent="#MainMenu"><strong>Etudiants</strong></a>
-        <div class="collapse" id="etudiant">
-            <% for(var i=0; i<=etudiants.length-1; i++) {%>
-            <a href="/profile" class="list-group-item"><%=(etudiants[i].nomU.toUpperCase())%> <%=(etudiants[i].prenomU)%>  <%=(etudiants[i].promotionU)%></a>
-            <button onclick="deleteUser(<%= etudiants[i].id %>)" type="button">Confirm</button>
-            <% } %>
+    <head>
+        <title>Utilisateurs</title>
+        <% include layout %>
+    </head>
+    <body>
+        <div class="container" id="MainMenu">
+            <div class="list-group panel">
+                <a href="#etudiant" class="list-group-item " data-toggle="collapse" data-parent="#MainMenu"><strong>Etudiants</strong></a>
+                <div class="collapse" id="etudiant">
+                    <% for(var i=0; i<=etudiants.length-1; i++) {%>
+                    <div class="list-group-item">
+                        <div class="container">
+                            <div class="col-md-9">
+                                <div><%=(etudiants[i].nomU.toUpperCase())%> <%=(etudiants[i].prenomU)%>  <%=(etudiants[i].promotionU)%></div>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="pull-right"><a onclick="deleteItems('<%= etudiants[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
+                                <span class="pull-right"><a href="/admin/users/<%= etudiants[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+                <a href="#enseignant" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu"><strong>Enseignants</strong></a>
+                <div class="collapse" id="enseignant">
+                    <% for(var i=0; i<=enseignants.length-1; i++) {%>
+                    <a href="/profile" class="list-group-item"><%=(enseignants[i].nomU.toUpperCase())%> <%=(enseignants[i].prenomU)%></a>
+                    <% } %>
+                </div>
+                <a href="#administration" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu"><strong>Administration</strong></a>
+                <div class="collapse" id="administration">
+                    <% for(var i=0; i<=administration.length-1; i++) {%>
+                    <div href="/profile" class="list-group-item"><%=(administration[i].nomU.toUpperCase())%> <%=(administration[i].prenomU)%></div>
+                    <% } %>
+                </div>
+            </div>
         </div>
-        <a href="#enseignant" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu"><strong>Enseignants</strong></a>
-        <div class="collapse" id="enseignant">
-            <% for(var i=0; i<=enseignants.length-1; i++) {%>
-            <a href="/profile" class="list-group-item"><%=(enseignants[i].nomU.toUpperCase())%> <%=(enseignants[i].prenomU)%></a>
-            <% } %>
-        </div>
-        <a href="#administration" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu"><strong>Administration</strong></a>
-        <div class="collapse" id="administration">
-            <% for(var i=0; i<=administration.length-1; i++) {%>
-            <a href="/profile" class="list-group-item"><%=(administration[i].nomU.toUpperCase())%> <%=(administration[i].prenomU)%></a>
-            <% } %>
-        </div>
-    </div>
-</div>
-</body>
+    </body>
 </html>
