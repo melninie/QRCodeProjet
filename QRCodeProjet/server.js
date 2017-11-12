@@ -13,7 +13,6 @@ var port = process.env.PORT || 8080;
 var passport = require('passport');
 var flash = require('connect-flash');
 
-var cors = require('cors');
 
 // configuration ===============================================================
 // connect to our database
@@ -44,8 +43,6 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 require('./app/Routes/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 app.use(express.static(__dirname + '/assets'));
-
-app.use(cors());
 
 app.use('/admin', require('./app/Routes/usersRoute.js'));
 app.use('/admin', require('./app/Routes/promosRoute.js'));

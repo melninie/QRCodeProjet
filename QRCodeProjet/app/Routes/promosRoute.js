@@ -13,14 +13,10 @@ router.get('/promotions/:id?', function(req, res, next) {CheckLog(req, res, next
         {
             if(err)
                 console.log("Error Selecting : %s ",err );
-
-            if(rows){
-                var test = 1;
+            if(rows.length <= 0){
+                res.render('errorRessource.ejs',{page_title:"Error", ressource:"/admin/promotions/"+req.param("id")});
             }
-            else{
-                var test = 0;
-            }
-            res.render('detailPromo.ejs',{page_title:"detailPromo", promo:rows[0], test:test});
+            res.render('detailPromo.ejs',{page_title:"detailPromo", promo:rows[0]});
         });
     }
     else {
@@ -28,11 +24,22 @@ router.get('/promotions/:id?', function(req, res, next) {CheckLog(req, res, next
             if (err)
                 console.log("Error Selecting : %s ", err);
 
-            res.render('allPromos.ejs', {page_title: "allPromos", promos: rows});
+            res.render('allPromos.ejs', {page_title: "allPromos", promos: rows, chemin:"admin/promotions/"});
         });
     }
 });
 
+
+router.delete('/promotions/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
+{
+    if(req.param("id")) {
+        var query = Promo.DelPromoId(req.param("id"), function (err, rows) {
+            if (err)
+                console.log("Error Selecting : %s ", err);
+
+        });
+    }
+});
 
 module.exports = router;
 

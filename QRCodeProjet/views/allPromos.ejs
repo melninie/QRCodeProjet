@@ -1,37 +1,24 @@
 <!doctype html>
 <html>
-<head>
-    <title>Promotions</title>
+    <head>
+        <title>Promotions</title>
+        <% include layout %>
+    </head>
+    <body>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <div class="container" >
+            <% for(var i=0; i<=promos.length-1; i++) {%>
+                <div class="row container">
+                    <div class="col-md-9">
+                        <div><%= promos[i].idP %> - <%= promos[i].nomP %></div>
+                    </div>
+                    <div class="col-md-2">
+                        <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItems('<%= promos[i].idP %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
+                        <span class="pull-right"><a href="/<%= chemin %><%= promos[i].idP %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                    </div>
+                </div>
+            <% } %>
+        </div>
 
-    <style>
-        .bs-example{
-            margin: 20px;
-        }
-        body {
-            padding-top:80px;
-            background-color: #76d04b;
-        }
-    </style>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script>
-        function deleteItems(idItem) {
-            $.ajax({
-                url: "http://localhost:8080/<%= chemin %>"+idItem,
-                type: 'delete',
-            });
-        }
-    </script>
-</head>
-<body>
-
-<div class="container" >
-    <% for(var i=0; i<=promos.length-1; i++) {%>
-        <a href="#"><%= promos[i].idP %> - <%= promos[i].nomP %></a>
-    <% } %>
-</div>
-</body>
+    </body>
 </html>
