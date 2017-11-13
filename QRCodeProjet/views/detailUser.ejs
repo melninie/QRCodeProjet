@@ -26,8 +26,8 @@
                 <div class="form-group">
                     <label>Promotion</label>
                     <select>
-                        <% for(var i=0; i<=3; i++) {%>
-                        <option><%=i%></option>
+                        <% for(var i=0; i<promos.length; i++) {%>
+                        <option value="<%=promos[i].idP%>"><%=promos[i].nomP%></option>
                         <% } %>
                     </select>
                 </div>
