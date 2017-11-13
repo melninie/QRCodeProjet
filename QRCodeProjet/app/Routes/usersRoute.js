@@ -1,6 +1,9 @@
 var User=require('../Models/usersModel');
+var Promo=require('../Models/promosModel');
+
 var CheckLog=require('../CheckLogin');
 var router = require('express').Router();
+var async = require('async');
 
 // =====================================
 // USERS ===============================
@@ -9,16 +12,44 @@ var router = require('express').Router();
 
     router.get('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
     {
+        var data = {};
+
         if(req.param("id")) {
-            var query = User.ObtUserId(req.param("id"), function(err,rows)
-            {
-                if(err)
-                    console.log("Error Selecting : %s ",err );
-                if(rows.length<=0)
-                {
-                    res.render('errorRessource.ejs',{page_title:"Error", ressource:"/admin/users/"+req.param("id")});
+            async.parallel([
+                function(parallel_done) {
+                    var query = User.ObtUserId(req.param("id"), function (err, rows) {
+                        if (err)
+                            console.log("Error Selecting : %s ", err);
+                        if (rows.length <= 0)
+                            res.render('errorRessource.ejs', {page_title: "Error", ressource: "/admin/users/" + req.param("id")
+                            });
+
+                        data.table1 = rows;
+
+                        parallel_done();
+                    });
+                },
+                function(parallel_done) {
+                    var query2 = Promo.ObtAllPromos(function (err, rows2) {
+                        if (err)
+                            console.log("Error Selecting : %s ", err);
+                        /* if(rows2.length<=0)
+                         {
+                             res.render('errorRessource.ejs',{page_title:"Error", ressource:"/admin/users/"+req.param("id")});
+                         }*/
+
+                        data.table2 = rows2;
+                        parallel_done();
+                    });
                 }
-                res.render('detailUser.ejs',{page_title:"detailUser", user:rows});
+            ], function(err){
+                if(err)
+                    return console.log(err);
+
+                console.log("DATA : ")
+                console.log(data);
+
+                res.render('detailUser.ejs',{page_title:"detailUser", user:data.table1, promos:data.table2});
             });
         }
         else

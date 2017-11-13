@@ -5,7 +5,7 @@ var app = express();
 var connection=mysql.createConnection({
     host:'localhost',
     user:'root',
-    database:'qrcode'
-
+    database:'qrcode',
+    multipleStatements:true
 });
 module.exports = connection;
