@@ -16,7 +16,7 @@ router.get('/promotions/:id?', function(req, res, next) {CheckLog(req, res, next
             if(rows.length <= 0){
                 res.render('errorRessource.ejs',{page_title:"Error", ressource:"/admin/promotions/"+req.param("id")});
             }
-            res.render('detailPromo.ejs',{page_title:"detailPromo", promo:rows[0]});
+            res.render('detailPromo.ejs',{page_title:"detailPromo", promo:rows});
         });
     }
     else {
