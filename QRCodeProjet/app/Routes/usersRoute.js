@@ -86,7 +86,7 @@ var async = require('async');
                 if (err)
                     console.log("Error Selecting : %s ", err);
 
-                res.render('detailUser.ejs', {page_title: "detailUser"});
+                //res.render('detailUser.ejs', {page_title: "detailUser"});
             });
         }
     });

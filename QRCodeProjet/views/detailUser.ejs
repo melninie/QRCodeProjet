@@ -10,7 +10,7 @@
         <div class="col-sm-6 col-sm-offset-3">
             <h1><span class="fa fa-sign-in"></span>Formulaire de modification</h1>
 
-            <form action="/users/:id?" method="put">
+            <form id="form">
                 <div class="form-group">
                     <label>Nom</label>
                     <input type="text" class="form-control" name="nom" value="<%=(user[0].nomU.toUpperCase())%>">
@@ -23,18 +23,20 @@
                     <label>Mail</label>
                     <input type="text" class="form-control" name="mail" value="<%=(user[0].mailU)%>">
                 </div>
+                <% if((user[0].roleU)=='ETUDIANT') { %>
                 <div class="form-group">
                     <label>Promotion</label>
-                    <select>
+                    <select name="promotion">
                         <% for(var i=0; i<promos.length; i++) {%>
-                        <option value="<%=promos[i].idP%>"><%=promos[i].nomP%></option>
+                        <option value="<%=promos[i].idP%>" <% if(promos[i].idP==user[0].promotionU) { %> selected="selected" <% } %> ><%=promos[i].nomP%></option>
                         <% } %>
                     </select>
                 </div>
+                <% } %>
 
                 <div class="pull-right">
-                    <button type="submit" class="btn btn-secondary btn-lg">Annuler</button>
-                    <button type="submit" class="btn btn-primary btn-lg">Appliquer</button>
+                    <a href="/admin/users" class="btn btn-secondary btn-lg">Annuler</a>
+                    <a href="/admin/users" class="btn btn-primary btn-lg" onclick="modifyItem('<%= user[0].id %>', '<%= chemin %>')">Appliquer</a>
                 </div>
             </form>
         </div>

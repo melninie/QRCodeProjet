@@ -12,7 +12,7 @@
                     <div class="list-group-item">
                         <div class="container">
                             <div class="col-md-9">
-                                <div><%=(etudiants[i].nomU.toUpperCase())%> <%=(etudiants[i].prenomU)%>  <%=(etudiants[i].promotionU)%></div>
+                                <div><strong><%=(etudiants[i].nomU.toUpperCase())%>&nbsp;&nbsp;&nbsp;<%=(etudiants[i].prenomU)%></strong>&nbsp;&nbsp;&nbsp;&nbsp;(<small><%=(etudiants[i].nomP)%>)</small></div>
                             </div>
                             <div class="col-md-2">
                                 <span class="pull-right"><a href="/admin/users" onclick="deleteItem('<%= etudiants[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
@@ -25,13 +25,33 @@
                 <a href="#enseignant" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu"><strong>Enseignants</strong></a>
                 <div class="collapse" id="enseignant">
                     <% for(var i=0; i<=enseignants.length-1; i++) {%>
-                    <a href="/profile" class="list-group-item"><%=(enseignants[i].nomU.toUpperCase())%> <%=(enseignants[i].prenomU)%></a>
+                    <div class="list-group-item">
+                        <div class="container">
+                            <div class="col-md-9">
+                                <div><strong><%=(enseignants[i].nomU.toUpperCase())%>&nbsp;&nbsp;&nbsp;<%=(enseignants[i].prenomU)%></strong></small></div>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="pull-right"><a href="/admin/users" onclick="deleteItem('<%= enseignants[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
+                                <span class="pull-right"><a href="/admin/users/<%= enseignants[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                            </div>
+                        </div>
+                    </div>
                     <% } %>
                 </div>
                 <a href="#administration" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu"><strong>Administration</strong></a>
                 <div class="collapse" id="administration">
                     <% for(var i=0; i<=administration.length-1; i++) {%>
-                    <div href="/profile" class="list-group-item"><%=(administration[i].nomU.toUpperCase())%> <%=(administration[i].prenomU)%></div>
+                    <div class="list-group-item">
+                        <div class="container">
+                            <div class="col-md-9">
+                                <div><strong><%=(administration[i].nomU.toUpperCase())%>&nbsp;&nbsp;&nbsp;<%=(administration[i].prenomU)%></strong></small></div>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="pull-right"><a href="/admin/users" onclick="deleteItem('<%= administration[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
+                                <span class="pull-right"><a href="/admin/users/<%= administration[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                            </div>
+                        </div>
+                    </div>
                     <% } %>
                 </div>
             </div>

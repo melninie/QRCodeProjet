@@ -3,7 +3,7 @@ var connection=require('../../config/dbconnection');
 var Users={
     ObtAllUsers:function(callback)
     {
-        return connection.query("select * from users Order by nomU, prenomU ASC", callback);
+        return connection.query("select * from users u LEFT JOIN promotion p ON u.promotionU=p.idP Order by nomU, prenomU ASC", callback);
     },
 
     ObtUserId:function(id, callback) {
