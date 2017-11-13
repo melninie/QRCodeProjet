@@ -1,7 +1,7 @@
 var User=require('../Models/usersModel');
 var Promo=require('../Models/promosModel');
-
 var CheckLog=require('../CheckLogin');
+
 var router = require('express').Router();
 var async = require('async');
 
@@ -46,10 +46,7 @@ var async = require('async');
                 if(err)
                     return console.log(err);
 
-                console.log("DATA : ")
-                console.log(data);
-
-                res.render('detailUser.ejs',{page_title:"detailUser", user:data.table1, promos:data.table2});
+                res.render('detailUser.ejs',{page_title:"detailUser", user:data.table1, promos:data.table2, chemin:"admin/users/"});
             });
         }
         else
@@ -75,16 +72,15 @@ var async = require('async');
             });
         }
     });
-/*
-    router.put('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMIN");}, function(req, res)
+
+    router.put('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
     {
         if (req.param("id")) {
 
-            var form = req.body;
-            var nomU = form.nomU;
-            var prenomU = form.prenomU;
-            var mailU = form.mailU;
-            var promotionU = form.promotionU;
+        var nomU = req.body.nom;
+        var prenomU = req.body.prenom;
+        var mailU = req.body.mail;
+        var promotionU = req.body.promotion;
 
             var query = User.PutUserId(req.param("id"), nomU, prenomU, mailU, promotionU, function (err, rows) {
                 if (err)
@@ -93,7 +89,7 @@ var async = require('async');
                 res.render('detailUser.ejs', {page_title: "detailUser"});
             });
         }
-    });*/
+    });
 
     router.delete('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
     {
