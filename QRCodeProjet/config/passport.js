@@ -39,37 +39,39 @@ module.exports = function(passport) {
         'local-signup',
         new LocalStrategy({
             // by default, local strategy uses username and password, we will override with email
-            usernameField : 'username',
+            usernameField : 'mail',
             passwordField : 'password',
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
-        function(req, username, password, done) {
+        function(req, mail, password, done) {
             // find a user whose email is the same as the forms email
             // we are checking to see if the user trying to login already exists
-            connection.query("SELECT * FROM users WHERE username = ?",[username], function(err, rows) {
+
+            connection.query("SELECT * FROM users WHERE mailU = ?",[mail], function(err, rows) {
                 if (err)
                     return done(err);
-                if (rows.length) {
-                    return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
-                } else {
-                    // if there is no user with that username
-                    // create the user
+                if (rows.length)
+                    return done(null, false, req.flash('signupMessage', 'That mail is already taken.'));
+                else
+                {
                     var newUserMysql = {
-                        username: username,
-                        password: bcrypt.hashSync(password, null, null),  // use the generateHash function in our user model
-                        prenomU: 'prenomTest',
-                        nomU: 'nomtest',
-                        mailU: 'mailtest',
-                        roleU: 'ETUDIANT',
-                        promotionU: 1
+                        username: req.body.prenom.substring(2) + req.body.nom.substring(4),
+                        password: bcrypt.hashSync(req.body.prenom.substring(2) + req.body.nom.substring(4), null, null),  // use the generateHash function in our user model
+                        prenomU: req.body.prenom,
+                        nomU: req.body.nom,
+                        mailU: req.body.mail,
+                        roleU: req.body.role,
+                        promotionU: req.body.promotion
                     };
 
                     var insertQuery = "INSERT INTO users ( username, password, prenomU, nomU, mailU, roleU, promotionU ) values (?,?,?,?,?,?,?)";
 
                     connection.query(insertQuery,[newUserMysql.username, newUserMysql.password, newUserMysql.prenomU, newUserMysql.nomU, newUserMysql.mailU, newUserMysql.roleU, newUserMysql.promotionU, ],function(err, rows) {
-                        newUserMysql.id = rows.insertId;
 
-                        return done(null, newUserMysql);
+                    console.log(req.user);
+
+                    return done(null, req.user);
+
                     });
                 }
             });

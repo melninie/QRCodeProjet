@@ -13,24 +13,34 @@
                 <form action="/admin/users" method="post">
                     <div class="form-group">
                         <label>Nom</label>
-                        <input type="text" class="form-control" name="nom" value="<%=(user[0].nomU.toUpperCase())%>">
+                        <input type="text" class="form-control" name="nom">
                     </div>
                     <div class="form-group">
                         <label>Prénom</label>
-                        <input type="text" class="form-control" name="prenom" value="<%=(user[0].prenomU)%>">
+                        <input type="text" class="form-control" name="prenom">
                     </div>
                     <div class="form-group">
                         <label>Mail</label>
-                        <input type="text" class="form-control" name="mail" value="<%=(user[0].mailU)%>">
+                        <input type="text" class="form-control" name="mail">
+                    </div>
+                    <div class="form-group">
+                        <label>Role</label>
+                        <select name="role">
+                            <option value="ETUDIANT">ETUDIANT</option>
+                            <option value="ENSEIGNANT">ENSEIGNANT</option>
+                            <option value="ADMINISTRATION">ADMINISTRATION</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Promotion</label>
                         <select name="promotion">
                             <% for(var i=0; i<promos.length; i++) {%>
-                            <option value="<%=promos[i].idP%>" <%=promos[i].nomP%></option>
+                            <option value="<%=promos[i].idP%>" ><%=promos[i].nomP%></option>
                             <% } %>
                         </select>
                     </div>
+
+                    <input type="hidden" name="password" value="1234">
 
                     <button type="submit" class="btn btn-warning btn-lg">Create</button>
                 </form>
