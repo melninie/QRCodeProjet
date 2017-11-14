@@ -46,6 +46,7 @@ app.use(express.static(__dirname + '/assets'));
 
 app.use('/admin', require('./app/Routes/usersRoute.js'));
 app.use('/admin', require('./app/Routes/promosRoute.js'));
+app.use('/admin', require('./app/Routes/matieresRoute.js'));
 app.use('/etudiant', require('./app/Routes/etudiantRoutes.js'));
 
 // launch ======================================================================

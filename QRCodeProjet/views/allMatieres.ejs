@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Matières</title>
+        <% include layout %>
+    </head>
+    <body>
+
+        <div class="container" >
+            <% for(var i=0; i<=matieres.length-1; i++) {%>
+                <div class="row container">
+                    <div class="col-md-9">
+                        <div><%= matieres[i].idM %> - <%= matieres[i].nomM %></div>
+                    </div>
+                    <div class="col-md-2">
+                        <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItems('<%= matieres[i].idM %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
+                        <span class="pull-right"><a href="/<%= chemin %><%= matieres[i].idM %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+
+</body>
+</html>
