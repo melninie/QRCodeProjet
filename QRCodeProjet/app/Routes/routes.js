@@ -53,7 +53,7 @@ module.exports = function(app, passport) {
              {
                  res.render('errorRessource.ejs', {page_title:"Error", ressource:"/admin/users/create"});
              }
-            res.render('createUser.ejs', {page_title:"detailUser", promos:rows, chemin:'admin/users'});
+            res.render('createUser.ejs', {page_title:"createUser", promos:rows});
         });
 	});
 

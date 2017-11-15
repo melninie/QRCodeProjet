@@ -6,6 +6,11 @@ var Users={
         return connection.query("select * from users u LEFT JOIN promotion p ON u.promotionU=p.idP Order by nomU, prenomU ASC", callback);
     },
 
+    ObtAllEnseignants:function(callback)
+    {
+        return connection.query("select * from users u LEFT JOIN promotion p ON u.promotionU=p.idP where u.roleU='ENSEIGNANT' Order by nomU, prenomU ASC", callback);
+    },
+
     ObtUserId:function(id, callback) {
         return connection.query("select * from users where id=? Order by nomU, prenomU ASC", [id], callback)
     },

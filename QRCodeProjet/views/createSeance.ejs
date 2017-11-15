@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Creation Seance</title>
+        <% include layout %>
+    </head>
+    <body>
+        <div class="container">
+            <div class="col-sm-6 col-sm-offset-3">
+
+                <h1><span class="fa fa-sign-in"></span> Creation Seance</h1>
+
+                <form action="/admin/seances" method="post">
+                    <div class="form-group">
+                        <label>Nom</label>
+                        <input type="text" class="form-control" name="nom">
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" class="form-control" name="date">
+                    </div>
+                    <div class="form-group">
+                        <label>Heure Début</label>
+                        <input type="time" class="form-control" name="hDebut">
+                    </div>
+                    <div class="form-group">
+                        <label>Heure Fin</label>
+                        <input type="time" class="form-control" name="hFin">
+                    </div>
+                    <div class="form-group">
+                        <label>Matiere</label>
+                        <select name="matiere">
+                            <% for(var i=0; i<matieres.length; i++) {%>
+                            <option value="<%=matieres[i].idM%>"><%=matieres[i].nomM%></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Enseignant</label>
+                        <select name="user">
+                            <% for(var i=0; i<enseignants.length; i++) {%>
+                            <option value="<%=enseignants[i].id%>"><%=enseignants[i].nomU%></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-warning btn-lg">Create</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

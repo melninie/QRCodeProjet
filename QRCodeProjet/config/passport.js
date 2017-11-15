@@ -68,8 +68,6 @@ module.exports = function(passport) {
 
                     connection.query(insertQuery,[newUserMysql.username, newUserMysql.password, newUserMysql.prenomU, newUserMysql.nomU, newUserMysql.mailU, newUserMysql.roleU, newUserMysql.promotionU, ],function(err, rows) {
 
-                    console.log(req.user);
-
                     return done(null, req.user);
 
                     });

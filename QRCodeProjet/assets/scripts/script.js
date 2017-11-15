@@ -7,8 +7,6 @@ function deleteItem(idItem, chemin) {
 }
 
 function modifyItem(idItem, chemin) {
-    console.log($("#form").serialize());
-
     $.ajax({
         url: "http://localhost:8080/"+chemin+idItem,
         data: $("#form").serialize(),
