@@ -12,9 +12,9 @@ var Promos={
         return connection.query("select * from promotion where idP=?", [id], callback);
     },
 
-    /*PutUserId:function(id, nom, prenom, mail, promo, callback) {
-        return connection.query("update users SET nomU=?, prenomU=?, mailU=?, promotionU=? where id=?", [nom, prenom, mail, promo, id], callback)
-    },*/
+    PutPromoId:function(id, nom, callback) {
+        return connection.query("update promotion SET nomP=? where idP=?", [nom, id], callback)
+    },
 
     DelPromoId:function(id) {
         return connection.query("delete from promotion where idP=?", [id])

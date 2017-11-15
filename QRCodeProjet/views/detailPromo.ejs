@@ -7,19 +7,18 @@
 <body>
 
 <div class="container" >
-    <%= promo.idP %> - <%= promo.nomP %>
     <div class="col-sm-6 col-sm-offset-3">
         <h1><span class="fa fa-sign-in"></span>Modifier une promotion</h1>
 
-        <form action="/promotions/:id?" method="put">
+        <form id="form">
             <div class="form-group">
                 <label>Nom de la promotion</label>
-                <input type="text" class="form-control" name="promotion" value="<%= promo.nomP %>">
+                <input type="text" class="form-control" name="nom" value="<%= promo[0].nomP %>" />
             </div>
-
+            <%= promo[0].idP %>
             <div class="pull-right">
-                <button type="submit" class="btn btn-secondary btn-lg">Annuler</button>
-                <button type="submit" class="btn btn-primary btn-lg">Appliquer</button>
+                <a href="/<%= chemin %>" class="btn btn-secondary btn-lg">Annuler</a>
+                <a href="/<%= chemin %>" class="btn btn-primary btn-lg" onclick="modifyItem('<%= promo[0].idP %>', '<%= chemin %>')">Appliquer</a>
             </div>
         </form>
     </div>

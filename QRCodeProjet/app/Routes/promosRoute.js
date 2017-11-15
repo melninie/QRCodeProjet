@@ -16,7 +16,7 @@ router.get('/promotions/:id?', function(req, res, next) {CheckLog(req, res, next
             if(rows.length <= 0){
                 res.render('errorRessource.ejs',{page_title:"Error", ressource:"/admin/promotions/"+req.param("id")});
             }
-            res.render('detailPromo.ejs',{page_title:"detailPromo", promo:rows});
+            res.render('detailPromo.ejs',{page_title:"detailPromo", promo:rows, chemin:"admin/promotions/"});
         });
     }
     else {
@@ -40,6 +40,35 @@ router.delete('/promotions/:id?', function(req, res, next){ CheckLog(req, res, n
         });
     }
 });
+
+
+
+router.put('/promotions/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
+{
+    if (req.param("id")) {
+
+        var nomP = req.body.nom;
+        var query = Promo.PutPromoId(req.param("id"), nomP, function (err, rows) {
+            if (err)
+                console.log("Error Selecting : %s ", err);
+
+            //res.render('detailUser.ejs', {page_title: "detailUser"});
+        });
+    }
+});
+
+
+router.post('/promotions', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
+{
+    if(req.param("id")) {
+        var query = Promo.DelPromoId(req.param("id"), function (err, rows) {
+            if (err)
+                console.log("Error Selecting : %s ", err);
+
+        });
+    }
+});
+
 
 module.exports = router;
 
