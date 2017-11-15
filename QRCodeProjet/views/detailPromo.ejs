@@ -15,7 +15,6 @@
                 <label>Nom de la promotion</label>
                 <input type="text" class="form-control" name="nom" value="<%= promo[0].nomP %>" />
             </div>
-            <%= promo[0].idP %>
             <div class="pull-right">
                 <a href="/<%= chemin %>" class="btn btn-secondary btn-lg">Annuler</a>
                 <a href="/<%= chemin %>" class="btn btn-primary btn-lg" onclick="modifyItem('<%= promo[0].idP %>', '<%= chemin %>')">Appliquer</a>

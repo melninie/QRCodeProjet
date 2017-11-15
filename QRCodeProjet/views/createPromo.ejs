@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+    <title>Creation Promotion</title>
+    <% include layout %>
+</head>
+<body>
+<div class="container">
+    <div class="col-sm-6 col-sm-offset-3">
+
+        <h1><span class="fa fa-sign-in"></span> Signup</h1>
+
+        <form action="/<%= chemin %>" method="post">
+            <div class="form-group">
+                <label>Nom de la promotion</label>
+                <input type="text" class="form-control" name="nom">
+            </div>
+            <button type="submit" class="btn btn-warning btn-lg">Créer</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

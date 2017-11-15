@@ -18,6 +18,10 @@ var Promos={
 
     DelPromoId:function(id) {
         return connection.query("delete from promotion where idP=?", [id])
+    },
+
+    AddPromoId:function(nomP, callback) {
+        return connection.query("INSERT INTO promotion(nomP) VALUES (?)", [nomP], callback)
     }
 
 };
