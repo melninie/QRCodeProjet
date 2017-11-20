@@ -55,8 +55,8 @@ module.exports = function(passport) {
                 else
                 {
                     var newUserMysql = {
-                        username: req.body.prenom.substring(2) + req.body.nom.substring(4),
-                        password: bcrypt.hashSync(req.body.prenom.substring(2) + req.body.nom.substring(4), null, null),  // use the generateHash function in our user model
+                        username: req.body.prenom.substring(0, 2) + req.body.nom.substring(0, 4),
+                        password: bcrypt.hashSync(req.body.prenom.substring(0, 2) + req.body.nom.substring(0, 4), null, null),  // use the generateHash function in our user model
                         prenomU: req.body.prenom,
                         nomU: req.body.nom,
                         mailU: req.body.mail,

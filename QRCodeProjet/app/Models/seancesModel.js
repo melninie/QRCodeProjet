@@ -11,11 +11,11 @@ var Seance={
     },
 
     CheckSeance: function(nom, date, hDebut, hFin, matiere, enseignant, callback){
-        return connection.query("SELECT * FROM users WHERE nomS=? and dateS=? and heureDebut=? and heureFin=? and matiereS=?, userS=?",[nom, date, hDebut, hFin, matiere, enseignant], callback)
+        return connection.query("SELECT * FROM seance WHERE nomS=? and dateS=? and heureDebut=? and heureFin=? and matiereS=?, userS=?",[nom, date, hDebut, hFin, matiere, enseignant], callback)
     },
 
     PostSeance: function(nom, date, hDebut, hFin, matiere, user, callback){
-        return connection.query("INSERT INTO users (nomS, dateS, heureDebut, heureFin, matiereS, userS) values (?,?,?,?,?,?)", [nom, date, hDebut, hFin, matiere, user], callback);
+        return connection.query("INSERT INTO seance (nomS, dateS, heureDebut, heureFin, matiereS, userS) values (?,?,?,?,?,?)", [nom, date, hDebut, hFin, matiere, user], callback);
     },
 
     PutSeanceId:function(id, nom, date, hDebut, hFin, matiere, user, callback) {
