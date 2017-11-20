@@ -69,6 +69,10 @@ var async = require('async');
                                     ressource: "/admin/seances/" + req.param("id")
                                 });
 
+                            rows.forEach(function (element) {
+                                element.dateS = element.dateS.getUTCFullYear()+"-"+(element.dateS.getUTCMonth()+1)+"-"+element.dateS.getDate();
+                            });
+
                             data.table1 = rows;
                             parallel_done();
                         });
@@ -123,9 +127,9 @@ var async = require('async');
                             res.render('errorRessource.ejs', {page_title: "Error", ressource: "/admin/seances/" + req.param("id")
                             });
 
-                        /*rows.forEach(function (element) {
-                            element.dateS = element.dateS.getUTCFullYear()+"-"+element.dateS.getUTCMonth()+"-"+element.dateS.getUTCDay();
-                        });*/
+                        rows.forEach(function (element) {
+                            element.dateS = element.dateS.getDate()+"-"+(element.dateS.getUTCMonth()+1)+"-"+element.dateS.getUTCFullYear();
+                        });
 
                         data2.table1 = rows;
                         parallel_done();
@@ -155,21 +159,22 @@ var async = require('async');
 
     router.post('/seances',function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
     {
-        var query = Seance.CheckSeance(req.body.nom, req.body.date, req.body.hDebut, req.body.hFin, req.body.matiere, req.body.enseignants, function (err, rows) {
+/*        var query = Seance.CheckSeance(req.body.nom, req.body.date, req.body.hDebut, req.body.hFin, req.body.matiere, req.body.enseignants, function (err, rows) {
             if (err)
                 console.log("Error Selecting : %s ", err);
             if (rows.length)
                 console.log("That mail is already taken.");
             else
-            {
-                var query = Seance.PostSeance(req.body.nom, req.body.date, req.body.hDebut, req.body.hFin, req.body.matiere, function (err, rows2) {
+            {*/
+                var query = Seance.PostSeance(req.body.nom, req.body.date, req.body.hDebut, req.body.hFin, req.body.matiere, req.body.user, function (err, rows) {
                     if (err)
                         console.log("Error Selecting : %s ", err);
-                    if (rows.length)
-                        console.log("That mail is already taken.");
+
+                    res.redirect('/admin/seances');
+
                 });
-            }
-        });
+ /*           }
+        });*/
     });
 
     router.put('/seances/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
