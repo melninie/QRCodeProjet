@@ -16,13 +16,8 @@ router.get('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "E
             function (parallel_done) {
                 var query1 = Etudiant.ObtSeanceWithMatiereId(req.params.id, function(err,rows) {
                     if (err)
-                    if (rows.length <= 0) {
-                        res.render('errorRessource.ejs', {
-                            page_title: "Error",
-                            ressource: "/etudiant/seance/" + req.param("id")
-                        });
-                    }
-                    data.seance = rows[0];
+                        console.log("Error Selecting : %s ", err);
+                    data.seance = rows;
                     parallel_done();
                 });
             },
@@ -42,6 +37,16 @@ router.get('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "E
         ], function (err) {
             if (err)
                 return console.log(err);
+
+            if (data.seance.length <= 0) {
+                res.render('errorRessource.ejs', {
+                    page_title: "Error",
+                    ressource: "/etudiant/seance/" + req.param("id")
+                });
+            }
+            else {
+                data.seance = data.seance[0]; //on ne garde que la premiere ligne
+            }
 
             //vérifications promo
             if(req.user.promotionU != data.seance.promotionS){
