@@ -18,8 +18,8 @@ var Seance={
         return connection.query("INSERT INTO seance (nomS, dateS, heureDebut, heureFin, matiereS, userS) values (?,?,?,?,?,?)", [nom, date, hDebut, hFin, matiere, user], callback);
     },
 
-    PutSeanceId:function(id, nom, date, hDebut, hFin, matiere, user, callback) {
-        return connection.query("update seance SET nomS=?, dateS=?, heureDebut=?, heureFin=?, matiereS=?, userS=? where idS=?", [nom, date, hDebut, hFin, matiere, user, id], callback)
+    PutSeanceId:function(id, nom, date, hDebut, hFin, commentaire, matiere, user, callback) {
+        return connection.query("update seance SET nomS=?, dateS=?, heureDebut=?, heureFin=?, commentaire=?, matiereS=?, userS=? where idS=?", [nom, date, hDebut, hFin, commentaire, matiere, user, id], callback)
     },
 
     DelSeanceId:function(id) {

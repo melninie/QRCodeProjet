@@ -57,6 +57,9 @@ var async = require('async');
 
             var query = User.ObtAllUsers(function(err,rows)
             {
+                var sessionUser = req.session.passport.user;
+                var lengthResult = 0;
+
                 if(err)
                     console.log("Error Selecting : %s ",err );
 
@@ -65,10 +68,13 @@ var async = require('async');
                         tabEtu.push(element);
                     else if(element.roleU=="ENSEIGNANT")
                         tabEns.push(element);
-                    else
+                    else {
                         tabAdmin.push(element);
+                        lengthResult++;
+                    }
                 });
-                res.render('allUsers.ejs',{page_title:"allUsers", etudiants:tabEtu, enseignants:tabEns, administration:tabAdmin, chemin:"admin/users/"});
+
+                res.render('allUsers.ejs',{page_title:"allUsers", etudiants:tabEtu, enseignants:tabEns, administration:tabAdmin, session:sessionUser, nbAdmin:lengthResult, chemin:"admin/users/"});
             });
         }
     });

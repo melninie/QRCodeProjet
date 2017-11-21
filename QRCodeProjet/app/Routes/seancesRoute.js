@@ -4,6 +4,7 @@ var Matiere=require('../Models/matieresModel');
 var Seance=require('../Models/seancesModel');
 var CheckLog=require('../CheckLogin');
 
+var moment = require('moment');
 var router = require('express').Router();
 var async = require('async');
 
@@ -152,7 +153,7 @@ var async = require('async');
                 if(err)
                     return console.log(err);
 
-                res.render('allSeances.ejs',{page_title:"allSeance", seances:data2.table1, matieres:data2.table2, chemin:"admin/seances/"});
+                res.render('allSeances.ejs',{page_title:"allSeance", seances:data2.table1, matieres:data2.table2, chemin:"admin/seances/", moment: moment});
             });
         }
     });
@@ -185,10 +186,11 @@ var async = require('async');
             var dateS = req.body.date;
             var heureDebut = req.body.hDebut;
             var heureFin = req.body.hFin;
+            var commentaire = req.body.commentaire;
             var matiere = req.body.matiere;
             var user = req.body.user;
 
-            var query = Seance.PutSeanceId(req.param("id"), nomS, dateS, heureDebut, heureFin, matiere, user, function (err, rows) {
+            var query = Seance.PutSeanceId(req.param("id"), nomS, dateS, heureDebut, heureFin, commentaire, matiere, user, function (err, rows) {
                 if (err)
                     console.log("Error Selecting : %s ", err);
             });
