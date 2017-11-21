@@ -49,6 +49,7 @@ app.use('/admin', require('./app/Routes/promosRoute.js'));
 app.use('/admin', require('./app/Routes/matieresRoute.js'));
 app.use('/admin', require('./app/Routes/seancesRoute'));
 app.use('/etudiant', require('./app/Routes/etudiantRoutes.js'));
+app.use('/enseignant', require('./app/Routes/enseignantRoutes.js'));
 
 
 // launch ======================================================================

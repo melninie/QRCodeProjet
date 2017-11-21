@@ -23,23 +23,33 @@ module.exports = function(app, passport) {
 
 	// process the login form
 	app.post('/login', function(req, res) {
-		var returnTo = req.session.returnTo||'profile';
+		var returnTo = req.session.returnTo||'redirectByRole';
 		passport.authenticate('local-login', {
             successRedirect : returnTo, // redirect to the secure profile section
             failureRedirect : '/login', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
 		})(req, res	);
-		/*function(req, res) {
-            console.log("hello");
-
-            if (req.body.remember) {
-              req.session.cookie.maxAge = 1000 * 60 * 3;
-            } else {
-              req.session.cookie.expires = false;
-            }
-	      res.redirect('/');
-    	}*/
 	});
+
+    // =====================================
+    // AFTER LOGIN ===============================
+    // =====================================
+    // redirect function of role user
+    app.get('/redirectByRole', function(req, res) {
+
+    	switch(req.user.roleU){
+			case "ETUDIANT":
+				var returnTo = "profile";
+				break;
+			case "ENSEIGNANT":
+				var returnTo = "enseignant/seance";
+				break;
+			case "ADMINISTRATION":
+				var returnTo = "admin/users";
+				break;
+		}
+        res.redirect(returnTo);
+    });
 
 	// =====================================
 	// SIGNUP ==============================
