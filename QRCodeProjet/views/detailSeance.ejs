@@ -28,6 +28,10 @@
                     <input type="time" class="form-control" name="hFin" value="<%=(seance[0].heureFin)%>">
                 </div>
                 <div class="form-group">
+                    <label>Commentaire</label>
+                    <textarea class="form-control" name="commentaire"><%=(seance[0].commentaire)%></textarea>
+                </div>
+                <div class="form-group">
                     <label>Matiere</label>
                     <select name="matiere">
                         <% for(var i=0; i<matieres.length; i++) {%>

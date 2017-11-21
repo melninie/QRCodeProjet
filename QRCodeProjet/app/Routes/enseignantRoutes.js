@@ -21,7 +21,7 @@ router.get('/seance', function(req, res, next) {CheckLog(req, res, next, "ENSEIG
             }
             res.render('validerPresence.ejs',{page_title:"validerPresence", seance:rows});
         });
-    }
+
     /*else {
         var query = Enseignant.ObtAllPromos(function (err, rows) {
             if (err)
