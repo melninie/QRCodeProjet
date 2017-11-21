@@ -1,6 +1,8 @@
 var Etudiant = require('../Models/etudiantModel');
 var CheckLog = require('../CheckLogin');
 var router = require('express').Router();
+var format = require('date-format');
+var async = require('async');
 
 // =====================================
 // ETUDIANT ==========================
@@ -9,26 +11,64 @@ var router = require('express').Router();
 router.get('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "ETUDIANT");},function(req, res) {
 
     if(req.params.id) {
-        var query = Etudiant.ObtSeanceWithMatiereId(req.params.id, function(err,rows) {
+        var data = {};
+        async.parallel([
+            function (parallel_done) {
+                var query1 = Etudiant.ObtSeanceWithMatiereId(req.params.id, function(err,rows) {
+                    if (err)
+                    if (rows.length <= 0) {
+                        res.render('errorRessource.ejs', {
+                            page_title: "Error",
+                            ressource: "/etudiant/seance/" + req.param("id")
+                        });
+                    }
+                    data.seance = rows[0];
+                    parallel_done();
+                });
+            },
+            function (parallel_done) {
+                var query2 = Etudiant.PeutSigner(req.params.id, req.user.id, function (err, rows2) {
+                    if (err)
+                        console.log("Error Selecting : %s ", err);
+                    if (rows2.length <= 0) {
+                        data.dejaPresent = false;
+                    }
+                    else {
+                        data.dejaPresent = true;
+                    }
+                    parallel_done();
+                });
+            }
+        ], function (err) {
             if (err)
-                console.log("Error Selecting : %s ", err);
-            if (rows.length <= 0) {
+                return console.log(err);
+
+            //vérifications promo
+            if(req.user.promotionU != data.seance.promotionS){
                 res.render('errorRessource.ejs', {
                     page_title: "Error",
                     ressource: "/etudiant/seance/" + req.param("id")
                 });
             }
+            //vérifications horaire
+            var heure = format.asString('hh:mm', new Date());
+            var date = format.asString('yyyy-MM-dd', new Date());
+            var dateSeance = format.asString('yyyy-MM-dd', data.seance.dateS);
+            var heureDebut = format.asString('hh:mm', data.seance.heureDebut);
+            var heureFin = format.asString('hh:mm', data.seance.heureFin);
 
-            console.log(rows[0]);
-
-            //vérifications
-            //la bonne promo
-            if(req.user.promotionU != rows[0].promotionS){
-
+            var peutSigner = false;
+            if((date == dateSeance) && (heureDebut <= heure && heure <= heureFin) && !data.dejaPresent){
+                peutSigner = true;
             }
-            //l'horaire
 
-            res.render('signalerPresence.ejs',{page_title:"signalerPresence", seance:rows});
+            res.render('signalerPresence.ejs',{
+                page_title:"signalerPresence",
+                format:format,
+                peutSigner : peutSigner,
+                dejaPresent: data.dejaPresent,
+                seance:data.seance}
+                );
         });
     }
 });

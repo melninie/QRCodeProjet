@@ -6,5 +6,9 @@ var Etudiant={
         return connection.query("select * from seance s LEFT JOIN matiere m ON s.matiereS=m.idM where idS = ?;", [id], callback)
     },
 
+    PeutSigner:function(seance, utilisateur, callback) {
+        return connection.query("select * from badge where seanceB = ? and utilisateurB = ?;", [seance, utilisateur], callback)
+    },
+
 };
 module.exports=Etudiant;

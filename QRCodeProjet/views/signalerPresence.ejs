@@ -7,11 +7,27 @@
 <body>
 
 <div class="container" >
-    Signaler sa présence
-    <%= seance.idS %><br>
-    <%= seance.heureDebut %><br>
-    <%= seance.heureFin %><br>
-    <%= seance.matiereS %><br>
+    <h1 align="center">Signaler sa présence</h1>
+    <h2>
+        <%= seance.nomM %>
+            <small>
+                <%= format.asString("dd/MM/yyyy",seance.dateS) %>
+                (<%= format.asString("hh:mm",seance.heureDebut) %> -
+                <%= format.asString("hh:mm",seance.heureFin) %>)
+            </small>
+    </h2>
+    <% if (peutSigner) { %>
+        <button type="button" class="btn btn-success btn-lg btn-block">Signaler sa présence</button>
+    <% } else { %>
+        <% if(dejaPresent){%>
+            <button type="button" class="btn disabled btn-lg btn-block">Vous ètes déja présent</button>
+        <% } else { %>
+            <button type="button" class="btn disabled btn-lg btn-block">L'horaire est dépassé, vous ne pouvez plus signer.</button>
+    <% } %>
+    <% } %>
+
+
+
 </div>
 </body>
 </html>
