@@ -5,20 +5,31 @@
         <% include layout %>
     </head>
     <body>
-
-        <div class="container" >
-            <% for(var i=0; i<=matieres.length-1; i++) {%>
-                <div class="row container">
-                    <div class="col-md-9">
-                        <div><%= matieres[i].idM %> - <%= matieres[i].nomM %></div>
-                    </div>
-                    <div class="col-md-2">
-                        <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItems('<%= matieres[i].idM %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
-                        <span class="pull-right"><a href="/<%= chemin %><%= matieres[i].idM %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
-                    </div>
+    <div class="container">
+        <h1 class="pull-left">Matières :</h1>
+        <span class="pull-right"><a href="/admin/matieres/create"><img class="iconsAction" src="/files/create.PNG"></a></span>
+    </div>
+    <div class="container" >
+        <% for(var i=0; i<=promos.length-1; i++) {%>
+            <a href="#promos<%=promos[i].nomP %>" class="list-group-item " data-toggle="collapse" data-parent="#MainMenu"><strong><%= promos[i].nomP %></strong></a>
+                <div class="collapse" id="promos<%=promos[i].nomP %>">
+                    <% for(var j=0; j<=matieres.length-1; j++) {
+                        if(matieres[j].promotionS == promos[i].idP) { %>
+                            <div class="list-group-item">
+                                <div class="container">
+                                    <div class="col-md-9">
+                                        <div><strong><%=(matieres[j].nomM.toUpperCase())%></strong></div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <span class="pull-right"><a href="/admin/matieres" onclick="deleteItem('<%= matieres[j].idM %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
+                                        <span class="pull-right"><a href="/admin/matieres/<%= matieres[j].idM %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% } %>
                 </div>
             <% } %>
-        </div>
-
+    </div>
 </body>
 </html>
