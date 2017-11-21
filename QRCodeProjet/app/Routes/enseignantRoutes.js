@@ -1,5 +1,4 @@
-var Enseignant = require('../Models/enseignantModel');
-var User = require('../Models/etudiantModel');
+var Seance = require('../Models/seancesModel');
 var CheckLog = require('../CheckLogin');
 var router = require('express').Router();
 
@@ -21,18 +20,6 @@ router.get('/seance', function(req, res, next) {CheckLog(req, res, next, "ENSEIG
             }
             res.render('validerPresence.ejs',{page_title:"validerPresence", seance:rows});
         });
-
-    /*else {
-        var query = Enseignant.ObtAllPromos(function (err, rows) {
-            if (err)
-                console.log("Error Selecting : %s ", err);
-
-            res.render('signalerPresence.ejs', {page_title: "signalerPresence", promos: rows, chemin:"admin/promotions/"});
-        });
-    }
-
-    res.render('signalerPresence.ejs', {page_title: "signalerPresence", /!*promos: rows,*!/ chemin:"etudiant/seance/"});*/
-
 });
 
 module.exports = router;

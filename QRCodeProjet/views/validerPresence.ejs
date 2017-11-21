@@ -4,14 +4,8 @@
     <title>Signaler présence</title>
     <% include layout %>
 </head>
-<body>
-
-<div class="container" >
-    Signaler sa présence
-    <%= seance.idS %><br>
-    <%= seance.heureDebut %><br>
-    <%= seance.heureFin %><br>
-    <%= seance.matiereS %><br>
-</div>
-</body>
+    <body>
+         <div class="col-md-6"><% include qrCode %></div>
+         <div class="col-md-6"><% include listeEtudiants %></div>
+    </body>
 </html>

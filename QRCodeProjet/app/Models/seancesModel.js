@@ -10,6 +10,10 @@ var Seance={
         return connection.query("select * from seance where idS=?", [id], callback)
     },
 
+    ObtSeanceEnseignant:function(callback){
+        return connection.query("", callback)
+    },
+
     CheckSeance: function(nom, date, hDebut, hFin, matiere, enseignant, callback){
         return connection.query("SELECT * FROM seance WHERE nomS=? and dateS=? and heureDebut=? and heureFin=? and matiereS=?, userS=?",[nom, date, hDebut, hFin, matiere, enseignant], callback)
     },
