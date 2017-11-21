@@ -10,5 +10,9 @@ var Etudiant={
         return connection.query("select * from badge where seanceB = ? and utilisateurB = ?;", [seance, utilisateur], callback)
     },
 
+    Signer:function(seance, utilisateur, callback) {
+        return connection.query("insert into badge (seanceB, utilisateurB) values (?,?);", [seance, utilisateur], callback)
+    },
+
 };
 module.exports=Etudiant;

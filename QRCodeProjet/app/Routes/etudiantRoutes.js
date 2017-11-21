@@ -72,8 +72,23 @@ router.get('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "E
                 format:format,
                 peutSigner : peutSigner,
                 dejaPresent: data.dejaPresent,
-                seance:data.seance}
+                seance:data.seance,
+                chemin: ("etudiant/seance/"+data.seance.idS)}
                 );
+        });
+    }
+});
+
+router.post('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "ETUDIANT");},function(req, res) {
+
+    if(req.params.id) {
+        var seance = req.params.id;
+        var utilisateur = req.user.id;
+        var query = Etudiant.Signer(seance, utilisateur, function (err, rows) {
+            if (err)
+                console.log("Error Selecting : %s ", err);
+
+            // res.redirect('/admin/promotions');
         });
     }
 });
