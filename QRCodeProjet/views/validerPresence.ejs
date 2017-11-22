@@ -3,9 +3,69 @@
 <head>
     <title>Signaler présence</title>
     <% include layout %>
-</head>
+
+    </head>
     <body>
-         <div class="col-md-6"><% include qrCode %></div>
-         <div class="col-md-6"><% include listeEtudiants %></div>
+        <div id="titre" class="container">
+            <h2 class="pull-left">Seance A Valider : </h2>
+        </div>
+
+        <div class="container" >
+            <div class="col-md-5">
+                <div id="promoSeance" class="container">
+                    <h4 class="pull-left"><%= seance[0].nomP %>&nbsp;&nbsp;<%= seance[0].nomM %></h4>
+                </div>
+                <div id="seanceAttr" class="container">
+                    <h4 class="pull-left"><%= seance[0].dateS %>&nbsp;&nbsp;<%= seance[0].heureDebut %>&nbsp;&nbsp;<%= seance[0].heureFin %></h4>
+                </div>
+                <div class="col-md-2">
+                    <div id="qrcodeCanvas"></div>
+                </div>
+            </div>
+            <script>
+                $('#qrcodeCanvas').qrcode({
+                    text	: "localhost:8080/<% chemin %><% seance.idS %>"
+                });
+            </script>
+
+            <div id="liste" class="col-md-6">
+                <h2>Liste Etudiants : </h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nom </th>
+                            <th>Prenom </th>
+                            <th>Présent </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(var i=0; i < etudiants.length ; i++) { %>
+                            <tr>
+                                <td><%= etudiants[i].nomU %></td>
+                                <td><%= etudiants[i].prenomU %></td>
+                                <td>
+                                    <% if(badge[i] != 0) { %>
+                                        <span id="SignOK" class="glyphicon glyphicon-ok"></span>
+                                    <% } else { %>
+                                        <span id="SignKO" class="glyphicon glyphicon-ok"></span>
+                                    <% } %>
+                                </td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+                <% if(seance[0].valideS ==0) { %>
+                    <form id="form">
+                        <div class="form-group">
+                            <label>Commentaire</label>
+                            <textarea class="form-control" name="commentaire"><%=(seance[0].commentaire)%></textarea>
+                        </div>
+                        <div class="pull-right">
+                            <a href="/enseignant/seance" class="btn btn-primary btn-lg" onclick="modifyItem('<%= seance[0].idS %>', '<%= chemin %>')">Validé Seance</a>
+                        </div>
+                    </form>
+                <% } %>
+            </div>
+        </div>
     </body>
 </html>
