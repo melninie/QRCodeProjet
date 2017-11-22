@@ -88,7 +88,7 @@ router.post('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "
             if (err)
                 console.log("Error Selecting : %s ", err);
 
-            // res.redirect('/admin/promotions');
+            res.redirect('/etudiant/seance/'+req.params.id);
         });
     }
 });

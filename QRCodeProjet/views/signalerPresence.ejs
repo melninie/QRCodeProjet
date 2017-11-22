@@ -17,10 +17,12 @@
             </small>
     </h2>
     <% if (peutSigner) { %>
-        <button type="button" class="btn btn-success btn-lg btn-block">Signaler sa présence</button>
+        <form action="/<%= chemin %>" method="post">
+            <input type="submit" class="btn btn-success btn-lg btn-block" value="Signaler sa présence"/>
+        </form>
     <% } else { %>
         <% if(dejaPresent){%>
-            <button type="button" class="btn disabled btn-lg btn-block">Vous ètes déja présent</button>
+            <button type="button" class="btn disabled btn-lg btn-block">Vous ètes présent à cette séance</button>
         <% } else { %>
             <button type="button" class="btn disabled btn-lg btn-block">L'horaire est dépassé, vous ne pouvez plus signer.</button>
         <% } %>
