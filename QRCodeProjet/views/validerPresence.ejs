@@ -1,11 +1,25 @@
 <!doctype html>
 <html>
-<head>
-    <title>Signaler présence</title>
-    <% include layout %>
-
     </head>
-    <body>
+        <title>Signaler présence</title>
+        <% include layout %>
+        <script>
+            function executeQuery() {
+                $.ajax({
+                    url: 'http://localhost:8080/enseignant/seance',
+                    type: 'get',
+                    success: function(data) {
+                        $('#refresh').html(data);
+                    }
+                });
+            }
+
+            $('#refresh').ready(function() {
+                setTimeout(executeQuery, 10000);
+            });
+        </script>
+    </head>
+    <body id="refresh">
         <div id="titre" class="container">
             <h2 class="pull-left">Seance A Valider : </h2>
         </div>
@@ -28,43 +42,45 @@
                 });
             </script>
 
-            <div id="liste" class="col-md-6">
-                <h2>Liste Etudiants : </h2>
-                <table class="table">
-                    <thead>
+            <div>
+                <div id="liste" class="col-md-6">
+                    <h2>Liste Etudiants : </h2>
+                    <table class="table">
+                        <thead>
                         <tr>
                             <th>Nom </th>
                             <th>Prenom </th>
                             <th>Présent </th>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <% for(var i=0; i < etudiants.length ; i++) { %>
-                            <tr>
-                                <td><%= etudiants[i].nomU %></td>
-                                <td><%= etudiants[i].prenomU %></td>
-                                <td>
-                                    <% if(badge[i] != 0) { %>
-                                        <span id="SignOK" class="glyphicon glyphicon-ok"></span>
-                                    <% } else { %>
-                                        <span id="SignKO" class="glyphicon glyphicon-ok"></span>
-                                    <% } %>
-                                </td>
-                            </tr>
-                        <% } %>
-                    </tbody>
-                </table>
-                <% if(seance[0].valideS ==0) { %>
-                    <form id="form">
-                        <div class="form-group">
-                            <label>Commentaire</label>
-                            <textarea class="form-control" name="commentaire"><%=(seance[0].commentaire)%></textarea>
-                        </div>
-                        <div class="pull-right">
-                            <a href="/enseignant/seance" class="btn btn-primary btn-lg" onclick="modifyItem('<%= seance[0].idS %>', '<%= chemin %>')">Validé Seance</a>
-                        </div>
-                    </form>
-                <% } %>
+                        </thead>
+                        <tbody>
+                            <% for(var i=0; i < etudiants.length ; i++) { %>
+                                <tr>
+                                    <td><%= etudiants[i].nomU %></td>
+                                    <td><%= etudiants[i].prenomU %></td>
+                                    <td>
+                                        <% if(badge[i] != 0) { %>
+                                            <span id="SignOK" class="glyphicon glyphicon-ok"></span>
+                                        <% } else { %>
+                                            <span id="SignKO" class="glyphicon glyphicon-ok"></span>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                    <% if(seance[0].valideS ==0) { %>
+                        <form id="form">
+                            <div class="form-group">
+                                <label>Commentaire</label>
+                                <textarea class="form-control" name="commentaire"><%=(seance[0].commentaire)%></textarea>
+                            </div>
+                            <div class="pull-right">
+                                <a href="/enseignant/seance" class="btn btn-primary btn-lg" onclick="modifyItem('<%= seance[0].idS %>', '<%= chemin %>')">Validé Seance</a>
+                            </div>
+                        </form>
+                    <% } %>
+                </div>
             </div>
         </div>
     </body>
