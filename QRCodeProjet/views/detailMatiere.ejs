@@ -19,14 +19,14 @@
                     <label>Promotion</label>
                     <select name="promo">
                         <% for(var i=0; i<promos.length; i++) {%>
-                            <option value="<%=promos[i].idP%>" <% if(promos[i].id==matiere[0].promotionS) { %> selected="selected" <% } %> ><%=promos[i].nomP%></option>
+                            <option value="<%=promos[i].idP%>" <% if(promos[i].id==matieres[0].promotionS) { %> selected="selected" <% } %> ><%=promos[i].nomP%></option>
                         <% } %>
                     </select>
                 </div>
 
                 <div class="pull-right">
                     <a href="/admin/matieres" class="btn btn-secondary btn-lg">Annuler</a>
-                    <a href="/admin/matieres" class="btn btn-primary btn-lg" onclick="modifyItem('<%= matiere[0].idM %>', '<%= chemin %>')">Appliquer</a>
+                    <a href="/admin/matieres" class="btn btn-primary btn-lg" onclick="modifyItem('<%= matieres[0].idM %>', '<%= chemin %>')">Appliquer</a>
                 </div>
             </form>
         </div>

@@ -10,6 +10,7 @@ var async = require('async');
 
 router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, "ADMINISTRATION");},function(req, res) {
 
+    var data = {};
     var data2 = {};
 
     if(req.params.id) {
@@ -28,28 +29,41 @@ router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, 
         }
         else
         {
+            async.parallel([
+                function (parallel_done) {
+                    var query = Matiere.ObtMatiereId(req.params.id, function (err, rows) {
+                        if (err)
+                            console.log("Error Selecting : %s ", err);
+                        if (rows.length <= 0) {
+                            res.render('errorRessource.ejs', {
+                                page_title: "Error",
+                                ressource: "/admin/matieres/" + req.param("id")
+                            });
+                        }
 
-            var query = Matiere.ObtMatiereId(req.params.id, function (err, rows) {
-                if (err)
-                    console.log("Error Selecting : %s ", err);
-                if (rows.length <= 0) {
-                    res.render('errorRessource.ejs', {
-                        page_title: "Error",
-                        ressource: "/admin/matieres/" + req.param("id")
+                        data.table1 = rows;
+                        parallel_done();
                     });
-                }
-                res.render('detailMatiere.ejs', {page_title: "detailMatiere", matieres: rows, promos: rows});
-            });
-            var query1 = Promotion.ObtAllPromos(function (err, rows) {
-                if (err)
-                    console.log("Error Selecting : %s ", err);
-                if (rows.length <= 0) {
-                    res.render('errorRessource.ejs', {
-                        page_title: "Error",
-                        ressource: "/admin/matieres/" + req.param("id")
+                },
+                function (parallel_done) {
+                    var query1 = Promotion.ObtAllPromos(function (err, rows2) {
+                        if (err)
+                            console.log("Error Selecting : %s ", err);
+                        if (rows2.length <= 0) {
+                            res.render('errorRessource.ejs', {
+                                page_title: "Error",
+                                ressource: "/admin/matieres/" + req.param("id")
+                            });
+                        }
+                        data.table2 = rows2;
+                        parallel_done();
                     });
-                }
-                res.render('createMatiere.ejs', {page_title: "createMatiere", promos:rows, chemin:"admin/matieres/"});
+                },
+            ], function (err) {
+                if (err)
+                    return console.log(err);
+
+                res.render('detailMatiere.ejs', {page_title: "detailMatiere", matieres:data.table1, promos:data.table2, chemin: "admin/matieres/"});
             });
         }
     }
