@@ -1,5 +1,5 @@
 
-// package config/dbconnection.js
+// fichier utilisé à chaque fois qu'une requete est faite sur la base de données
 
 var mysql=require('mysql');
 var express = require('express')

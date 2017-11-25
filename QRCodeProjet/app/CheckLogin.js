@@ -1,13 +1,12 @@
-// route middleware to make sure
 
 module.exports= function (req, res, next, role)
 {
-    // if user is authenticated in the session, carry on
+    // Vérification du role de l'utilisateur avant de lui renvoyer la page demandée
     if (req.isAuthenticated())
         if(role == req.user.roleU)
             return next();
 
-    // if they aren't redirect them to the home page
+    // Si il n'a pas le bon rôle, il est renvoyé à la page de login et reçoit un msg d'erreur
     req.session.returnTo = req.originalUrl;
     req.flash('loginMessage', 'Vous n avez pas les droits pour accéder à la page demandée');
     res.redirect('/login');

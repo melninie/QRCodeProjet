@@ -103,14 +103,6 @@ router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, 
             res.render('Matieres/allMatieres.ejs',{page_title:"allMatieres", matieres:data2.table1, promos:data2.table2, chemin:"admin/matieres/"});
         });
     }
-    /*else {
-        var query = Matiere.ObtAllMatieres(function (err, rows) {
-            if (err)
-                console.log("Error Selecting : %s ", err);
-
-            res.render('allMatieres.ejs', {page_title: "allMatieres", matieres: rows, chemin:"admin/matieres/"});
-        });
-    }*/
 });
 
 router.post('/matieres',function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)

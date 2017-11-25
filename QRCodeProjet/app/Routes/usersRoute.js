@@ -76,18 +76,18 @@ var async = require('async');
 
     router.put('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
     {
-        if (req.param("id")) {
+        if (req.param("id"))
+        {
+            console.log(req.body.nom);
 
-        var nomU = req.body.nom;
-        var prenomU = req.body.prenom;
-        var mailU = req.body.mail;
-        var promotionU = req.body.promotion;
+            var nomU = req.body.nom;
+            var prenomU = req.body.prenom;
+            var mailU = req.body.mail;
+            var promotionU = req.body.promotion;
 
             var query = User.PutUserId(req.param("id"), nomU, prenomU, mailU, promotionU, function (err, rows) {
                 if (err)
                     console.log("Error Selecting : %s ", err);
-
-                //res.render('detailUser.ejs', {page_title: "detailUser"});
             });
         }
     });

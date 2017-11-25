@@ -59,7 +59,6 @@ router.put('/seance/:id?', function(req, res, next){ CheckLog(req, res, next, "E
 {
     if (req.param("id"))
     {
-        console.log("PUT SEANCE")
         var commentaire = req.body.commentaire;
         var id = req.param("id");
 

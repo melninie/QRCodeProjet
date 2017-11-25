@@ -1,4 +1,3 @@
-// package config/passport.js
 
 var LocalStrategy   = require('passport-local').Strategy;
 var mysql = require('mysql');
@@ -7,18 +6,12 @@ var connection = require('./dbconnection');
 
 module.exports = function(passport) {
 
-    // =========================================================================
-    // passport session setup ==================================================
-    // =========================================================================
-    // required for persistent login sessions
-    // passport needs ability to serialize and unserialize users out of session
-
-    // used to serialize the user for the session
+    // utilisé pout serealizer l'utilisateur pour la session
     passport.serializeUser(function(user, done) {
         done(null, user.id);
     });
 
-    // used to deserialize the user
+    // utilisé pout deserealizer l'utilisateur pour la session
     passport.deserializeUser(function(id, done) {
         connection.query("SELECT * FROM users WHERE id = ? ",[id], function(err, rows){
             done(err, rows[0]);
@@ -33,13 +26,13 @@ module.exports = function(passport) {
         'local-signup',
         new LocalStrategy({
             // La stragéie se base sur le mail et le mot de passe de l'utilisateur
-            // passReqToCallback nous permet de renvoyer la totalité de la demande au rappel
+            // passReqToCallback nous permet de renvoyer la totalité de la demande
             usernameField : 'mail',
             passwordField : 'password',
             passReqToCallback : true
         },
         function(req, mail, password, done) {
-            // Grce âu mail de l'utilisateur, nous déterminons s'il extiste déjà
+            // Grâce au mail de l'utilisateur, nous déterminons s'il extiste déjà
             // Si oui, nous renvoyons un message
             // Sinon nous l'ajoutons à la base de données
             // le username est construit à partir du nom et du prénom de l'utilisateur
@@ -80,31 +73,28 @@ module.exports = function(passport) {
     // =========================================================================
     // LOCAL LOGIN =============================================================
     // =========================================================================
-    // we are using named strategies since we have one for login and one for signup
-    // by default, if there was no name, it would just be called 'local'
 
     passport.use(
         'local-login',
         new LocalStrategy({
-            // by default, local strategy uses username and password, we will override with email
             usernameField : 'username',
             passwordField : 'password',
-            passReqToCallback : true // allows us to pass back the entire request to the callback
+            passReqToCallback : true
         },
-        function(req, username, password, done) { // callback with email and password from our form
+        function(req, username, password, done) {
             connection.query("SELECT * FROM users WHERE username = ?",[username], function(err, rows){
 
                 if (err)
                     return done(err);
                 if (!rows.length) {
-                    return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+                    return done(null, false, req.flash('loginMessage', 'Utilisateur Incorrect ! '));
                 }
 
-                // if the user is found but the password is wrong
+                // Si le login utilisateur est reconnu mais que le password ne correspond pas
                 if (!bcrypt.compareSync(password, rows[0].password))
-                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+                    return done(null, false, req.flash('loginMessage', 'Oops! Mot de Passe Incorrect !'));
 
-                // all is well, return successful user
+                // Si tout est bon, on retourne l'utilisateur
                 return done(null, rows[0]);
             });
         })
