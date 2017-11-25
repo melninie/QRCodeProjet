@@ -11,8 +11,8 @@
     </div>
     <div class="container" >
         <% for(var i=0; i<=promos.length-1; i++) {%>
-            <a href="#promos<%=promos[i].nomP %>" class="list-group-item " data-toggle="collapse" data-parent="#MainMenu"><strong><%= promos[i].nomP %></strong></a>
-                <div class="collapse" id="promos<%=promos[i].nomP %>">
+            <a href="#promos<%=promos[i].idP %>" class="list-group-item " data-toggle="collapse" data-parent="#MainMenu"><strong><%= promos[i].nomP %></strong></a>
+                <div class="collapse" id="promos<%=promos[i].idP %>">
                     <% for(var j=0; j<=matieres.length-1; j++) {
                         if(matieres[j].promotionS == promos[i].idP) { %>
                             <div class="list-group-item">
