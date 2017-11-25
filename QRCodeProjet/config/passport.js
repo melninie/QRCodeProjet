@@ -52,15 +52,18 @@ module.exports = function(passport) {
                     return done(null, false, req.flash('signupMessage', 'That mail is already taken.'));
                 else
                 {
-                    var newUserMysql = {
-                        username: req.body.prenom.substring(0, 2) + req.body.nom.substring(0, 4),
-                        password: bcrypt.hashSync(req.body.prenom.substring(0, 2) + req.body.nom.substring(0, 4), null, null),  // use the generateHash function in our user model
-                        prenomU: req.body.prenom,
-                        nomU: req.body.nom,
-                        mailU: req.body.mail,
-                        roleU: req.body.role,
-                        promotionU: req.body.promotion
+                  var newUserMysql = {
+                      username: req.body.prenom.substring(0, 2) + req.body.nom.substring(0, 4),
+                      password: bcrypt.hashSync(req.body.prenom.substring(0, 2) + req.body.nom.substring(0, 4), null, null),  // use the generateHash function in our user model
+                      prenomU: req.body.prenom,
+                      nomU: req.body.nom,
+                      mailU: req.body.mail,
+                      roleU: req.body.role,
+                      promotionU: req.body.promotion
                     };
+
+                    if(newUserMysql.roleU != "ETUDIANT")
+                        newUserMysql.promotionU=null;
 
                     var insertQuery = "INSERT INTO users ( username, password, prenomU, nomU, mailU, roleU, promotionU ) values (?,?,?,?,?,?,?)";
 

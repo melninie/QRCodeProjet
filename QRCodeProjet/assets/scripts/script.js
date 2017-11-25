@@ -13,3 +13,11 @@ function modifyItem(idItem, chemin) {
         type: 'put',
     });
 }
+
+function CachePromo() {
+    var x = document.getElementById("role").value;
+    if(x=="ENSEIGNANT" || x=="ADMINISTRATION")
+    {
+        document.getElementById("promovisible").style.visibility = "hidden";
+    }
+}
