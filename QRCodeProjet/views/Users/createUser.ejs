@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Creation Utilisateur</title>
-        <% include layout %>
+        <% include ../layout %>
     </head>
     <body>
         <div class="container">
@@ -31,15 +31,16 @@
                             <option value="ADMINISTRATION">ADMINISTRATION</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Promotion</label>
-                        <select name="promotion">
-                            <% for(var i=0; i<promos.length; i++) {%>
-                            <option value="<%=promos[i].idP%>" ><%=promos[i].nomP%></option>
-                            <% } %>
-                        </select>
-                    </div>
-
+                    <% if() {
+                        <div class="form-group">
+                            <label>Promotion</label>
+                            <select name="promotion">
+                                <% for(var i=0; i<promos.length; i++) {%>
+                                <option value="<%=promos[i].idP%>" ><%=promos[i].nomP%></option>
+                                <% } %>
+                            </select>
+                        </div>
+                    <% } %>
                     <input type="hidden" name="password" value="1234">
 
                     <a href="<%= chemin %>" class="btn btn-secondary btn-lg">Annuler</a>

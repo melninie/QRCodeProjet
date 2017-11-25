@@ -9,9 +9,8 @@ var router = require('express').Router();
 var async = require('async');
 
 // =====================================
-// USERS ===============================
+// Seances ===============================
 // =====================================
-// show the lists of users form
 
     router.get('/seances/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
     {
@@ -55,7 +54,7 @@ var async = require('async');
                     if (err)
                         return console.log(err);
 
-                    res.render('createSeance.ejs', {page_title: "createSeance", matieres:data.table1, enseignants:data.table2, chemin:"admin/seances/"});
+                    res.render('./Seances/createSeance.ejs', {page_title: "createSeance", matieres:data.table1, enseignants:data.table2, chemin:"admin/seances/"});
                 });
             }
             else {
@@ -112,7 +111,7 @@ var async = require('async');
                     if (err)
                         return console.log(err);
 
-                    res.render('detailSeance.ejs', {page_title: "detailSeance", seance: data.table1, matieres: data.table2, enseignants: data.table3, chemin: "admin/seances/"});
+                    res.render('./Seances/detailSeance.ejs', {page_title: "detailSeance", seance: data.table1, matieres: data.table2, enseignants: data.table3, chemin: "admin/seances/"});
                 });
             }
         }
@@ -153,7 +152,7 @@ var async = require('async');
                 if(err)
                     return console.log(err);
 
-                res.render('allSeances.ejs',{page_title:"allSeance", seances:data2.table1, matieres:data2.table2, chemin:"admin/seances/", moment: moment});
+                res.render('./Seances/allSeances.ejs',{page_title:"allSeance", seances:data2.table1, matieres:data2.table2, chemin:"admin/seances/", moment: moment});
             });
         }
     });

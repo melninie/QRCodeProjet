@@ -1,4 +1,5 @@
-// config/database.js
+// package config/database.js
+
 module.exports = {
     'connection': {
         'host': 'localhost',

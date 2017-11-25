@@ -5,10 +5,9 @@ var CheckLog=require('../CheckLogin');
 var router = require('express').Router();
 var async = require('async');
 
-// =====================================
-// USERS ===============================
-// =====================================
-// show the lists of users form
+    // =====================================
+    // USERS ===============================
+    // =====================================
 
     router.get('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
     {
@@ -21,7 +20,7 @@ var async = require('async');
                         if (err)
                             console.log("Error Selecting : %s ", err);
                         if (rows.length <= 0)
-                            res.render('errorRessource.ejs', {page_title: "Error", ressource: "/admin/users/" + req.param("id")
+                            res.render('errorRessource.ejs', {page_title: "Error", data:rows.length, ressource:"/admin/users/" + req.param("id")
                             });
 
                         data.table1 = rows;
@@ -33,10 +32,6 @@ var async = require('async');
                     var query2 = Promo.ObtAllPromos(function (err, rows2) {
                         if (err)
                             console.log("Error Selecting : %s ", err);
-                        /* if(rows2.length<=0)
-                         {
-                             res.render('errorRessource.ejs',{page_title:"Error", ressource:"/admin/users/"+req.param("id")});
-                         }*/
 
                         data.table2 = rows2;
                         parallel_done();

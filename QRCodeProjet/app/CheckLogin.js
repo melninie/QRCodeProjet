@@ -9,5 +9,6 @@ module.exports= function (req, res, next, role)
 
     // if they aren't redirect them to the home page
     req.session.returnTo = req.originalUrl;
+    req.flash('loginMessage', 'Vous n avez pas les droits pour accéder à la page demandée');
     res.redirect('/login');
 };
