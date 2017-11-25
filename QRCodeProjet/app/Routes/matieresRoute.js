@@ -24,7 +24,7 @@ router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, 
                         ressource: "/admin/matieres/" + req.param("id")
                     });
                 }
-            res.render('createMatiere.ejs', {page_title: "createMatiere", promos:rows, chemin:"admin/matieres/"});
+            res.render('Matieres/createMatiere.ejs', {page_title: "createMatiere", promos:rows, chemin:"admin/matieres/"});
             });
         }
         else
@@ -63,7 +63,7 @@ router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, 
                 if (err)
                     return console.log(err);
 
-                res.render('detailMatiere.ejs', {page_title: "detailMatiere", matieres:data.table1, promos:data.table2, chemin: "admin/matieres/"});
+                res.render('Matieres/detailMatiere.ejs', {page_title: "detailMatiere", matieres:data.table1, promos:data.table2, chemin: "admin/matieres/"});
             });
         }
     }
@@ -100,7 +100,7 @@ router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, 
             if(err)
                 return console.log(err);
 
-            res.render('allMatieres.ejs',{page_title:"allMatieres", matieres:data2.table1, promos:data2.table2, chemin:"admin/matieres/"});
+            res.render('Matieres/allMatieres.ejs',{page_title:"allMatieres", matieres:data2.table1, promos:data2.table2, chemin:"admin/matieres/"});
         });
     }
     /*else {

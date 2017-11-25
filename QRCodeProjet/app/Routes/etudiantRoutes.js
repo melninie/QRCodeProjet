@@ -67,7 +67,7 @@ router.get('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "E
                 peutSigner = true;
             }
 
-            res.render('signalerPresence.ejs',{
+            res.render('Etudiants/signalerPresence.ejs',{
                 page_title:"signalerPresence",
                 format:format,
                 peutSigner : peutSigner,

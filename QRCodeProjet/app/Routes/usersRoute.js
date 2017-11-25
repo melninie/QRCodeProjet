@@ -41,7 +41,7 @@ var async = require('async');
                 if(err)
                     return console.log(err);
 
-                res.render('detailUser.ejs',{page_title:"detailUser", user:data.table1, promos:data.table2, chemin:"admin/users/"});
+                res.render('Users/detailUser.ejs',{page_title:"detailUser", user:data.table1, promos:data.table2, chemin:"admin/users/"});
             });
         }
         else
@@ -69,7 +69,7 @@ var async = require('async');
                     }
                 });
 
-                res.render('allUsers.ejs',{page_title:"allUsers", etudiants:tabEtu, enseignants:tabEns, administration:tabAdmin, session:sessionUser, nbAdmin:lengthResult, chemin:"admin/users/"});
+                res.render('Users/allUsers.ejs',{page_title:"allUsers", etudiants:tabEtu, enseignants:tabEns, administration:tabAdmin, session:sessionUser, nbAdmin:lengthResult, chemin:"admin/users/"});
             });
         }
     });

@@ -10,7 +10,7 @@ router.get('/promotions/:id?', function(req, res, next) {CheckLog(req, res, next
 
     if(req.params.id) {
         if(req.params.id == "create"){
-            res.render('createPromo.ejs', {page_title: "createPromo", chemin:"admin/promotions/"});
+            res.render('Promos/createPromo.ejs', {page_title: "createPromo", chemin:"admin/promotions/"});
         }
         else {
             var query = Promo.ObtPromoId(req.params.id, function(err,rows)
@@ -20,7 +20,7 @@ router.get('/promotions/:id?', function(req, res, next) {CheckLog(req, res, next
                 if(rows.length <= 0){
                     res.render('errorRessource.ejs',{page_title:"Error", ressource:"/admin/promotions/"+req.param("id")});
                 }
-                res.render('detailPromo.ejs',{page_title:"detailPromo", promo:rows, chemin:"admin/promotions/"});
+                res.render('Promos/detailPromo.ejs',{page_title:"detailPromo", promo:rows, chemin:"admin/promotions/"});
             });
         }
 
@@ -30,7 +30,7 @@ router.get('/promotions/:id?', function(req, res, next) {CheckLog(req, res, next
             if (err)
                 console.log("Error Selecting : %s ", err);
 
-            res.render('allPromos.ejs', {page_title: "allPromos", promos: rows, chemin:"admin/promotions/"});
+            res.render('Promos/allPromos.ejs', {page_title: "allPromos", promos: rows, chemin:"admin/promotions/"});
         });
     }
 });
