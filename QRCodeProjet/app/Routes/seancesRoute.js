@@ -21,7 +21,7 @@ var async = require('async');
             if(req.param("id")=="create") {
                 async.parallel([
                     function (parallel_done) {
-                        var query1 = Matiere.ObtAllMatieres(function (err, rows) {
+                        var query1 = Matiere.ObtAllMatieresOrdonneM(function (err, rows) {
                             if (err)
                                 console.log("Error Selecting : %s ", err);
                             if (rows.length <= 0) {
@@ -123,26 +123,19 @@ var async = require('async');
                     {
                         if(err)
                             console.log("Error Selecting : %s ",err );
-                        if (rows.length <= 0)
-                            res.render('errorRessource.ejs', {page_title: "Error", ressource: "/admin/seances/" + req.param("id")
+                        if (rows.length != 0) {
+                            rows.forEach(function (element) {
+                                element.dateS = element.dateS.getDate() + "-" + (element.dateS.getUTCMonth() + 1) + "-" + element.dateS.getUTCFullYear();
                             });
-
-                        rows.forEach(function (element) {
-                            element.dateS = element.dateS.getDate()+"-"+(element.dateS.getUTCMonth()+1)+"-"+element.dateS.getUTCFullYear();
-                        });
-
+                        }
                         data2.table1 = rows;
                         parallel_done();
                     });
                 },
                 function(parallel_done) {
-                    var query2 = Matiere.ObtAllMatieres(function (err, rows2) {
+                    var query2 = Matiere.ObtAllMatieresOrdonneM(function (err, rows2) {
                         if (err)
                             console.log("Error Selecting : %s ", err);
-                        if(rows2.length<=0)
-                        {
-                            res.render('errorRessource.ejs',{page_title:"Error", ressource:"/admin/seances/"+req.param("id")});
-                        }
 
                         data2.table2 = rows2;
                         parallel_done();

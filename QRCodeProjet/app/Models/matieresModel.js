@@ -5,7 +5,12 @@ var Matiere={
     ObtAllMatieres:function(callback)
     {
         //return connection.query("select * from matiere", callback);
-        return connection.query("select m.*, p.nomP from matiere m LEFT JOIN promotion p ON m.promotionS=p.idP Order by p.nomP ASC", callback);
+        return connection.query("select m.*, p.nomP from matiere m LEFT JOIN promotion p ON m.promotionS=p.idP Order by p.nomP, m.nomM ASC", callback);
+    },
+    ObtAllMatieresOrdonneM:function(callback)
+    {
+        //return connection.query("select * from matiere", callback);
+        return connection.query("select m.*, p.nomP from matiere m LEFT JOIN promotion p ON m.promotionS=p.idP Order by m.nomM ASC", callback);
     },
 
     ObtMatiereId:function(id, callback)

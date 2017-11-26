@@ -6,31 +6,64 @@
     <body>
         <div class="container">
             <h1 class="pull-left">Seances :</h1>
-            <span class="pull-right"><a href="/admin/seances/create"><img class="iconsAction" src="/files/create.PNG"></a></span>
+            <% if(matieres.length != 0) { %>
+                <span class="pull-right"><a href="/admin/seances/create"><img class="iconsAction" src="/files/create.PNG"></a></span>
+            <% } %>
         </div>
         <div class="container" id="MainMenu">
             <div class="list-group panel">
-                <% for(var i=0; i<=matieres.length-1; i++) {%>
-                    <a href="#matiere<%=matieres[i].nomM %>" class="list-group-item " data-toggle="collapse" data-parent="#MainMenu"><strong><%= matieres[i].nomM %></strong></a>
-                        <div class="collapse" id="matiere<%=matieres[i].nomM %>">
-                            <% for(var j=0; j<=seances.length-1; j++) {
-                                if(seances[j].matiereS == matieres[i].idM) { %>
+                <% if (matieres.length !=0) { %>
+                    <% for(var i=0; i<=matieres.length-1; i++) {%>
+                        <a href="#matiere<%=matieres[i].nomM %>" class="list-group-item " data-toggle="collapse" data-parent="#MainMenu"><strong><%= matieres[i].nomM %></strong></a>
+                            <div class="collapse" id="matiere<%=matieres[i].nomM %>">
+                                <% if(seances.length !=0) {
+                                     var x = 0;
+                                     for(var j=0; j<=seances.length-1; j++) {
+                                        if(seances[j].matiereS == matieres[i].idM) {
+                                            x=1; %>
+                                            <div class="list-group-item">
+                                                <div class="container">
+                                                    <div class="col-md-9">
+                                                        <div><strong><%=(seances[j].nomS.toUpperCase())%>&nbsp;&nbsp;<%=(seances[j].dateS)%></strong>&nbsp;&nbsp;&nbsp;<small>(<%=(seances[j].heureDebut)%>&nbsp;&nbsp;<%=(seances[j].heureFin)%>&nbsp;&nbsp;<%= ((seances[j].valideS)!=0)? "Validé" : "Non Validé" %>)</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=(seances[j].commentaire)%></div>
+                                                    </div>
+                                                    <% if(moment(new Date()).format("YYYY-MM-DD") == seances[j].dateS && moment(new Date()).format("HH:mm") < seances[j].hFin
+                                                            || moment(new Date()).format("YYYY-MM-DD") < seances[j].dateS) { %>
+                                                    <div class="col-md-2">
+                                                        <span class="pull-right"><a href="/admin/seances" onclick="deleteItem('<%= seances[j].idS %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
+                                                        <span class="pull-right"><a href="/admin/seances/<%= seances[j].idS %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                                                    </div>
+                                                    <% } %>
+                                                </div>
+                                            </div>
+                                            <% if(x!=1) { %>
+                                                <div class="list-group-item">
+                                                    <div class="container">
+                                                        <div class="col-md-9">
+                                                            <div><strong>Il n'y a pas de séance pour cette matière.</strong></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <% } %>
+                                        <% } %>
+                                    <% } %>
+                                <% } else { %>
                                     <div class="list-group-item">
                                         <div class="container">
                                             <div class="col-md-9">
-                                                <div><strong><%=(seances[j].nomS.toUpperCase())%>&nbsp;&nbsp;<%=(seances[j].dateS)%></strong>&nbsp;&nbsp;&nbsp;<small>(<%=(seances[j].heureDebut)%>&nbsp;&nbsp;<%=(seances[j].heureFin)%>&nbsp;&nbsp;<%= ((seances[j].valideS)!=0)? "Validé" : "Non Validé" %>)</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=(seances[j].commentaire)%></div>
+                                                <div><strong>Il n'y a pas de Séances pour cette Matière.</strong></div>
                                             </div>
-                                            <% if(moment(new Date()).format("YYYY-MM-DD") == seances[j].dateS && moment(new Date()).format("HH:mm") < seances[j].hFin
-                                                    || moment(new Date()).format("YYYY-MM-DD") < seances[j].dateS) { %>
-                                            <div class="col-md-2">
-                                                <span class="pull-right"><a href="/admin/seances" onclick="deleteItem('<%= seances[j].idS %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
-                                                <span class="pull-right"><a href="/admin/seances/<%= seances[j].idS %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
-                                            </div>
-                                            <% } %>
                                         </div>
                                     </div>
                                 <% } %>
-                            <% } %>
+                            </div>
+                        <% } %>
+                    <% } else { %>
+                        <div class="list-group-item">
+                            <div class="container">
+                                <div class="col-md-9">
+                                    <div><strong>Veuillez créer des Matières avant de créer des Séances. Merci.</strong></div>
+                                </div>
+                            </div>
                         </div>
                     <% } %>
                 </div>

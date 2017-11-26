@@ -75,9 +75,6 @@ router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, 
                 {
                     if(err)
                         console.log("Error Selecting : %s ",err );
-                    if (rows.length <= 0)
-                        res.render('errorRessource.ejs', {page_title: "Error", ressource: "/admin/matieres/" + req.param("id")
-                        });
 
                     data2.table1 = rows;
                     parallel_done();
@@ -87,10 +84,6 @@ router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, 
                 var query2 = Promotion.ObtAllPromos(function (err, rows2) {
                     if (err)
                         console.log("Error Selecting : %s ", err);
-                    if(rows2.length<=0)
-                    {
-                        res.render('errorRessource.ejs',{page_title:"Error", ressource:"/admin/matieres/"+req.param("id")});
-                    }
 
                     data2.table2 = rows2;
                     parallel_done();
