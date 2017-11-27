@@ -47,9 +47,12 @@ var Seance={
         return connection.query("update seance SET commentaire=?, valideS=1 where idS=?", [commentaire, id], callback)
     },
 
-
     DelSeanceId:function(id) {
         return connection.query("delete from seance where idS=?", [id])
     },
+
+    DelSeanceByMatiere : function (id) {
+        return connection.query("delete from seance where matiereS=?", [id])
+    }
 };
 module.exports=Seance;

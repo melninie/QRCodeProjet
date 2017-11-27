@@ -16,7 +16,7 @@ router.get('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "E
             function (parallel_done) {
                 var query1 = Etudiant.ObtSeanceWithMatiereId(req.params.id, function(err,rows) {
                     if (err)
-                        console.log("Error Selecting : %s ", err);
+                        res.render('errorRequest.ejs', {page_title:"Error", ressource: "/etudiant/seance"}+ req.param("id"));
                     data.seance = rows;
                     parallel_done();
                 });
@@ -24,7 +24,7 @@ router.get('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "E
             function (parallel_done) {
                 var query2 = Etudiant.PeutSigner(req.params.id, req.user.id, function (err, rows2) {
                     if (err)
-                        console.log("Error Selecting : %s ", err);
+                        res.render('errorRequest.ejs', {page_title:"Error", ressource: "/etudiant/seance"}+ req.param("id"));
                     if (rows2.length <= 0) {
                         data.dejaPresent = false;
                     }
@@ -36,7 +36,7 @@ router.get('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "E
             }
         ], function (err) {
             if (err)
-                return console.log(err);
+                res.render('errorRequest.ejs', {page_title:"Error", ressource: "/etudiant/seance"}+ req.param("id"));
 
             if (data.seance.length <= 0) {
                 res.render('errorRessource.ejs', {
@@ -86,7 +86,7 @@ router.post('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "
         var utilisateur = req.user.id;
         var query = Etudiant.Signer(seance, utilisateur, function (err, rows) {
             if (err)
-                console.log("Error Selecting : %s ", err);
+                res.render('errorRequest.ejs', {page_title:"Error", ressource: "/etudiant/seance"}+ req.param("id"));
 
             res.redirect('/etudiant/seance/'+req.params.id);
         });

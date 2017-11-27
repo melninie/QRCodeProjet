@@ -9,8 +9,12 @@ var Matiere={
     },
     ObtAllMatieresOrdonneM:function(callback)
     {
-        //return connection.query("select * from matiere", callback);
         return connection.query("select m.*, p.nomP from matiere m LEFT JOIN promotion p ON m.promotionS=p.idP Order by m.nomM ASC", callback);
+    },
+
+    ObtAllMatieresByPromo:function(id, callback)
+    {
+        return connection.query("select * from matiere where promotionS=?", [id], callback);
     },
 
     ObtMatiereId:function(id, callback)
@@ -28,6 +32,9 @@ var Matiere={
 
     DelMatiereId:function(id) {
         return connection.query("delete from matiere where idM=?", [id])
+    },
+    DelMatiereByPromo : function (id) {
+        return connection.query("delete from matiere where promotionS=?", [id])
     }
 };
 module.exports=Matiere;

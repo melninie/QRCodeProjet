@@ -3,6 +3,7 @@ var Promotion = require('../Models/promosModel');
 var CheckLog = require('../CheckLogin');
 var router = require('express').Router();
 var async = require('async');
+var Seance = require('../Models/seancesModel');
 
 // =====================================
 // MATIERES ==========================
@@ -17,7 +18,7 @@ router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, 
         if(req.param("id")=="create") {
             var query1 = Promotion.ObtAllPromos(function (err, rows) {
                 if (err)
-                    console.log("Error Selecting : %s ", err);
+                    res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/matiere"}+ req.param("id"));
                 if (rows.length <= 0) {
                     res.render('errorRessource.ejs', {
                         page_title: "Error",
@@ -33,7 +34,7 @@ router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, 
                 function (parallel_done) {
                     var query = Matiere.ObtMatiereId(req.params.id, function (err, rows) {
                         if (err)
-                            console.log("Error Selecting : %s ", err);
+                            res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/matiere"}+ req.param("id"));
                         if (rows.length <= 0) {
                             res.render('errorRessource.ejs', {
                                 page_title: "Error",
@@ -48,7 +49,7 @@ router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, 
                 function (parallel_done) {
                     var query1 = Promotion.ObtAllPromos(function (err, rows2) {
                         if (err)
-                            console.log("Error Selecting : %s ", err);
+                            res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/matiere"}+ req.param("id"));
                         if (rows2.length <= 0) {
                             res.render('errorRessource.ejs', {
                                 page_title: "Error",
@@ -61,7 +62,7 @@ router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, 
                 },
             ], function (err) {
                 if (err)
-                    return console.log(err);
+                    res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/matiere"}+ req.param("id"));
 
                 res.render('Matieres/detailMatiere.ejs', {page_title: "detailMatiere", matieres:data.table1, promos:data.table2, chemin: "admin/matieres/"});
             });
@@ -74,7 +75,7 @@ router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, 
                 var query = Matiere.ObtAllMatieres(function(err,rows)
                 {
                     if(err)
-                        console.log("Error Selecting : %s ",err );
+                        res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/matiere"});
 
                     data2.table1 = rows;
                     parallel_done();
@@ -83,7 +84,7 @@ router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, 
             function(parallel_done) {
                 var query2 = Promotion.ObtAllPromos(function (err, rows2) {
                     if (err)
-                        console.log("Error Selecting : %s ", err);
+                        res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/matiere"});
 
                     data2.table2 = rows2;
                     parallel_done();
@@ -91,7 +92,7 @@ router.get('/matieres/:id?', function(req, res, next) {CheckLog(req, res, next, 
             }
         ], function(err){
             if(err)
-                return console.log(err);
+                res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/matiere"});
 
             res.render('Matieres/allMatieres.ejs',{page_title:"allMatieres", matieres:data2.table1, promos:data2.table2, chemin:"admin/matieres/"});
         });
@@ -104,7 +105,7 @@ router.post('/matieres',function(req, res, next){ CheckLog(req, res, next, "ADMI
 
     var query = Matiere.PostMatiere(req.body.nom, req.body.promo, function (err, rows) {
         if (err)
-            console.log("Error Selecting : %s ", err);
+            res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/matiere"});
 
         res.redirect('/admin/matieres');
     });
@@ -119,7 +120,7 @@ router.put('/matieres/:id?', function(req, res, next){ CheckLog(req, res, next, 
 
         var query = Matiere.PutMatiereId(req.param("id"), nomM, promotionS, function (err, rows) {
             if (err)
-                console.log("Error Selecting : %s ", err);
+                res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/matiere"}+ req.param("id"));
         });
     }
 });
@@ -128,10 +129,35 @@ router.put('/matieres/:id?', function(req, res, next){ CheckLog(req, res, next, 
 router.delete('/matieres/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
 {
     if(req.param("id")) {
-        var query = Matiere.DelMatiereId(req.param("id"), function (err, rows) {
-            if (err)
-                console.log("Error Selecting : %s ", err);
+        async.parallel([
+            function(parallel_done) {
 
+                var query = Matiere.DelMatiereId(req.param("id"), function (err, rows) {
+                    if (err)
+                        res.render('errorRequest.ejs', {
+                            page_title: "Error",
+                            ressource: "/admin/matiere"
+                        } + req.param("id"));
+
+                    parallel_done();
+
+                });
+            },
+            function(parallel_done) {
+                var query2 = Seance.DelSeanceByMatiere(req.param("id"), function (err, rows) {
+                    if (err)
+                        res.render('errorRequest.ejs', {
+                            page_title: "Error",
+                            ressource: "/admin/matiere/" + req.param("id")
+                        });
+
+                    parallel_done();
+
+                });
+            }
+            ], function(err){
+                    if(err)
+                        res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/matiere"});
         });
     }
 });

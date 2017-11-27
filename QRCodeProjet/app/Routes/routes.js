@@ -44,7 +44,7 @@ module.exports = function(app, passport) {
 	app.get('/admin/users/create', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res) {
         var query = Promo.ObtAllPromos(function (err, rows) {
             if (err)
-                console.log("Error Selecting : %s ", err);
+                res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/users/"});
              if(rows.length<=0)
              {
                  res.render('errorRessource.ejs', {page_title:"Error", ressource:"/admin/users/create"});
@@ -85,6 +85,7 @@ module.exports = function(app, passport) {
     // =====================================
     app.get('/logout', function(req, res) {
         req.logout();
+        req.session.returnTo=null;
         res.redirect('/');
     });
 };

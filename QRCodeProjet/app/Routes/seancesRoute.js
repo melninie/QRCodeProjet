@@ -23,7 +23,7 @@ var async = require('async');
                     function (parallel_done) {
                         var query1 = Matiere.ObtAllMatieresOrdonneM(function (err, rows) {
                             if (err)
-                                console.log("Error Selecting : %s ", err);
+                                res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/" + req.param("id")});
                             if (rows.length <= 0) {
                                 res.render('errorRessource.ejs', {
                                     page_title: "Error",
@@ -38,7 +38,7 @@ var async = require('async');
                     function (parallel_done) {
                         var query2 = User.ObtAllEnseignants(function (err, rows2) {
                             if (err)
-                                console.log("Error Selecting : %s ", err);
+                                res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/" + req.param("id")});
                             if (rows2.length <= 0) {
                                 res.render('errorRessource.ejs', {
                                     page_title: "Error",
@@ -52,7 +52,7 @@ var async = require('async');
                     }
                 ], function (err) {
                     if (err)
-                        return console.log(err);
+                        res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/" + req.param("id")});
 
                     res.render('Seances/createSeance.ejs', {page_title: "createSeance", matieres:data.table1, enseignants:data.table2, chemin:"admin/seances/"});
                 });
@@ -62,7 +62,7 @@ var async = require('async');
                     function (parallel_done) {
                         var query = Seance.ObtSeanceId(req.param("id"), function (err, rows) {
                             if (err)
-                                console.log("Error Selecting : %s ", err);
+                                res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/" + req.param("id")});
                             if (rows.length <= 0)
                                 res.render('errorRessource.ejs', {
                                     page_title: "Error",
@@ -80,7 +80,7 @@ var async = require('async');
                     function (parallel_done) {
                         var query2 = Matiere.ObtAllMatieres(function (err, rows2) {
                             if (err)
-                                console.log("Error Selecting : %s ", err);
+                                res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/" + req.param("id")});
                             if (rows2.length <= 0) {
                                 res.render('errorRessource.ejs', {
                                     page_title: "Error",
@@ -95,7 +95,7 @@ var async = require('async');
                     function (parallel_done) {
                         var query2 = User.ObtAllEnseignants(function (err, rows3) {
                             if (err)
-                                console.log("Error Selecting : %s ", err);
+                                res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/" + req.param("id")});
                             if (rows3.length <= 0) {
                                 res.render('errorRessource.ejs', {
                                     page_title: "Error",
@@ -109,7 +109,7 @@ var async = require('async');
                     }
                 ], function (err) {
                     if (err)
-                        return console.log(err);
+                        res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/" + req.param("id")});
 
                     res.render('Seances/detailSeance.ejs', {page_title: "detailSeance", seance: data.table1, matieres: data.table2, enseignants: data.table3, chemin: "admin/seances/"});
                 });
@@ -122,7 +122,7 @@ var async = require('async');
                     var query = Seance.ObtAllSeances(function(err,rows)
                     {
                         if(err)
-                            console.log("Error Selecting : %s ",err );
+                            res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/"});
                         if (rows.length != 0) {
                             rows.forEach(function (element) {
                                 element.dateS = element.dateS.getDate() + "-" + (element.dateS.getUTCMonth() + 1) + "-" + element.dateS.getUTCFullYear();
@@ -135,7 +135,7 @@ var async = require('async');
                 function(parallel_done) {
                     var query2 = Matiere.ObtAllMatieresOrdonneM(function (err, rows2) {
                         if (err)
-                            console.log("Error Selecting : %s ", err);
+                            res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/"});
 
                         data2.table2 = rows2;
                         parallel_done();
@@ -143,7 +143,7 @@ var async = require('async');
                 }
             ], function(err){
                 if(err)
-                    return console.log(err);
+                    res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/"});
 
                 res.render('Seances/allSeances.ejs',{page_title:"allSeance", seances:data2.table1, matieres:data2.table2, chemin:"admin/seances/", moment: moment});
             });
@@ -154,7 +154,7 @@ var async = require('async');
     {
         var query = Seance.PostSeance(req.body.nom, req.body.date, req.body.hDebut, req.body.hFin, req.body.matiere, req.body.user, function (err, rows) {
             if (err)
-                console.log("Error Selecting : %s ", err);
+                res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/"});
 
             res.redirect('/admin/seances');
         });
@@ -174,7 +174,7 @@ var async = require('async');
 
             var query = Seance.PutSeanceId(req.param("id"), nomS, dateS, heureDebut, heureFin, commentaire, matiere, user, function (err, rows) {
                 if (err)
-                    console.log("Error Selecting : %s ", err);
+                    res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/" + req.param("id")});
             });
         }
     });
@@ -184,7 +184,7 @@ var async = require('async');
         if(req.param("id")) {
             var query = Seance.DelSeanceId(req.param("id"), function (err, rows) {
                 if (err)
-                    console.log("Error Selecting : %s ", err);
+                    res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/" + req.param("id")});
            });
         }
     });
