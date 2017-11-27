@@ -11,9 +11,9 @@
     <h2>
         <%= seance.nomM %>
             <small>
-                <%= format.asString("dd/MM/yyyy",seance.dateS) %>
-                (<%= format.asString("hh:mm",seance.heureDebut) %> -
-                <%= format.asString("hh:mm",seance.heureFin) %>)
+                <%= moment(seance.dateS).format("DD-MM-YYYY") %>
+                (<%= seance.heureDebut %> -
+                <%= seance.heureFin %>)
             </small>
     </h2>
     <% if (peutSigner) { %>
