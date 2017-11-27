@@ -28,7 +28,7 @@
                                                             || moment(new Date()).format("YYYY-MM-DD") < seances[j].dateS) { %>
                                                     <div class="col-md-2">
                                                         <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= seances[j].idS %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
-                                                        <span class="pull-right"><a href="/<%= chemin %>/<%= seances[j].idS %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                                                        <span class="pull-right"><a href="/<%= chemin %><%= seances[j].idS %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
                                                     </div>
                                                     <% } %>
                                                 </div>

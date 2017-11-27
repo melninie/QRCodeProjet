@@ -68,9 +68,9 @@
                                     <% if(session!=administration[i].id && nbAdmin>1) { %>
                                         <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= administration[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
                                     <% } else { %>
-                                        <span class="pull-right"><img class="iconsAction" src="/files/deleteGrise.PNG"></span>
+                                        <span class="pull-right"><img class="iconsAction" src="/files/deleteGrise.PNG" disabled></span>
                                     <% } %>
-                                    <span class="pull-right"><a href="/<%= chemin %>/<%= administration[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                                    <span class="pull-right"><a href="/<%= chemin %><%= administration[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
                                 </div>
                             </div>
                         </div>
