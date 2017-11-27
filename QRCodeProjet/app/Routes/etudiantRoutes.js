@@ -3,6 +3,7 @@ var CheckLog = require('../CheckLogin');
 var router = require('express').Router();
 var format = require('date-format');
 var async = require('async');
+var moment = require('moment');
 
 // =====================================
 // ETUDIANT ==========================
@@ -58,9 +59,9 @@ router.get('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "E
             //vérifications horaire
             var heure = format.asString('hh:mm', new Date());
             var date = format.asString('yyyy-MM-dd', new Date());
-            var dateSeance = format.asString('yyyy-MM-dd', data.seance.dateS);
-            var heureDebut = format.asString('hh:mm', data.seance.heureDebut);
-            var heureFin = format.asString('hh:mm', data.seance.heureFin);
+            var dateSeance = data.seance.dateS = moment(data.seance.dateS).format("YYYY-MM-DD");
+            var heureDebut = data.seance.heureDebut;
+            var heureFin = data.seance.heureFin;
 
             var peutSigner = false;
             if((date == dateSeance) && (heureDebut <= heure && heure <= heureFin) && !data.dejaPresent){

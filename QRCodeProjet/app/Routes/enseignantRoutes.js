@@ -17,7 +17,7 @@ router.get('/seance', function(req, res, next) {CheckLog(req, res, next, "ENSEIG
         if(rows.length != 0) {
 
             rows.forEach(function (element) {
-                element.dateS = momdnt(element.dateS).format('YYYY-MM-DD');
+                element.dateS = moment(element.dateS).format('YYYY-MM-DD');
             });
 
 
