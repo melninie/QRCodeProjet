@@ -1,30 +1,30 @@
 <!doctype html>
 <html>
     <head>
-        <title>Creation Utilisateur</title>
+        <title>Création Utilisateur</title>
         <% include ../layout %>
     </head>
     <body>
         <div class="container">
             <div class="col-sm-6 col-sm-offset-3">
 
-                <h1><span class="fa fa-sign-in"></span> Signup</h1>
+                <h1>Utilisateur</h1>
 
                 <form action="<%= chemin %>" method="post">
                     <div class="form-group">
-                        <label>Nom</label>
+                        <label>Nom :</label>
                         <input type="text" class="form-control" name="nom">
                     </div>
                     <div class="form-group">
-                        <label>Prénom</label>
+                        <label>Prénom :</label>
                         <input type="text" class="form-control" name="prenom">
                     </div>
                     <div class="form-group">
-                        <label>Mail</label>
+                        <label>Mail :</label>
                         <input type="text" class="form-control" name="mail">
                     </div>
                     <div class="form-group">
-                        <label>Role</label>
+                        <label>Rôle :</label>
                         <select id="role" name="role" onchange="CachePromo()">
                             <option value="ETUDIANT">ETUDIANT</option>
                             <option value="ENSEIGNANT">ENSEIGNANT</option>
@@ -32,7 +32,7 @@
                         </select>
                     </div>
                     <div id="promovisible" class="form-group">
-                        <label>Promotion</label>
+                        <label>Promotion :</label>
                         <select name="promotion">
                             <% for(var i=0; i<promos.length; i++) { %>
                             <option value="<%=promos[i].idP%>" ><%=promos[i].nomP%></option>
@@ -41,8 +41,10 @@
                     </div>
                     <input type="hidden" name="password" value="1234">
 
-                    <a href="<%= chemin %>" class="btn btn-secondary btn-lg">Annuler</a>
-                    <button type="submit" class="btn btn-warning btn-lg">Créer</button>
+                    <div class="pull-right">
+                        <a href="/<%= chemin %>" class="btn btn-secondary btn-lg">Annuler</a>
+                        <button type="submit" class="btn btn-success btn-lg">Créer</button>
+                    </div>
                 </form>
             </div>
         </div>

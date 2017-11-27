@@ -1,29 +1,32 @@
 <!doctype html>
 <html>
     <head>
-        <title>Creation Matière</title>
+        <title>Création Matière</title>
         <% include ../layout %>
     </head>
     <body>
         <div class="container">
             <div class="col-sm-6 col-sm-offset-3">
 
-                <h1><span class="fa fa-sign-in"></span> Creation Matière</h1>
+                <h1>Matière</h1>
 
                 <form action="/<%= chemin %>" method="post">
                     <div class="form-group">
-                        <label>Nom</label>
+                        <label>Nom :</label>
                         <input type="text" class="form-control" name="nom">
                     </div>
                     <div class="form-group">
-                        <label>Promotion</label>
+                        <label>Promotion :</label>
                         <select name="promo">
                             <% for(var i=0; i<promos.length; i++) {%>
                             <option value="<%=promos[i].idP%>"><%=promos[i].nomP%></option>
                             <% } %>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-warning btn-lg">Create</button>
+                    <div class="pull-right">
+                        <a href="/<%= chemin %>" class="btn btn-secondary btn-lg">Annuler</a>
+                        <button type="submit" class="btn btn-success btn-lg">Créer</button>
+                    </div>
                 </form>
             </div>
         </div>
