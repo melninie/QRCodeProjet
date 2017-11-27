@@ -35,7 +35,7 @@ module.exports = function(app, passport) {
 				var returnTo = "enseignant/seance";
 				break;
 			case "ADMINISTRATION":
-				var returnTo = "admin/users";
+				var returnTo = "admin/";
 				break;
 		}
         res.redirect(returnTo);
@@ -71,4 +71,20 @@ module.exports = function(app, passport) {
 		req.logout();
 		res.redirect('/');
 	});
+
+    // =====================================
+    // ADMIN ===============================
+    // =====================================
+    app.get('/admin',function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function (req, res){
+        console.log('dans la route admin ejs');
+        res.render('admin.ejs', {page_title:"Administration"});
+    });
+
+    // =====================================
+    // LOGOUT ==============================
+    // =====================================
+    app.get('/logout', function(req, res) {
+        req.logout();
+        res.redirect('/');
+    });
 };
