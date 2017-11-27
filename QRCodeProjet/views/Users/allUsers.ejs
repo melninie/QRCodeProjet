@@ -27,9 +27,11 @@
                         </div>
                     <% } %>
                     <% if (etudiants.length == 0) {%>
-                        <div class="container list-group-item">
-                            <div class="col-md-9 ">
-                                <p>Il n'y a pas encore d'étudiant.</p>
+                        <div class="list-group-item">
+                            <div class="container">
+                                <div class="col-md-9">
+                                    <div>Il n'y a pas encore d'étudiant.</div>
+                                </div>
                             </div>
                         </div>
                     <% } %>
@@ -43,16 +45,18 @@
                                     <div><strong><%=(enseignants[i].nomU.toUpperCase())%>&nbsp;&nbsp;&nbsp;<%=(enseignants[i].prenomU)%></strong></div>
                                 </div>
                                 <div class="col-md-2">
-                                    <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= enseignants[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
+                                    <span class="pull-right"><a href="/<%= chemin %>" onclick="confirmBeforeDelete('<%= enseignants[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
                                     <span class="pull-right"><a href="/<%= chemin %><%= enseignants[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
                                 </div>
                             </div>
                         </div>
                     <% } %>
                     <% if (enseignants.length == 0) {%>
-                        <div class="container list-group-item">
-                            <div class="col-md-9 ">
-                                <p>Il n'y a pas encore d'enseignant.</p>
+                        <div class="list-group-item">
+                            <div class="container">
+                                <div class="col-md-9">
+                                    <div>Il n'y a pas encore d'enseignant.</div>
+                                </div>
                             </div>
                         </div>
                     <% } %>
@@ -67,7 +71,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <% if(session!=administration[i].id && nbAdmin>1) { %>
-                                        <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= administration[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
+                                        <span class="pull-right"><a href="/<%= chemin %>" onclick="confirmBeforeDelete('<%= administration[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
                                     <% } else { %>
                                         <span class="pull-right"><img class="iconsAction" src="/files/deleteGrise.PNG" disabled></span>
                                     <% } %>

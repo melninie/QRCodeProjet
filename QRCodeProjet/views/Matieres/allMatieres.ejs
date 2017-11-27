@@ -30,7 +30,7 @@
                                                     <div><strong><%=(matieres[j].nomM.toUpperCase())%></strong></div>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= matieres[j].idM %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
+                                                    <span class="pull-right"><a href="/<%= chemin %>" onclick="confirmBeforeDelete('<%= matieres[j].idM %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
                                                     <span class="pull-right"><a href="/<%= chemin %><%= matieres[j].idM %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
                                                 </div>
                                             </div>
