@@ -59,17 +59,12 @@ module.exports = function(app, passport) {
 		failureFlash : true // allow flash messages
 	}));
 
-	app.get('/profile',function(req, res) {
+	app.get('/profile', function(req, res, next){ CheckLog(req, res, next, "ETUDIANT");}, function(req, res) {
 		if(req.session.user){console.log(req.session)}
 
-		res.render('profile.ejs', {
+		res.render('Etudiant/profile.ejs', {
 			user : req.user
 		});
-	});
-
-	app.get('/logout', function(req, res) {
-		req.logout();
-		res.redirect('/');
 	});
 
     // =====================================

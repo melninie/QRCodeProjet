@@ -1,3 +1,10 @@
+function confirmBeforeDelete(idItem, chemin) {
+    var txt;
+    var r = confirm("Attention, supprimer cet élément entrainera la suppression des éléments associés.");
+    if (r == true) {
+        deleteItem(idItem, chemin)
+    }
+}
 
 function deleteItem(idItem, chemin) {
     $.ajax({
