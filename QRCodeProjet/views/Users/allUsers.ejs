@@ -4,9 +4,10 @@
         <% include ../layout %>
     </head>
     <body>
+    <% include ../menu %>
         <div class="container">
             <span class="pull-left"><h1>Utilisateurs :</h1></span>
-            <span class="pull-right"><a href="/<%= chemin %>/create"><h1><img class="iconsAction" src="/files/create.PNG"></h1></a></span>
+            <span class="pull-right"><a href="/<%= chemin %>create"><h1><img class="iconsAction" src="/files/create.PNG"></h1></a></span>
         </div>
         <div class="container" id="MainMenu">
             <div class="list-group panel">
@@ -20,7 +21,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= etudiants[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
-                                    <span class="pull-right"><a href="/<%= chemin %>/<%= etudiants[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                                    <span class="pull-right"><a href="/<%= chemin %><%= etudiants[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
                                 </div>
                             </div>
                         </div>
@@ -43,7 +44,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= enseignants[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
-                                    <span class="pull-right"><a href="/<%= chemin %>/<%= enseignants[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                                    <span class="pull-right"><a href="/<%= chemin %><%= enseignants[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
                                 </div>
                             </div>
                         </div>
