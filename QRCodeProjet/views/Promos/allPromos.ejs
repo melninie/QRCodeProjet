@@ -18,7 +18,7 @@
                         <div><strong><%= promos[i].nomP %></strong></div>
                     </div>
                     <div class="col-md-2">
-                        <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= promos[i].idP %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
+                        <span class="pull-right"><a href="/<%= chemin %>" onclick="confirmBeforeDelete('<%= promos[i].idP %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
                         <span class="pull-right"><a href="/<%= chemin %><%= promos[i].idP %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
                     </div>
                 </div>
