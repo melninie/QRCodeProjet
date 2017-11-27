@@ -5,61 +5,75 @@
     </head>
     <body>
         <div class="container">
-            <h1 class="pull-left">Utilisateurs :</h1>
-            <span class="pull-right"><a href="/admin/users/create"><img class="iconsAction" src="/files/create.PNG"></a></span>
+            <span class="pull-left"><h1>Utilisateurs :</h1></span>
+            <span class="pull-right"><a href="/<%= chemin %>/create"><h1><img class="iconsAction" src="/files/create.PNG"></h1></a></span>
         </div>
         <div class="container" id="MainMenu">
             <div class="list-group panel">
                 <a href="#etudiant" class="list-group-item " data-toggle="collapse" data-parent="#MainMenu"><strong>Etudiants</strong></a>
                 <div class="collapse" id="etudiant">
                     <% for(var i=0; i<=etudiants.length-1; i++) {%>
-                    <div class="list-group-item">
-                        <div class="container">
-                            <div class="col-md-9">
-                                <div><strong><%=(etudiants[i].nomU.toUpperCase())%>&nbsp;&nbsp;&nbsp;<%=(etudiants[i].prenomU)%></strong>&nbsp;&nbsp;&nbsp;&nbsp;(<small><%=(etudiants[i].nomP)%>)</small></div>
-                            </div>
-                            <div class="col-md-2">
-                                <span class="pull-right"><a href="/admin/users" onclick="deleteItem('<%= etudiants[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
-                                <span class="pull-right"><a href="/admin/users/<%= etudiants[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                        <div class="list-group-item">
+                            <div class="container">
+                                <div class="col-md-9">
+                                    <div><strong><%=(etudiants[i].nomU.toUpperCase())%>&nbsp;&nbsp;&nbsp;<%=(etudiants[i].prenomU)%></strong>&nbsp;&nbsp;&nbsp;&nbsp;(<small><%=(etudiants[i].nomP)%>)</small></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= etudiants[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
+                                    <span class="pull-right"><a href="/<%= chemin %>/<%= etudiants[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <% } %>
+                    <% if (etudiants.length == 0) {%>
+                        <div class="container list-group-item">
+                            <div class="col-md-9 ">
+                                <p>Il n'y a pas encore d'étudiant.</p>
+                            </div>
+                        </div>
                     <% } %>
                 </div>
                 <a href="#enseignant" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu"><strong>Enseignants</strong></a>
                 <div class="collapse" id="enseignant">
                     <% for(var i=0; i<=enseignants.length-1; i++) {%>
-                    <div class="list-group-item">
-                        <div class="container">
-                            <div class="col-md-9">
-                                <div><strong><%=(enseignants[i].nomU.toUpperCase())%>&nbsp;&nbsp;&nbsp;<%=(enseignants[i].prenomU)%></strong></small></div>
-                            </div>
-                            <div class="col-md-2">
-                                <span class="pull-right"><a href="/admin/users" onclick="deleteItem('<%= enseignants[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
-                                <span class="pull-right"><a href="/admin/users/<%= enseignants[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                        <div class="list-group-item">
+                            <div class="container">
+                                <div class="col-md-9">
+                                    <div><strong><%=(enseignants[i].nomU.toUpperCase())%>&nbsp;&nbsp;&nbsp;<%=(enseignants[i].prenomU)%></strong></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= enseignants[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
+                                    <span class="pull-right"><a href="/<%= chemin %>/<%= enseignants[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <% } %>
+                    <% if (enseignants.length == 0) {%>
+                        <div class="container list-group-item">
+                            <div class="col-md-9 ">
+                                <p>Il n'y a pas encore d'enseignant.</p>
+                            </div>
+                        </div>
                     <% } %>
                 </div>
                 <a href="#administration" class="list-group-item" data-toggle="collapse" data-parent="#MainMenu"><strong>Administration</strong></a>
                 <div class="collapse" id="administration">
                     <% for(var i=0; i<=administration.length-1; i++) {%>
-                    <div class="list-group-item">
-                        <div class="container">
-                            <div class="col-md-9">
-                                <div><strong><%=(administration[i].nomU.toUpperCase())%>&nbsp;&nbsp;&nbsp;<%=(administration[i].prenomU)%></strong></small></div>
-                            </div>
-                            <div class="col-md-2">
-                                <% if(session!=administration[i].id && nbAdmin>1) { %>
-                                <span class="pull-right"><a href="/admin/users" onclick="deleteItem('<%= administration[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
-                                <% } else { %>
-                                <span class="pull-right"><img class="iconsAction" src="/files/deleteGrise.PNG"></span>
-                                <% } %>
-                                <span class="pull-right"><a href="/admin/users/<%= administration[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                        <div class="list-group-item">
+                            <div class="container">
+                                <div class="col-md-9">
+                                    <div><strong><%=(administration[i].nomU.toUpperCase())%>&nbsp;&nbsp;&nbsp;<%=(administration[i].prenomU)%></strong></small></div>
+                                </div>
+                                <div class="col-md-2">
+                                    <% if(session!=administration[i].id && nbAdmin>1) { %>
+                                        <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= administration[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
+                                    <% } else { %>
+                                        <span class="pull-right"><img class="iconsAction" src="/files/deleteGrise.PNG"></span>
+                                    <% } %>
+                                    <span class="pull-right"><a href="/<%= chemin %>/<%= administration[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     <% } %>
                 </div>
             </div>

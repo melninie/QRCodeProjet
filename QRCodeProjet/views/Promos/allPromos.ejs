@@ -7,14 +7,15 @@
     <body>
 
         <div class="container" >
-            <h1 class="pull-left">Promotions :</h1>
-            <span class="pull-right"><a href="/<%= chemin %>create"><img class="iconsAction" src="/files/create.PNG"></a></span>
+            <span class="pull-left"><h1 class="pull-left">Promotions :</h1></span>
+            <span class="pull-right"><a href="/<%= chemin %>create"><h1><img class="iconsAction" src="/files/create.PNG"></h1></a></span>
         </div>
+
         <div class="container">
             <% for(var i=0; i<=promos.length-1; i++) {%>
-                <div class="container">
-                    <div class="col-md-9">
-                        <div><%= promos[i].idP %> - <%= promos[i].nomP %></div>
+                <div class="container list-group-item">
+                    <div class="col-md-9 ">
+                        <div><strong><%= promos[i].nomP %></strong></div>
                     </div>
                     <div class="col-md-2">
                         <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= promos[i].idP %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
@@ -22,7 +23,13 @@
                     </div>
                 </div>
             <% } %>
+            <% if (promos.length == 0) {%>
+                <div class="container list-group-item">
+                    <div class="col-md-9 ">
+                        <p>Il n'y a pas encore de promotion.</p>
+                    </div>
+                </div>
+            <% } %>
         </div>
-
     </body>
 </html>

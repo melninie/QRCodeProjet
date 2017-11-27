@@ -1,14 +1,12 @@
 <html>
     <head>
-        <title>Seances</title>
+        <title>Séances</title>
         <% include ../layout %>
     </head>
     <body>
         <div class="container">
-            <h1 class="pull-left">Seances :</h1>
-            <% if(matieres.length != 0) { %>
-                <span class="pull-right"><a href="/admin/seances/create"><img class="iconsAction" src="/files/create.PNG"></a></span>
-            <% } %>
+            <span class="pull-left"><h1 class="pull-left">Séances :</h1></span>
+            <span class="pull-right"><a href="/<%= chemin %>/create"><h1><img class="iconsAction" src="/files/create.PNG"></h1></a></span>
         </div>
         <div class="container" id="MainMenu">
             <div class="list-group panel">
@@ -29,28 +27,28 @@
                                                     <% if(moment(new Date()).format("YYYY-MM-DD") == seances[j].dateS && moment(new Date()).format("HH:mm") < seances[j].hFin
                                                             || moment(new Date()).format("YYYY-MM-DD") < seances[j].dateS) { %>
                                                     <div class="col-md-2">
-                                                        <span class="pull-right"><a href="/admin/seances" onclick="deleteItem('<%= seances[j].idS %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
-                                                        <span class="pull-right"><a href="/admin/seances/<%= seances[j].idS %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                                                        <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= seances[j].idS %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
+                                                        <span class="pull-right"><a href="/<%= chemin %>/<%= seances[j].idS %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
                                                     </div>
                                                     <% } %>
                                                 </div>
                                             </div>
-                                            <% if(x!=1) { %>
-                                                <div class="list-group-item">
-                                                    <div class="container">
-                                                        <div class="col-md-9">
-                                                            <div><strong>Il n'y a pas de séance pour cette matière.</strong></div>
-                                                        </div>
+                                        <% } %>
+                                        <% if(x!=1) { %>
+                                            <div class="list-group-item">
+                                                <div class="container">
+                                                    <div class="col-md-12">
+                                                        <div>Il n'y a pas de séance pour cette matière.</div>
                                                     </div>
                                                 </div>
-                                            <% } %>
+                                            </div>
                                         <% } %>
                                     <% } %>
                                 <% } else { %>
                                     <div class="list-group-item">
                                         <div class="container">
                                             <div class="col-md-9">
-                                                <div><strong>Il n'y a pas de Séances pour cette Matière.</strong></div>
+                                                <div>Il n'y a pas de Séances pour cette matière.</div>
                                             </div>
                                         </div>
                                     </div>
@@ -61,7 +59,7 @@
                         <div class="list-group-item">
                             <div class="container">
                                 <div class="col-md-9">
-                                    <div><strong>Veuillez créer des Matières avant de créer des Séances. Merci.</strong></div>
+                                    <div>Veuillez créer des Matières avant de créer des Séances. Merci.</div>
                                 </div>
                             </div>
                         </div>
