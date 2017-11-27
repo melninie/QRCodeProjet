@@ -4,7 +4,9 @@
 }
 body {
     padding-top: 80px;
-    background-color: bisque;
+    /*background-color: bisque;*/
+    background: url('../files/7.png') no-repeat center center fixed;
+    background-size: cover;
 }
 
 .iconsAction {
