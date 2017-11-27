@@ -140,12 +140,21 @@ var async = require('async');
                         data2.table2 = rows2;
                         parallel_done();
                     });
+                },
+                function(parallel_done) {
+                    var query3 = User.ObtAllEnseignants(function (err, rows3) {
+                        if (err)
+                            res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/"});
+
+                        data2.table3 = rows3;
+                        parallel_done();
+                    });
                 }
             ], function(err){
                 if(err)
                     res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/"});
 
-                res.render('Seances/allSeances.ejs',{page_title:"allSeance", seances:data2.table1, matieres:data2.table2, chemin:"admin/seances/", moment: moment});
+                res.render('Seances/allSeances.ejs',{page_title:"allSeance", seances:data2.table1, matieres:data2.table2, enseignants:data2.table3, chemin:"admin/seances/", moment: moment});
             });
         }
     });

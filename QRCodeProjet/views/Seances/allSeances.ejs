@@ -7,10 +7,21 @@
     <% include ../menu %>
         <div class="container">
             <span class="pull-left"><h1 class="pull-left">Séances :</h1></span>
-            <span class="pull-right"><a href="/<%= chemin %>create"><h1><img class="iconsAction" src="/files/create.PNG"></h1></a></span>
+            <%if(matieres.length!=0 && enseignants.length!=0) { %>
+                <span class="pull-right"><a href="/<%= chemin %>create"><h1><img class="iconsAction" src="/files/create.PNG"></h1></a></span>
+            <% } %>
         </div>
         <div class="container" id="MainMenu">
             <div class="list-group panel">
+                <% if(enseignants.length==0) { %>
+                <div class="list-group-item">
+                    <div class="container">
+                        <div class="col-md-12">
+                            <div>Attention il n'y a plus d'enseignants enregistrés. Veuillez Créer des Enseignants pour créer des séances</div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
                 <% if (matieres.length !=0) { %>
                     <% for(var i=0; i<=matieres.length-1; i++) {%>
                         <a href="#matiere<%=matieres[i].nomM %>" class="list-group-item " data-toggle="collapse" data-parent="#MainMenu"><strong><%= matieres[i].nomM %></strong></a>
@@ -35,7 +46,8 @@
                                                 </div>
                                             </div>
                                         <% } %>
-                                        <% if(x!=1) { %>
+                                        <% if(x==0) {
+                                            x=1; %>
                                             <div class="list-group-item">
                                                 <div class="container">
                                                     <div class="col-md-12">
