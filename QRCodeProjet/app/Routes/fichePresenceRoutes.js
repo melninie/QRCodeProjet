@@ -4,6 +4,7 @@ var CheckLog = require('../CheckLogin');
 var router = require('express').Router();
 
 var pdfMaker = require('pdf-maker');
+var fs = require('fs');
 // =====================================
 // ETUDIANT ==========================
 // =====================================
@@ -11,7 +12,10 @@ var pdfMaker = require('pdf-maker');
 router.get('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, next, "ADMINISTRATION");},function(req, res) {
 
     if(req.params.id) {
-
+        fs.readFile('./PDF/'+req.params.id+'.pdf', function (err,data){
+            res.contentType("application/pdf");
+            res.send(data);
+        });
     }
     else {
         var query = Promo.ObtAllPromos(function (err, rows) {
@@ -90,7 +94,8 @@ router.post('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, 
                                     chemin:"admin/fichePresence/",
                                     allSeances: allSeances,
                                     date:date,
-                                    promo:nomPromo
+                                    promo:nomPromo,
+                                    pathFile:pdfPath
                                 });
                             }
                         });
