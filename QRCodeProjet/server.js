@@ -39,7 +39,8 @@ app.use(express.static(__dirname + '/assets'));
 app.use('/admin', require('./app/Routes/usersRoute.js'));
 app.use('/admin', require('./app/Routes/promosRoute.js'));
 app.use('/admin', require('./app/Routes/matieresRoute.js'));
-app.use('/admin', require('./app/Routes/seancesRoute'));
+app.use('/admin', require('./app/Routes/seancesRoute.js'));
+app.use('/admin', require('./app/Routes/fichePresenceRoutes.js'));
 app.use('/etudiant', require('./app/Routes/etudiantRoutes.js'));
 app.use('/enseignant', require('./app/Routes/enseignantRoutes.js'));
 

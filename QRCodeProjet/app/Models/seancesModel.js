@@ -10,6 +10,16 @@ var Seance={
         return connection.query("select * from seance where idS=?", [id], callback)
     },
 
+    ObtSeancesFiche:function(idPromo, date, callback){
+        return connection.query("SELECT s.idS, s.nomS, s.dateS, s.heureDebut, s.heureFin, s.valideS, m.idM, m.nomM, p.idP, p.nomP, u.nomU, u.prenomU "
+            + "from seance s "
+            + "inner join matiere m on s.matiereS=m.idM "
+            + "inner join users u on s.userS=u.id "
+            + "inner join promotion p on m.promotionS=p.idP "
+            + "where s.dateS=? and idP=? "
+            + "Order By s.heureDebut", [date, idPromo], callback);
+    },
+
     ObtSeanceEnseignant:function(idEnseignant, callback){
         return connection.query("SELECT s.idS, s.nomS, s.dateS, s.heureDebut, s.heureFin, s.valideS, "
             + "m.idM, m.nomM, "
@@ -19,6 +29,7 @@ var Seance={
             + "inner join promotion p on m.promotionS=p.idP "
             + "where s.userS=? and s.valideS=0 Order By s.dateS, s.heureFin LIMIT 1", [idEnseignant], callback);
     },
+
     ObtEtudiantEnseignant:function(idSeance, callback){
         return connection.query("SELECT u.id, u.nomU, u.prenomU from seance s "
             + "inner join matiere m on s.matiereS=m.idM "

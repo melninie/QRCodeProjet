@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Valider présence</title>
+        <% include ../layout %>
+    </head>
+    <body id="refresh">
+        <div id="titre" class="container">
+            <h2 class="pull-left">Recap</h2>
+        </div>
+
+        <div class="container" >
+
+
+
+            <% Object.keys(allSeances.lignes).forEach(function(key){%>
+            <%- allSeances.etudiants[key] %> :
+                    <%Object.keys(allSeances.lignes[key]).forEach(function(jkl){%>
+                    <%- allSeances.lignes[key][jkl] %> -
+            <%});%>
+            <%});%>
+        </div>
+    </body>
+</html>

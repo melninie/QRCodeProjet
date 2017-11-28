@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Fiche présence</title>
+        <% include ../layout %>
+    </head>
+    <body id="refresh">
+        <div id="titre" class="container">
+            <h2 class="pull-left">Choix de la fiche : </h2>
+        </div>
+
+        <div class="container">
+            <form action="/<%= chemin %>" method="post">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Promotion :</label>
+                        <select name="promo" class="form-control">
+                            <% for(var i=0; i<promos.length; i++) {%>
+                            <option value="<%=promos[i].idP%>"><%=promos[i].nomP%></option>
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Date :</label>
+                        <input type="date" class="form-control" name="date" required>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <br><button type="submit" class="btn btn-success btn-lg">Générer</button>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
