@@ -2,6 +2,8 @@ var Promo = require('../Models/promosModel');
 var Seance = require('../Models/seancesModel');
 var CheckLog = require('../CheckLogin');
 var router = require('express').Router();
+
+var pdfMaker = require('pdf-maker');
 // =====================================
 // ETUDIANT ==========================
 // =====================================
@@ -9,7 +11,7 @@ var router = require('express').Router();
 router.get('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, next, "ADMINISTRATION");},function(req, res) {
 
     if(req.params.id) {
-        //lien vers pdf
+
     }
     else {
         var query = Promo.ObtAllPromos(function (err, rows) {
@@ -30,6 +32,8 @@ router.post('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, 
     allSeances["entete"] = [];
     allSeances["etudiants"] = [];
     allSeances["lignes"] = [];
+    allSeances["enseignants"] = [];
+    var nomPromo;
     var query = Seance.ObtSeancesFiche(promo, date, function(err,rows)
     {
         if(err)
@@ -37,8 +41,10 @@ router.post('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, 
 
         if(rows.length != 0) {
 
+            nomPromo = rows[0].nomP
             rows.forEach(function (seance, indexS) {
                 allSeances["entete"].push(seance.nomM);
+                allSeances["enseignants"].push(seance.nomU + " " + seance.prenomU);
 
                 var query2 = Seance.ObtEtudiantEnseignant(seance.idS, function (err2, rows2) {
                     if (err2)
@@ -60,10 +66,31 @@ router.post('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, 
                                 allSeances["lignes"]["etu"+etudiant.id].push(1);
 
                             if((indexE == rows2.length-1) && (indexS == rows.length-1)){
+
+                                var template = './views/FichePresence/recap.ejs';
+                                var data = {
+                                    allSeances: allSeances,
+                                    date:date,
+                                    promo:nomPromo
+                                };
+                                var pdfPath = './PDF/recap'+date+nomPromo+'.pdf';
+                                var option = {
+                                    paperSize: {
+                                        format: 'A4',
+                                        orientation: 'portrait',
+                                        border: '1.8cm'
+                                    }
+
+                                };
+
+                                pdfMaker(template, data, pdfPath, option);
+
                                 res.render('FichePresence/recap.ejs', {
                                     page_title: "fichePresence",
                                     chemin:"admin/fichePresence/",
                                     allSeances: allSeances,
+                                    date:date,
+                                    promo:nomPromo
                                 });
                             }
                         });

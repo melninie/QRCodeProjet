@@ -2,23 +2,60 @@
 <html>
     <head>
         <title>Valider présence</title>
-        <% include ../layout %>
+        <link rel="icon" type="image/png" href="/files/favicon.PNG" />
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link href="/styles/style.css" rel="stylesheet" type="text/css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="/scripts/script.js"></script>
+
+        <script src="/scripts/jquery.qrcode.js"></script>
+        <script src="/scripts/qrcode.js"></script>
     </head>
     <body id="refresh">
         <div id="titre" class="container">
-            <h2 class="pull-left">Recap</h2>
+            <h2 class="pull-left">Fiche de Présence <small>(<%= date %> - <%= promo %>)</small></h2>
         </div>
 
         <div class="container" >
+            <table class="table table-bordered" style="background-color: white">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <% Object.keys(allSeances.entete).forEach(function(key){%>
+                            <th><%- allSeances.entete[key] %></th>
+                        <%});%>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% Object.keys(allSeances.lignes).forEach(function(key){%>
+                        <tr>
+                            <th scope="row"><%- allSeances.etudiants[key] %></th>
+                            <%Object.keys(allSeances.lignes[key]).forEach(function(key2){%>
+                            <td>
+                                <% if(allSeances.lignes[key][key2] != 0) { %>
+                                    <span id="SignOK" class="glyphicon glyphicon-ok"></span>
+                                <% } else { %>
+                                    <span id="SignKO" class="glyphicon glyphicon-remove"></span>
+                                <% } %>
 
+                            </td>
+                            <%});%>
+                        </tr>
+                    <%});%>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <th scope="row">Enseignant</th>
+                        <% Object.keys(allSeances.enseignants).forEach(function(key){%>
+                            <th><%- allSeances.enseignants[key] %></th>
+                        <%});%>
+                    </tr>
+                </tbody>
+            </table>
 
-
-            <% Object.keys(allSeances.lignes).forEach(function(key){%>
-            <%- allSeances.etudiants[key] %> :
-                    <%Object.keys(allSeances.lignes[key]).forEach(function(jkl){%>
-                    <%- allSeances.lignes[key][jkl] %> -
-            <%});%>
-            <%});%>
         </div>
     </body>
 </html>
