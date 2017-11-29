@@ -15,6 +15,19 @@ Fonction de gauche à droite :
 * Le bouton PDF permet de séléctionner la fiche de présence que l'on souhaite afficher
 * Le bouton déconnexion va permettre à l'utilisateur de se déconnecter du site
 
+## Login :
+
+![Login](VueLogin.png)
+
+Afin d'accéder au site, lors de chaque visite il est demandé a tout utilisateurs de bien vouloir se connecter via le nom de compte
+ainsi que le mot de passe fourni par l'administration. A partir de là, tous les utilisateurs vont se retrouver sur cette vue qui 
+contient les fonctionnalités suivantes :
+1) Champ permettant de rentrer son nom de compte (Username)
+2) Champ permettant de rentrer son mot de passe (Password)
+3) Case permettant au navigateur de récupérer ses identifiants afi d'évité de les réécrire à chaque fois
+4) Bouton permettant d'accéder au site et aux fonctionalités réservés aux différents utilisateurs (Etudiant, Enseignant et
+Administration)
+
 ## Présentation des vues administrateurs :
 
 L'administrateur a accès à différentes vues qui lui permette de gérer les différents éléments qui seront nécéssaire afin de renseigner  
@@ -58,7 +71,7 @@ Cette interface nous donne la possibilité de créer un compte utilisateur :
 6) Bouton permettant d'annuler les modifications
 7) Bouton permettant de créer l'utilisateur
 
-#### Vues "Matières" :
+### Vues "Matières" :
 
 ![Vue matières](VueAdminMatiere.png)
 
@@ -69,10 +82,116 @@ Les numéros affichés représentes les fonctionnalités disponnibles dans cette
    * Bouton Rouge : permet de supprimer une matière
 3) Bouton permettant de créer une nouvelle matière
 
+#### Modification d'une matière :
 
+![Modification matière](CreateAdminMatiere.png)
 
+Dans cette vue, l'administrateur va pourvoir modifier les caractéristiques d'une matière, en particulier son nom 
+et la promotion auquelle elle est rattaché :
+1) Champ de modification du nom de la matière
+2) Selection de la promotion associé
+3) Bouton permettant d'annuler la modification
+4) Bouton permettant d'appliquer la modification apporté
 
+#### Création d'une matière :
 
+![Création matière](ModificationAdminMatiere.png)
 
+Cette interface va permettre a l'administrateur de créer et d'associer une matière a une promotion en particulier :
+1) Champ de création du nom de la matière 
+2) Selecteur permettant de relier une matière a une promotion
+3) Bouton permettant d'annuler l'action en cours
+4) Bouton permettant de créer la matière 
 
+### Vues "Séances" :
 
+![Vue séance](VueAdminSeance.PNG)
+
+Cette vue générale des séances va afficher à l'administrateur la totalité des séances comprises dans la base de données.
+L'utilisateur va aussi pouvoir intéragir avec en réalisant 3 actions sur ces séances :
+1) Voir les détails de la séance qui sera classé par matière (on peut donc se référer au nom de la matière), connaitre la date ainsi que 
+la plage horraire utilisé et enfin il pourra consulter l'état de la séance (Validé ou non)
+2) Grâce aux deux boutons présent ici il pourra modifier une séance en cliquant sur le bouton bleu ou il pourra la supprimer en cliquant 
+sur le rouge
+3) Enfin, l'administrateur connecté aura la possibilité de créer une nouvelle séance en cliquant sur le bouton "+"
+
+#### Modification d'une séance :
+
+![Modification Séance](...)
+
+[...]
+
+#### Création d'une séance :
+
+![Création séance](CreateAdminSeance.png)
+
+L'administrateur a la possibilité de de créer une nouvelle séance, pour cela il doit passer par cette vue qui lui donne accès aux 
+fonctionnalités suivantes :
+1) Créer un nom de séance
+2) Indiquer la date exact en format jour/mois/année
+3) Indiquer l'heure de début de la séance
+4) Indiquer l'heure de fin de la séance
+5) Séléctionner la matière associé
+6) Séléctionner l'enseignant qui fera cette séance
+7) Bouton permettant d'annuler l'action en cours
+8) Bouton permettant de créer la séance
+
+### Vues "Promotions" :
+
+![Vue promotion](VueAdminPromotion.png)
+
+Afin de pouvoir rassembler les étudiants en une même entité et de pouvoir associé une matière à cette entité, l'administration a accès
+à une vue "Promotions" qui lui permet de connaitre quelle promotion on été créé. 
+
+1) Affichage du nom des promotions déjà créé
+2) Bouton d'actions liés aux promotions déjà créé :
+- En bleu, le bouton qui donne la possibilité de modifier une promotion
+- En rouge, le bouton qui donne la possibilité de supprimier une promotion
+3) Bouton qui permet de créer une nouvelle promotion 
+
+#### Modification d'une promotion :
+
+![Modification promotion](ModificationAdminPromotion.png)
+
+Lorsque l'utilisateur clique sur le bouton bleu il arrive sur cette vue de modification de promotion. 
+Cette vue va lui permettre de modifier le nom de la promotion.
+
+1) Champ de modification du nom de la promotion
+2) Bouton permettant d'annuler les modifications
+3) Bouton permettant d'appliquer les modifications apportées
+
+#### Création d'une promotion :
+
+![Création promotion](CreateAdminPromotion.png)
+
+Lorsque l'utilisateur clique sur le bouton vert, il arrive sur cette page de création de promotion.
+Cette vue lui permettra de créer une nouvelle promotion.
+
+1) Champ de création du nom de la promotion
+2) Bouton permettant d'annuler la création en cours
+3) Bouton permettant de créer la promotion
+
+## Présentation vue Enseignant :
+
+![Vue enseignant](SeanceEnseignant.png)
+
+Lorsque l'enseignant se connecte au site, il arrive alors sur cette page des séances à valider.
+Si aucune séance n'est a valider, la page sera presque vide et indiquera seulement qu'il n'y a pas de séance à valider.
+Si il y a une ou plusieurs séances à valider, alors a ce moment là une vue avec un QRcode et une liste d'étudiants vont apparaître.
+L'enseignant pourra donc montrer son QRcode à l'ensemble de la classe puis commenter s'il le souhaite la fiche de présence et enfin la 
+valider.
+
+1) QRcode a faire flasher par les élèves
+2) Liste des étudiant contenant leurs nom, prénom et s'il sont noté présent ou non
+3) Champ de commentaire 
+4) Bouton permettant de valider la feuille de présence
+
+## Présentation vue Etudiant :
+
+![Vue etudiant](VueProfileEtudiant.png)
+
+Lorsqu'un étudiant se connecte, il est redirigé directement vers sa fiche de profil. De là, il peut uniquement consulter ses 
+informations.
+
+1) Bouton de déconnexion, permet de revenir à l'interface "login" 
+2) Information visible par l'étudiant (Nom d'utilisateur, Nom et Prénom)
