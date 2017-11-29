@@ -127,7 +127,7 @@ https://github.com/melninie/QRCodeProjet/blob/master/QRCodeProjet/app/Routes/rou
 **GET** / :
 ```js
 app.get('/', function(req, res) {
-res.render('login.ejs', { message: req.flash('loginMessage') });
+	res.render('login.ejs', { message: req.flash('loginMessage') });
 });
 ```
 Renvoi vers la vue login afin de se connecter
@@ -137,7 +137,7 @@ https://github.com/melninie/QRCodeProjet/blob/master/QRCodeProjet/app/Routes/rou
 **GET** /login :
 ```js
 app.get('/login', function(req, res) {
-res.render('login.ejs', { message: req.flash('loginMessage') });
+	res.render('login.ejs', { message: req.flash('loginMessage') });
 });
 ```
 Route Qui affiche une vue indiquant à l’utilisateur de se connecter à l’application
@@ -147,12 +147,12 @@ https://github.com/melninie/QRCodeProjet/blob/master/QRCodeProjet/app/Routes/rou
 **POST** /login :
 ```js
 app.post('/login', function(req, res) {
-var returnTo = req.session.returnTo||'redirectByRole';
-passport.authenticate('local-login', {
-	successRedirect : returnTo,
-failureRedirect : '/login',
-failureFlash : true
-})(req, res	);
+	var returnTo = req.session.returnTo||'redirectByRole';
+	passport.authenticate('local-login', {
+		successRedirect : returnTo,
+		failureRedirect : '/login',
+		failureFlash : true
+	})(req, res	);
 });
 ```
 Renvoie le login au serveur et vérifie celui-ci avant de permettre à l’utilisateur de pouvoir se connecter
@@ -193,7 +193,7 @@ https://github.com/melninie/QRCodeProjet/blob/master/QRCodeProjet/app/Routes/rou
 **POST** /admin/users :
 ```js
 app.post('/admin/users', passport.authenticate('local-signup', {
-successRedirect : '/admin/users',
+	successRedirect : '/admin/users',
 		failureRedirect : '/admin/users/create',
 		failureFlash : true // allow flash messages
 	}));
@@ -224,3 +224,13 @@ app.get('/logout', function(req, res)
 ```
 Cette route permet à n’importe qu’elle utilisateur de se déconnecter depuis toutes les vues possédant le bouton déconnexion.
 
+## Technologies utilisées : 
+
+Afin de réaliser ce projet nous avons travailler avec divers technologies qui nous ont permis de mener à bien ce projet :
+* Nous avons utilisés l'outil **IntelliJ IDEA** qui nous a permis de développer et de faciliter les intéractions avec le serveur
+* Afin de garder un oeil sur les changements dans Github, nous avons utilisé l'outil **SmartGit** 
+* Nous nous sommes servi de **EasyPHP** et de **PHPMyAdmin** en tant que serveur et de database
+* Pour pouvoir communiquer entre nous, nous avons utilisé divers outils comme **Slack** ou **Discord** mais aussi **Asana** qui nous 
+a permis de faire un suivi de projet complet
+* Nous avons développé ce projet sous **NodeJS** et **EJS**, et nous nous sommes servi de **SQL** afin d'écrire les différentes requètes
+* Enfin nous avons utilisé **Boostrap** afin de donner du style a notre site
