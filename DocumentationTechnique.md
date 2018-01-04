@@ -244,6 +244,41 @@ router.post('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, 
 ```
 Cette route sert a générer le PDF sur le serveur. Route accessible uniquement par l'administration.
 
+## Spécification de l'API REST :
+
+| **HTTP verb** | **URL**                  | **Response URL** | **Response body** | **Reason** |
+|-----------|------------------------------|--------------|---------------|--------|
+| GET       | /app/Routes/enseignantRoutes | 200          | retourne toutes les séances de l'enseignant|       |
+| PUT       | /app/Routes/enseignantRoutes |              |               |        |
+| GET       | /app/Routes/etudiantRoutes   |              |               |        |
+| POST      | /app/Routes/etudiantRoutes   |              |               |        |
+| GET       | /app/Routes/matieresRoute    |              |               |        |
+| POST      | /app/Routes/matieresRoute    |              |               |        |
+| PUT       | /app/Routes/matieresRoute    |              |               |        |
+| DELETE    | /app/Routes/matieresRoute    |              |               |        |
+| GET       | /app/Routes/promosRoute      |              |               |        |
+| POST      | /app/Routes/promosRoute      |              |               |        |
+| PUT       | /app/Routes/promosRoute      |              |               |        |
+| DELETE    | /app/Routes/promosRoute      |              |               |        |
+| GET       | /app/Routes/seancesRoute     |              |               |        |
+| POST      | /app/Routes/seancesRoute     |              |               |        |
+| PUT       | /app/Routes/seancesRoute     |              |               |        |
+| DELETE    | /app/Routes/seancesRoute     |              |               |        |
+| GET       | /app/Routes/usersRoute       |              |               |        |
+| PUT       | /app/Routes/usersRoute       |              |               |        |
+| DELETE    | /app/Routes/usersRoute       |              |               |        |
+| GET       | /app/Routes/routes           |              |               |        |
+| GET       | /app/Routes/routes           |              |               |        |
+| POST      | /app/Routes/routes           |              |               |        |
+| GET       | /app/Routes/routes           |              |               |        |
+| GET       | /app/Routes/routes           |              |               |        |
+| POST      | /app/Routes/routes           |              |               |        |
+| GET       | /app/Routes/routes           |              |               |        |
+| GET       | /app/Routes/routes           |              |               |        |
+| GET       | /app/Routes/routes           |              |               |        |
+| GET       | /app/Routes/routes           |              |               |        |
+| POST      | /app/Routes/routes           |              |               |        |
+
 ## Technologies utilisées : 
 
 Afin de réaliser ce projet nous avons travailler avec divers technologies qui nous ont permis de mener à bien ce projet :
