@@ -64,6 +64,11 @@ var Seance={
 
     DelSeanceByMatiere : function (id) {
         return connection.query("delete from seance where matiereS=?", [id])
+    },
+
+    CronSeanceEnseignant:function(date, callback)
+    {
+        return connection.query("select s.*, u.mailU from seance s inner join users u on s.userS=u.id where dateS=? Order by u.mailU, s.heureDebut", [date], callback);
     }
 };
 module.exports=Seance;
