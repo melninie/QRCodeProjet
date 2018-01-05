@@ -36,26 +36,26 @@
                                                     <div class="col-md-9">
                                                         <div><strong><%=(seances[j].nomS.toUpperCase())%>&nbsp;&nbsp;<%=(seances[j].dateS)%></strong>&nbsp;&nbsp;&nbsp;<small>(<%=(seances[j].heureDebut)%>&nbsp;&nbsp;<%=(seances[j].heureFin)%>&nbsp;&nbsp;<%= ((seances[j].valideS)!=0)? "Validé" : "Non Validé" %>)</small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=(seances[j].commentaire)%></div>
                                                     </div>
-                                                    <% if(moment(new Date()).format("YYYY-MM-DD") == seances[j].dateS && moment(new Date()).format("HH:mm") < seances[j].hFin
+                                                    <% if(moment(new Date()).format("YYYY-MM-DD") == seances[j].dateS && moment(new Date()).format("HH:mm") <= seances[j].heureFin
                                                             || moment(new Date()).format("YYYY-MM-DD") < seances[j].dateS) { %>
-                                                    <div class="col-md-2">
-                                                        <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= seances[j].idS %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
-                                                        <span class="pull-right"><a href="/<%= chemin %><%= seances[j].idS %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
-                                                    </div>
+                                                        <div class="col-md-2">
+                                                            <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= seances[j].idS %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
+                                                            <span class="pull-right"><a href="/<%= chemin %><%= seances[j].idS %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                                                        </div>
                                                     <% } %>
                                                 </div>
                                             </div>
-                                        <% } %>
-                                        <% if(x==0) {
-                                            x=1; %>
-                                            <div class="list-group-item">
-                                                <div class="container">
-                                                    <div class="col-md-12">
-                                                        <div>Il n'y a pas de séance pour cette matière.</div>
-                                                    </div>
+                                        <% }
+                                     }
+                                     if(x==0) {
+                                         x=1; %>
+                                         <div class="list-group-item">
+                                             <div class="container">
+                                                <div class="col-md-12">
+                                                    <div>Il n'y a pas de séance pour cette matière.</div>
                                                 </div>
-                                            </div>
-                                        <% } %>
+                                                </div>
+                                         </div>
                                     <% } %>
                                 <% } else { %>
                                     <div class="list-group-item">
