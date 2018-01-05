@@ -41,15 +41,13 @@ app.use(express.static(__dirname + '/assets'));
 
 var cronFunction =require('./app/Routes/cronRoutes.js');
 
-var job = new CronJob('30 55 * * * *', function() {
-		console.log('before');
+var job = new CronJob('00 30 7 * * *', function() {
         cronFunction.cronMail();
-        console.log('after');
 
     }, function () {
         /* This function is executed when the job stops */
     },
-    true, /* Start the job right now */
+    true,
     "Europe/Paris"
 );
 

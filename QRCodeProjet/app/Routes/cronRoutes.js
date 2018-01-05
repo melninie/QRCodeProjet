@@ -12,7 +12,6 @@ var moment = require('moment');
 
 module.exports = {
     cronMail: function () {
-console.log('in');
         var transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
             port: 465,
