@@ -3,6 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var flash = require('connect-flash');
+var CronJob = require('cron').CronJob;
 
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
@@ -36,6 +37,25 @@ require('./app/Routes/routes.js')(app, passport); // load our routes and pass in
 
 app.use(express.static(__dirname + '/assets'));
 
+
+
+var cronFunction =require('./app/Routes/cronRoutes.js');
+
+var job = new CronJob('30 55 * * * *', function() {
+		console.log('before');
+        cronFunction.cronMail();
+        console.log('after');
+
+    }, function () {
+        /* This function is executed when the job stops */
+    },
+    true, /* Start the job right now */
+    "Europe/Paris"
+);
+
+
+
+
 app.use('/admin', require('./app/Routes/usersRoute.js'));
 app.use('/admin', require('./app/Routes/promosRoute.js'));
 app.use('/admin', require('./app/Routes/matieresRoute.js'));
@@ -43,6 +63,9 @@ app.use('/admin', require('./app/Routes/seancesRoute.js'));
 app.use('/admin', require('./app/Routes/fichePresenceRoutes.js'));
 app.use('/etudiant', require('./app/Routes/etudiantRoutes.js'));
 app.use('/enseignant', require('./app/Routes/enseignantRoutes.js'));
+/*
+app.use('/cron', require('./app/Routes/cronRoutes.js'));
+*/
 
 app.listen(port);
 console.log('The magic happens on port ' + port);
