@@ -1,9 +1,9 @@
 var CheckLog = require('../CheckLogin');
-var router = require('express').Router();
 var Promo = require('../Models/promosModel');
 var Matiere = require('../Models/matieresModel');
 var Seance = require('../Models/seancesModel');
 
+var router = require('express').Router();
 var async = require('async');
 
 // =====================================
@@ -21,10 +21,10 @@ router.get('/promotions/:id?', function(req, res, next) {CheckLog(req, res, next
             {
                 if(err)
                     res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/promos/" + req.param("id")});
-                if(rows.length <= 0){
+                if(rows.length <= 0)
                     res.render('errorRessource.ejs',{page_title:"Error", ressource:"/admin/promotions/"+req.param("id")});
-                }
-                res.render('Promos/detailPromo.ejs',{page_title:"detailPromo", promo:rows, chemin:"admin/promotions/"});
+                else
+                    res.render('Promos/detailPromo.ejs',{page_title:"detailPromo", promo:rows, chemin:"admin/promotions/"});
             });
         }
 
@@ -33,8 +33,8 @@ router.get('/promotions/:id?', function(req, res, next) {CheckLog(req, res, next
         var query = Promo.ObtAllPromos(function (err, rows) {
             if (err)
                 res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/promos/"});
-
-            res.render('Promos/allPromos.ejs', {page_title: "allPromos", promos: rows, chemin:"admin/promotions/"});
+            else
+                res.render('Promos/allPromos.ejs', {page_title: "allPromos", promos: rows, chemin:"admin/promotions/"});
         });
     }
 });
@@ -57,7 +57,6 @@ router.delete('/promotions/:id?', function(req, res, next){ CheckLog(req, res, n
             function(parallel_done) {
                 var query2 = Matiere.ObtAllMatieresByPromo(req.param("id"), function (err, rows2) {
                     rows2.forEach(function (element) {
-                        console.log(element);
                         var query4 = Seance.DelSeanceByMatiere(element.idM, function (err, rows) {
                             if (err)
                                 res.render('errorRequest.ejs', {
@@ -92,7 +91,7 @@ router.put('/promotions/:id?', function(req, res, next){ CheckLog(req, res, next
         var nomP = req.body.nom;
         var query = Promo.PutPromoId(req.param("id"), nomP, function (err, rows) {
             if (err)
-                console.log("Error Selecting : %s ", err);
+                res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/promos/" + req.param("id")});
         });
     }
 });

@@ -60,18 +60,13 @@ module.exports = function(app, passport) {
 	}));
 
 	app.get('/profile', function(req, res, next){ CheckLog(req, res, next, "ETUDIANT");}, function(req, res) {
-		if(req.session.user){console.log(req.session)}
-
-		res.render('Etudiant/profile.ejs', {
-			user : req.user
-		});
+		res.render('Etudiant/profile.ejs', { user : req.user });
 	});
 
     // =====================================
     // ADMIN ===============================
     // =====================================
     app.get('/admin',function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function (req, res){
-        console.log('dans la route admin ejs');
         res.render('admin.ejs', {page_title:"Administration"});
     });
 

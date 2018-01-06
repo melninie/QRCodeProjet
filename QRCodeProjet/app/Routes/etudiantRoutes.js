@@ -1,5 +1,6 @@
 var Etudiant = require('../Models/etudiantModel');
 var CheckLog = require('../CheckLogin');
+
 var router = require('express').Router();
 var format = require('date-format');
 var async = require('async');
@@ -17,7 +18,10 @@ router.get('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "E
             function (parallel_done) {
                 var query1 = Etudiant.ObtSeanceWithMatiereId(req.params.id, function(err,rows) {
                     if (err)
+                    {
                         res.render('errorRequest.ejs', {page_title:"Error", ressource: "/etudiant/seance"}+ req.param("id"));
+                        return false;
+                    }
                     data.seance = rows;
                     parallel_done();
                 });
@@ -25,7 +29,10 @@ router.get('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "E
             function (parallel_done) {
                 var query2 = Etudiant.PeutSigner(req.params.id, req.user.id, function (err, rows2) {
                     if (err)
+                    {
                         res.render('errorRequest.ejs', {page_title:"Error", ressource: "/etudiant/seance"}+ req.param("id"));
+                        return false;
+                    }
                     if (rows2.length <= 0) {
                         data.dejaPresent = false;
                     }
@@ -37,13 +44,16 @@ router.get('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "E
             }
         ], function (err) {
             if (err)
+            {
                 res.render('errorRequest.ejs', {page_title:"Error", ressource: "/etudiant/seance"}+ req.param("id"));
-
+                return false;
+            }
             if (data.seance.length <= 0) {
                 res.render('errorRessource.ejs', {
                     page_title: "Error",
                     ressource: "/etudiant/seance/" + req.param("id")
                 });
+                return false;
             }
             else {
                 data.seance = data.seance[0]; //on ne garde que la premiere ligne
@@ -55,6 +65,7 @@ router.get('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "E
                     page_title: "Error",
                     ressource: "/etudiant/seance/" + req.param("id")
                 });
+                return false;
             }
             //vérifications horaire
             var heure = format.asString('hh:mm', new Date());
@@ -88,8 +99,8 @@ router.post('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "
         var query = Etudiant.Signer(seance, utilisateur, function (err, rows) {
             if (err)
                 res.render('errorRequest.ejs', {page_title:"Error", ressource: "/etudiant/seance"}+ req.param("id"));
-
-            res.redirect('/etudiant/seance/'+req.params.id);
+            else
+                res.redirect('/etudiant/seance/'+req.params.id);
         });
     }
 });

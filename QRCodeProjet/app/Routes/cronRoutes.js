@@ -1,5 +1,6 @@
 var Seance=require('../Models/seancesModel');
 var CheckLog = require('../CheckLogin');
+
 var router = require('express').Router();
 var async = require('async');
 var fs = require("fs");
@@ -7,8 +8,6 @@ var nodemailer = require("nodemailer");
 var ejs = require("ejs");
 var qr = require('qr-image');
 var moment = require('moment');
-
-
 
 module.exports = {
     cronMail: function () {
@@ -51,7 +50,6 @@ module.exports = {
 
 
             function rndr(tab) {
-                console.log(tabSpeEnseignantSeance);
                 for(var enseignant in tabSpeEnseignantSeance)
                 {
                     var seances = tabSpeEnseignantSeance[enseignant];

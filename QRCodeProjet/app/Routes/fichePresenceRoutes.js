@@ -1,8 +1,8 @@
 var Promo = require('../Models/promosModel');
 var Seance = require('../Models/seancesModel');
 var CheckLog = require('../CheckLogin');
-var router = require('express').Router();
 
+var router = require('express').Router();
 var pdfMaker = require('pdf-maker');
 var fs = require('fs');
 // =====================================
@@ -21,8 +21,8 @@ router.get('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, n
         var query = Promo.ObtAllPromos(function (err, rows) {
             if (err)
                 res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/fichePresence/"});
-
-            res.render('FichePresence/formulaire.ejs', {page_title: "fichePresence", promos: rows, chemin:"admin/fichePresence/"});
+            else
+                res.render('FichePresence/formulaire.ejs', {page_title: "fichePresence", promos: rows, chemin:"admin/fichePresence/"});
         });
     }
 });

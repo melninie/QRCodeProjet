@@ -18,10 +18,15 @@ var async = require('async');
                 function(parallel_done) {
                     var query = User.ObtUserId(req.param("id"), function (err, rows) {
                         if (err)
+                        {
                             res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/users/"}+ req.param("id"));
+                            return false;
+                        }
                         if (rows.length <= 0)
-                            res.render('errorRessource.ejs', {page_title: "Error", data:rows.length, ressource:"/admin/users/" + req.param("id")
-                            });
+                        {
+                            res.render('errorRessource.ejs', {page_title: "Error", data:rows.length, ressource:"/admin/users/" + req.param("id")});
+                            return false;
+                        }
 
                         data.table1 = rows;
 
@@ -40,8 +45,8 @@ var async = require('async');
             ], function(err){
                 if(err)
                     res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/users/" + req.param("id")});
-
-                res.render('Users/detailUser.ejs',{page_title:"detailUser", user:data.table1, promos:data.table2, chemin:"admin/users/"});
+                else
+                    res.render('Users/detailUser.ejs',{page_title:"detailUser", user:data.table1, promos:data.table2, chemin:"admin/users/"});
             });
         }
         else
@@ -78,8 +83,6 @@ var async = require('async');
     {
         if (req.param("id"))
         {
-            console.log(req.body.nom);
-
             var nomU = req.body.nom;
             var prenomU = req.body.prenom;
             var mailU = req.body.mail;

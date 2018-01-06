@@ -36,8 +36,6 @@ router.get('/seance', function(req, res, next) {CheckLog(req, res, next, "ENSEIG
                         else
                             rowsbadge.push(1);
 
-                        console.log(rows3);
-
                         if (rowsbadge.length == rows2.length) {
                             res.render('validerPresence.ejs', {
                                 page_title: "validerPresence", seance: rows,
@@ -70,8 +68,6 @@ router.put('/seance/:id?', function(req, res, next){ CheckLog(req, res, next, "E
         });
     }
 });
-
-
 
 module.exports = router;
 

@@ -4,7 +4,10 @@
     <% include layout %>
 </head>
     <body>
-        <h1> ERROR RESSOURCE</h1>
-        <h2> La ressource <%= ressource %> n'existe pas</h2>
+        <% include menu %>
+        <div class="container">
+            <h1> ERROR RESSOURCE</h1>
+            <h2> La ressource <%= ressource %> est inexistante</h2>
+        </div>
     </body>
 </html>
