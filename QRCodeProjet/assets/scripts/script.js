@@ -42,8 +42,12 @@ function formUserOK (idItem, chemin) {
     var valuePrenom = window.document.usermodif.prenom.value;
     var valueMail = window.document.usermodif.mail.value;
 
+    var expr = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
     if (valueNom =="" || valuePrenom =="" || valueMail =="")
         alert("Tous les champs ne sont pas remplis");
+    if(!expr.test(valueMail))
+        alert("Veuillez renseigner une adresse email");
     else {
         modifyItem(idItem, chemin);
         window.document.getElementById("redirection").click();
