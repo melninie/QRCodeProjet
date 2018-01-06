@@ -11,22 +11,22 @@
         <div class="col-sm-6 col-sm-offset-3">
             <h1><span class="fa fa-sign-in"></span>Formulaire de modification</h1>
 
-            <form id="form">
+            <form id="form" name="seancemodif">
                 <div class="form-group">
                     <label>Nom</label>
-                    <input type="text" class="form-control" name="nom" value="<%=(seance[0].nomS.toUpperCase())%>">
+                    <input type="text" class="form-control" name="nom" value="<%=(seance[0].nomS.toUpperCase())%>" maxlength="50" required>
                 </div>
                 <div class="form-group">
                     <label>Date</label>
-                    <input type="date" class="form-control" name="date" value="<%=(seance[0].dateS)%>">
+                    <input type="date" class="form-control" name="date" value="<%=(seance[0].dateS)%>" required>
                 </div>
                 <div class="form-group">
                     <label>Heure Debut</label>
-                    <input type="time" class="form-control" name="hDebut" value="<%=(seance[0].heureDebut)%>">
+                    <input type="time" class="form-control" name="hDebut" value="<%=(seance[0].heureDebut)%>" required>
                 </div>
                 <div class="form-group">
                     <label>Heure Fin</label>
-                    <input type="time" class="form-control" name="hFin" value="<%=(seance[0].heureFin)%>">
+                    <input type="time" class="form-control" name="hFin" value="<%=(seance[0].heureFin)%>" required>
                 </div>
                 <div class="form-group">
                     <label>Commentaire</label>
@@ -51,7 +51,8 @@
 
                 <div class="pull-right">
                     <a href="/admin/seances" class="btn btn-secondary btn-lg">Annuler</a>
-                    <a href="/admin/seances" class="btn btn-primary btn-lg" onclick="modifyItem('<%= seance[0].idS %>', '<%= chemin %>')">Appliquer</a>
+                    <a class="btn btn-primary btn-lg" onclick="formSeanceOK('<%= seance[0].idS %>', '<%= chemin %>')">Appliquer</a>
+                    <a id="redirection" href="/<%= chemin %>"></a>
                 </div>
             </form>
         </div>
