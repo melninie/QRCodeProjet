@@ -14,15 +14,16 @@
                 <form action="<%= chemin %>" method="post">
                     <div class="form-group">
                         <label>Nom :</label>
-                        <input type="text" class="form-control" name="nom">
+                        <input type="text" class="form-control" name="nom" maxlength="50" required>
                     </div>
                     <div class="form-group">
                         <label>Prénom :</label>
-                        <input type="text" class="form-control" name="prenom">
+                        <input type="text" class="form-control" name="prenom" maxlength="50" required>
                     </div>
                     <div class="form-group">
                         <label>Mail :</label>
-                        <input type="text" class="form-control" name="mail">
+                        <input type="email" class="form-control" name="mail" maxlength="100" required>
+
                     </div>
                     <div class="form-group">
                         <label>Rôle :</label>
@@ -43,7 +44,7 @@
                     <input type="hidden" name="password" value="1234">
 
                     <div class="pull-right">
-                        <a href="/<%= chemin %>" class="btn btn-secondary btn-lg">Annuler</a>
+                        <a href="<%= chemin %>" class="btn btn-secondary btn-lg">Annuler</a>
                         <button type="submit" class="btn btn-success btn-lg">Créer</button>
                     </div>
                 </form>

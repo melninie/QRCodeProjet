@@ -10,18 +10,19 @@
     <div class="container">
         <div class="col-sm-6 col-sm-offset-3">
             <h1><span class="fa fa-sign-in"></span>Formulaire de modification</h1>
-            <form id="form">
+
+            <form id="form" name="usermodif">
                 <div class="form-group">
                     <label>Nom</label>
-                    <input type="text" class="form-control" name="nom" value="<%=(user[0].nomU.toUpperCase())%>">
+                    <input type="text" class="form-control" name="nom" value="<%=(user[0].nomU.toUpperCase())%>" maxlength="50" required>
                 </div>
                 <div class="form-group">
                     <label>Prénom</label>
-                    <input type="text" class="form-control" name="prenom" value="<%=(user[0].prenomU)%>">
+                    <input type="text" class="form-control" name="prenom" value="<%=(user[0].prenomU)%>" maxlength="50" required>
                 </div>
                 <div class="form-group">
                     <label>Mail</label>
-                    <input type="text" class="form-control" name="mail" value="<%=(user[0].mailU)%>">
+                    <input type="email" class="form-control" name="mail" value="<%=(user[0].mailU)%>" maxlength="100" required>
                 </div>
                 <% if((user[0].roleU)=='ETUDIANT') { %>
                 <div class="form-group">
@@ -36,7 +37,8 @@
 
                 <div class="pull-right">
                     <a href="/<%= chemin %>" class="btn btn-secondary btn-lg">Annuler</a>
-                    <a href="/<%= chemin %>" class="btn btn-primary btn-lg" onclick="modifyItem('<%= user[0].id %>', '<%= chemin %>')">Appliquer</a>
+                    <a class="btn btn-primary btn-lg" onclick="formUserOK('<%= user[0].id %>', '<%= chemin %>')">Appliquer</a>
+                    <a id="redirection" href="/<%= chemin %>"></a>
                 </div>
             </form>
         </div>

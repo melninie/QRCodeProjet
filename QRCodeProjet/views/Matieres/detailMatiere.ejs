@@ -11,10 +11,10 @@
         <div class="col-sm-6 col-sm-offset-3">
             <h1><span class="fa fa-sign-in"></span>Formulaire de modification</h1>
 
-            <form id="form">
+            <form id="form" name="matieremodif">
                 <div class="form-group">
                     <label>Nom</label>
-                    <input type="text" class="form-control" name="nom" value="<%=(matieres[0].nomM.toUpperCase())%>">
+                    <input type="text" class="form-control" name="nom" value="<%=(matieres[0].nomM.toUpperCase())%>" maxlength="50" required>
                 </div>
                 <div class="form-group">
                     <label>Promotion</label>
@@ -27,7 +27,8 @@
 
                 <div class="pull-right">
                     <a href="/admin/matieres" class="btn btn-secondary btn-lg">Annuler</a>
-                    <a href="/admin/matieres" class="btn btn-primary btn-lg" onclick="modifyItem('<%= matieres[0].idM %>', '<%= chemin %>')">Appliquer</a>
+                    <a class="btn btn-primary btn-lg" onclick="formMatiereOK('<%= matieres[0].idM %>', '<%= chemin %>')">Appliquer</a>
+                    <a id="redirection" href="/<%= chemin %>"></a>
                 </div>
             </form>
         </div>

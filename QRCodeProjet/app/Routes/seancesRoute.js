@@ -125,9 +125,10 @@ var async = require('async');
                             res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/"});
                         if (rows.length != 0) {
                             rows.forEach(function (element) {
-                                element.dateS = element.dateS.getDate() + "-" + (element.dateS.getUTCMonth() + 1) + "-" + element.dateS.getUTCFullYear();
+                                element.dateS = moment(element.dateS).format("YYYY-MM-DD");
                             });
                         }
+
                         data2.table1 = rows;
                         parallel_done();
                     });

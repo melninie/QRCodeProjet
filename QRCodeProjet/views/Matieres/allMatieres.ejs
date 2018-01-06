@@ -36,17 +36,18 @@
                                             </div>
                                         </div>
                                     <% } %>
-                                    <% if(x==0) {
-                                        x=1; %>
-                                        <div class="list-group-item">
-                                            <div class="container">
-                                                <div class="col-md-12">
-                                                    <div>Il n'y a pas de matières pour cette promotion.</div>
-                                                </div>
+                                <% } %>
+
+                                <% if(x==0) {
+                                    x=1; %>
+                                    <div class="list-group-item">
+                                        <div class="container">
+                                            <div class="col-md-12">
+                                                <div>Il n'y a pas de matières pour cette promotion.</div>
                                             </div>
                                         </div>
-                                     <% } %>
-                                <% } %>
+                                    </div>
+                                 <% } %>
                             <% } else { %>
                                 <div class="list-group-item">
                                     <div class="container">
