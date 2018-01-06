@@ -13,7 +13,7 @@ router.get('/seance', function(req, res, next) {CheckLog(req, res, next, "ENSEIG
     var query = Seance.ObtSeanceEnseignant(req.user.id, function(err,rows)
     {
         if(err)
-            res.render('errorRequest.ejs', {page_title:"Error", ressource: "/enseignant/seance"});
+            res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/enseignant/seance"});
         if(rows.length != 0) {
 
             rows.forEach(function (element) {
@@ -23,21 +23,21 @@ router.get('/seance', function(req, res, next) {CheckLog(req, res, next, "ENSEIG
 
             var query2 = Seance.ObtEtudiantEnseignant(rows[0].idS, function (err, rows2) {
                 if (err)
-                    res.render('errorRequest.ejs', {page_title: "Error", ressource: "/enseignant/seance"});
+                    res.status(500).render('errorRequest.ejs', {page_title: "Error", ressource: "/enseignant/seance"});
 
                 var rowsbadge = [];
 
                 rows2.forEach(function (element) {
                     var query3 = Seance.ObtBadgeEtuSeance(element.id, rows[0].idS, function (err, rows3) {
                         if (err)
-                            res.render('errorRequest.ejs', {page_title: "Error", ressource: "/enseignant/seance"});
+                            res.status(500).render('errorRequest.ejs', {page_title: "Error", ressource: "/enseignant/seance"});
                         if (rows3.length == 0)
                             rowsbadge.push(0);
                         else
                             rowsbadge.push(1);
 
                         if (rowsbadge.length == rows2.length) {
-                            res.render('validerPresence.ejs', {
+                            res.status(200).render('validerPresence.ejs', {
                                 page_title: "validerPresence", seance: rows,
                                 etudiants: rows2, badge: rowsbadge, chemin: "enseignant/seance/"
                             });
@@ -47,7 +47,7 @@ router.get('/seance', function(req, res, next) {CheckLog(req, res, next, "ENSEIG
             });
         }
         else {
-            res.render('validerPresence.ejs', {
+            res.status(200).render('validerPresence.ejs', {
                 page_title: "validerPresence", seance: [],
                 chemin: "enseignant/seance/"
             });
@@ -64,7 +64,7 @@ router.put('/seance/:id?', function(req, res, next){ CheckLog(req, res, next, "E
 
         var query = Seance.ValiderSeance(id, commentaire, function (err, rows) {
             if (err)
-                res.render('errorRequest.ejs', {page_title:"Error", ressource: "/enseignant/seance"}+ req.param("id"));
+                res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/enseignant/seance"}+ req.param("id"));
         });
     }
 });

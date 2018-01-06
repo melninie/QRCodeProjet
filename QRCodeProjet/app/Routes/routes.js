@@ -8,11 +8,11 @@ module.exports = function(app, passport) {
 	// =====================================
 
 	app.get('/', function(req, res) {
-        res.render('login.ejs', { message: req.flash('loginMessage') });
+        res.status(200).render('login.ejs', { message: req.flash('loginMessage') });
 	});
 
 	app.get('/login', function(req, res) {
-		res.render('login.ejs', { message: req.flash('loginMessage') });
+		res.status(200).render('login.ejs', { message: req.flash('loginMessage') });
 	});
 
 	app.post('/login', function(req, res) {
@@ -38,18 +38,22 @@ module.exports = function(app, passport) {
 				var returnTo = "admin/";
 				break;
 		}
-        res.redirect(returnTo);
+        res.status(200).redirect(returnTo);
     });
 
 	app.get('/admin/users/create', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res) {
         var query = Promo.ObtAllPromos(function (err, rows) {
             if (err)
-                res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/users/"});
+			{
+				res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/users/"});
+				return false;
+            }
              if(rows.length<=0)
              {
-                 res.render('errorRessource.ejs', {page_title:"Error", ressource:"/admin/users/create"});
+                 res.status(404).render('errorRessource.ejs', {page_title:"Error", ressource:"/admin/users/create"});
+                 return false;
              }
-            res.render('Users/createUser.ejs', {page_title:"createUser", promos:rows, chemin:"/admin/users/"});
+            res.status(201).render('Users/createUser.ejs', {page_title:"createUser", promos:rows, chemin:"/admin/users/"});
         });
 	});
 
@@ -60,14 +64,14 @@ module.exports = function(app, passport) {
 	}));
 
 	app.get('/profile', function(req, res, next){ CheckLog(req, res, next, "ETUDIANT");}, function(req, res) {
-		res.render('Etudiant/profile.ejs', { user : req.user });
+		res.status(200).render('Etudiant/profile.ejs', { user : req.user });
 	});
 
     // =====================================
     // ADMIN ===============================
     // =====================================
     app.get('/admin',function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function (req, res){
-        res.render('admin.ejs', {page_title:"Administration"});
+        res.status(200).render('admin.ejs', {page_title:"Administration"});
     });
 
     // =====================================
@@ -76,6 +80,6 @@ module.exports = function(app, passport) {
     app.get('/logout', function(req, res) {
         req.logout();
         req.session.returnTo=null;
-        res.redirect('/');
+        res.status(200).redirect('/');
     });
 };

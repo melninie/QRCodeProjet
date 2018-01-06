@@ -19,12 +19,12 @@ var async = require('async');
                     var query = User.ObtUserId(req.param("id"), function (err, rows) {
                         if (err)
                         {
-                            res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/users/"}+ req.param("id"));
+                            res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/users/"}+ req.param("id"));
                             return false;
                         }
                         if (rows.length <= 0)
                         {
-                            res.render('errorRessource.ejs', {page_title: "Error", data:rows.length, ressource:"/admin/users/" + req.param("id")});
+                            res.status(404).render('errorRessource.ejs', {page_title: "Error", data:rows.length, ressource:"/admin/users/" + req.param("id")});
                             return false;
                         }
 
@@ -36,7 +36,7 @@ var async = require('async');
                 function(parallel_done) {
                     var query2 = Promo.ObtAllPromos(function (err, rows2) {
                         if (err)
-                            res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/users/" + req.param("id")});
+                            res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/users/" + req.param("id")});
 
                         data.table2 = rows2;
                         parallel_done();
@@ -44,9 +44,9 @@ var async = require('async');
                 }
             ], function(err){
                 if(err)
-                    res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/users/" + req.param("id")});
+                    res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/users/" + req.param("id")});
                 else
-                    res.render('Users/detailUser.ejs',{page_title:"detailUser", user:data.table1, promos:data.table2, chemin:"admin/users/"});
+                    res.status(200).render('Users/detailUser.ejs',{page_title:"detailUser", user:data.table1, promos:data.table2, chemin:"admin/users/"});
             });
         }
         else
@@ -61,7 +61,7 @@ var async = require('async');
                 var lengthResult = 0;
 
                 if(err)
-                    res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/users/"});
+                    res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/users/"});
 
                 rows.forEach(function(element) {
                     if(element.roleU=="ETUDIANT")
@@ -74,7 +74,7 @@ var async = require('async');
                     }
                 });
 
-                res.render('Users/allUsers.ejs',{page_title:"allUsers", etudiants:tabEtu, enseignants:tabEns, administration:tabAdmin, session:sessionUser, nbAdmin:lengthResult, chemin:"admin/users/"});
+                res.status(200).render('Users/allUsers.ejs',{page_title:"allUsers", etudiants:tabEtu, enseignants:tabEns, administration:tabAdmin, session:sessionUser, nbAdmin:lengthResult, chemin:"admin/users/"});
             });
         }
     });
@@ -90,7 +90,7 @@ var async = require('async');
 
             var query = User.PutUserId(req.param("id"), nomU, prenomU, mailU, promotionU, function (err, rows) {
                 if (err)
-                    res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/users/" + req.param("id")});
+                    res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/users/" + req.param("id")});
             });
         }
     });
@@ -100,7 +100,7 @@ var async = require('async');
         if(req.param("id")) {
             var query = User.DelUserId(req.param("id"), function (err, rows) {
                 if (err)
-                    res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/users/" + req.param("id")});
+                    res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/users/" + req.param("id")});
 
            });
         }
