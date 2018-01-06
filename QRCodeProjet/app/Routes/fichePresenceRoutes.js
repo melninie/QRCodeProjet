@@ -14,15 +14,15 @@ router.get('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, n
     if(req.params.id) {
         fs.readFile('./PDF/'+req.params.id+'.pdf', function (err,data){
             res.contentType("application/pdf");
-            res.send(data);
+            res.status(200).send(data);
         });
     }
     else {
         var query = Promo.ObtAllPromos(function (err, rows) {
             if (err)
-                res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/fichePresence/"});
+                res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/fichePresence/"});
             else
-                res.render('FichePresence/formulaire.ejs', {page_title: "fichePresence", promos: rows, chemin:"admin/fichePresence/"});
+                res.status(200).render('FichePresence/formulaire.ejs', {page_title: "fichePresence", promos: rows, chemin:"admin/fichePresence/"});
         });
     }
 });
@@ -41,7 +41,7 @@ router.post('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, 
     var query = Seance.ObtSeancesFiche(promo, date, function(err,rows)
     {
         if(err)
-            res.render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/fichePresence"});
+            res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/fichePresence"});
 
         if(rows.length != 0) {
 
@@ -52,7 +52,7 @@ router.post('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, 
 
                 var query2 = Seance.ObtEtudiantEnseignant(seance.idS, function (err2, rows2) {
                     if (err2)
-                        res.render('errorRequest.ejs', {page_title: "Error", ressource: "/admin/fichePresence"});
+                        res.status(500).render('errorRequest.ejs', {page_title: "Error", ressource: "/admin/fichePresence"});
 
                     rows2.forEach(function (etudiant, indexE) {
                         if (!("etu"+etudiant.id in allSeances["lignes"])) {;
@@ -62,7 +62,7 @@ router.post('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, 
 
                         var query3 = Seance.ObtBadgeEtuSeance(parseInt(etudiant.id), seance.idS, function (err3, rows3) {
                             if (err3)
-                                res.render('errorRequest.ejs', {page_title: "Error", ressource: "/enseignant/seance"});
+                                res.status(500).render('errorRequest.ejs', {page_title: "Error", ressource: "/enseignant/seance"});
 
                             if (rows3.length == 0)
                                 allSeances["lignes"]["etu"+etudiant.id].push(0);
@@ -89,7 +89,7 @@ router.post('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, 
 
                                 pdfMaker(template, data, pdfPath, option);
 
-                                res.render('FichePresence/recap.ejs', {
+                                res.status(200).render('FichePresence/recap.ejs', {
                                     page_title: "fichePresence",
                                     chemin:"admin/fichePresence/",
                                     allSeances: allSeances,
@@ -106,7 +106,7 @@ router.post('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, 
 
         }
         else {
-            res.render('validerPresence.ejs', {
+            res.status(200).render('validerPresence.ejs', {
                 page_title: "validerPresence", seance: [],
                 chemin: "enseignant/seance/"
             });
