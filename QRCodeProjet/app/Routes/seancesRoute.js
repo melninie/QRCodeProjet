@@ -151,7 +151,7 @@ var async = require('async');
                             rows.forEach(function (element) {
                                 element.dateS = moment(element.dateS).format("YYYY-MM-DD");
                             });
-                            return false;
+                            //return false;
                         }
 
                         data2.table1 = rows;
