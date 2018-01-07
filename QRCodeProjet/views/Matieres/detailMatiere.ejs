@@ -20,7 +20,7 @@
                     <label>Promotion</label>
                     <select name="promo">
                         <% for(var i=0; i<promos.length; i++) {%>
-                            <option value="<%=promos[i].idP%>" <% if(promos[i].id==matieres[0].promotionS) { %> selected="selected" <% } %> ><%=promos[i].nomP%></option>
+                            <option value="<%=promos[i].idP%>" <% if(promos[i].idP==matieres[0].promotionS) { %> selected="selected" <% } %> ><%=promos[i].nomP%></option>
                         <% } %>
                     </select>
                 </div>
