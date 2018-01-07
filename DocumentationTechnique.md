@@ -249,7 +249,8 @@ Cette route sert a générer le PDF sur le serveur. Route accessible uniquement 
 | **HTTP verb** | **URL**                  | **Response URL** | **Response body** | **Reason** |
 |-----------|------------------------------|--------------|---------------|--------|
 | GET       | /app/Routes/enseignantRoutes | 200          | retourne toutes les séances de l'enseignant|       |
-| PUT       | /app/Routes/enseignantRoutes |              |               |        |
+|           |                              | 500          |               | pas de contenu     |
+| PUT       | /app/Routes/enseignantRoutes | 500          |               |        |
 | GET       | /app/Routes/etudiantRoutes   |              |               |        |
 | POST      | /app/Routes/etudiantRoutes   |              |               |        |
 | GET       | /app/Routes/matieresRoute    |              |               |        |
@@ -276,8 +277,9 @@ Cette route sert a générer le PDF sur le serveur. Route accessible uniquement 
 | GET       | /app/Routes/routes           |              |               |        |
 | GET       | /app/Routes/routes           |              |               |        |
 | GET       | /app/Routes/routes           |              |               |        |
-| GET       | /app/Routes/routes           |              |               |        |
-| POST      | /app/Routes/routes           |              |               |        |
+| GET       | /app/Routes/fichePresenceRoutes |              |               |        |
+| POST      | /app/Routes/fichePresenceRoutes |              |               |        |
+|           |                              |              |               |        |
 
 ## Technologies utilisées : 
 
