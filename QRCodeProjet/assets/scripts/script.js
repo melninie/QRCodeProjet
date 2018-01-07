@@ -46,7 +46,7 @@ function formUserOK (idItem, chemin) {
 
     if (valueNom =="" || valuePrenom =="" || valueMail =="")
         alert("Tous les champs ne sont pas remplis");
-    if(!expr.test(valueMail))
+    else if(!expr.test(valueMail))
         alert("Veuillez renseigner une adresse email");
     else {
         modifyItem(idItem, chemin);
