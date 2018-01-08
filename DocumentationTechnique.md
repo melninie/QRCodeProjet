@@ -248,55 +248,55 @@ Cette route sert a générer le PDF sur le serveur. Route accessible uniquement 
 
 | **HTTP verb** | **URL**                  | **Response URL** | **Response body** | **Reason** |
 |-----------|------------------------------|--------------|---------------|--------|
-| GET       | /enseignant/seance           | 200          | retourne toutes les séances de l'enseignant |     |
-|           |                              | 500          |               | pas de contenu |
-| PUT       | /enseignant/seance/:id?      | 500          |               |        |
-| GET       | /etudiant/seance/:id?        | 200          |               |        |
-|           |                              | 404          |               |        |
-|           |                              | 500          |               |        |
-| POST      | /etudiant/seance/:id?        | 201          |               |        |
-|           |                              | 500          |               |        |
-| GET       | /admin/matieres/:id?         | 200          |               |        |
-|           |                              | 404          |               |        |
-|           |                              | 500          |               |        |
-| POST      | /admin/matieres              | 201          |               |        |
-|           |                              | 500          |               |        |
-| PUT       | /admin/matieres/:id?         | 500          |               |        |
-| DELETE    | /admin/matieres/:id?         | 500          |               |        |
-| GET       | /admin/promotions/:id?       | 200          |               |        |
-|           |                              | 404          |               |        |
-|           |                              | 500          |               |        |
-| POST      | /admin/promotions            | 201          |               |        |
-|           |                              | 500          |               |        |
-| PUT       | /admin/promotions/:id?       | 500          |               |        |
-| DELETE    | /admin/promotions/:id?       | 500          |               |        |
-| GET       | /admin/seances/:id?          | 200          |               |        |
-|           |                              | 404          |               |        |
-|           |                              | 500          |               |        |
-| POST      | /admin/seances               | 201          |               |        |
-|           |                              | 500          |               |        |
-| PUT       | /admin/seances/:id?          | 500          |               |        |
-| DELETE    | /admin/seances/:id?          | 500          |               |        |
-| GET       | /admin/users/:id?            | 200          |               |        |
-|           |                              | 404          |               |        |
-|           |                              | 500          |               |        |
-| PUT       | /admin/users/:id?            | 500          |               |        |
-| DELETE    | /admin/users/:id?            | 500          |               |        |
-| GET       | /                            | 200          |               |        |
-| GET       | /login                       | 200          |               |        |
-| POST      | /login                       |              |               |        |
-| GET       | /redirectByRole              | 200          |               |        |
-| GET       | /admin/users/create          | 201          |               |        |
-|           |                              | 404          |               |        |
-|           |                              | 500          |               |        |
-| POST      | /admin/users                 |              |               |        |
-| GET       | /profile                     | 200          |               |        |
-| GET       | /admin                       | 200          |               |        |
-| GET       | /logout                      | 200          |               |        |
-| GET       | /fichePresence/:id?          | 200          |               |        |
-|           |                              | 500          |               |        |
-| POST      | /fichePresence/:id?          | 200          |               |        |
-|           |                              | 500          |               |        |
+| GET       | /enseignant/seance           | 200          | Retourne toutes les séances de l'enseignant |     |
+|           |                              | 500          |               | Erreur interne du serveur |
+| PUT       | /enseignant/seance/:id?      | 500          |               | Erreur interne du serveur |
+| GET       | /etudiant/seance/:id?        | 200          | Retourne la séances que l'étudiant doit valider |        |
+|           |                              | 404          |               | Ressource non trouvée |
+|           |                              | 500          |               | Erreur interne du serveur |
+| POST      | /etudiant/seance/:id?        | 201          | Crée la validation d'une séance |        |
+|           |                              | 500          |               | Erreur interne du serveur |
+| GET       | /admin/matieres/:id?         | 200          | Retourne une matière demandé |        |
+|           |                              | 404          |               | Ressource non trouvée |
+|           |                              | 500          |               | Erreur interne du serveur |
+| POST      | /admin/matieres              | 201          | Crée une matière dans la table |        |
+|           |                              | 500          |               | Erreur interne du serveur |
+| PUT       | /admin/matieres/:id?         | 500          |               | Erreur interne du serveur |
+| DELETE    | /admin/matieres/:id?         | 500          |               | Erreur interne du serveur |
+| GET       | /admin/promotions/:id?       | 200          | Retourne une promotion demandé |        |
+|           |                              | 404          |               | Ressource non trouvée |
+|           |                              | 500          |               | Erreur interne du serveur |
+| POST      | /admin/promotions            | 201          | Crée une promotion dans la table |        |
+|           |                              | 500          |               | Erreur interne du serveur |
+| PUT       | /admin/promotions/:id?       | 500          |               | Erreur interne du serveur |
+| DELETE    | /admin/promotions/:id?       | 500          |               | Erreur interne du serveur |
+| GET       | /admin/seances/:id?          | 200          | Retourne une séance demandé |        |
+|           |                              | 404          |               | Ressource non trouvée |
+|           |                              | 500          |               | Erreur interne du serveur |
+| POST      | /admin/seances               | 201          | Crée une séance dans la table |        |
+|           |                              | 500          |               | Erreur interne du serveur |
+| PUT       | /admin/seances/:id?          | 500          |               | Erreur interne du serveur |
+| DELETE    | /admin/seances/:id?          | 500          |               | Erreur interne du serveur |
+| GET       | /admin/users/:id?            | 200          | Retourne un utilisateur demandé |        |
+|           |                              | 404          |               | Ressource non trouvée |
+|           |                              | 500          |               | Erreur interne du serveur |
+| PUT       | /admin/users/:id?            | 500          |               | Erreur interne du serveur |
+| DELETE    | /admin/users/:id?            | 500          |               | Erreur interne du serveur |
+| GET       | /                            | 200          | Retourne la page d'acceuil |        |
+| GET       | /login                       | 200          | Retourne la connexion |        |
+| POST      | /login                       |              | Renvoi les données entrées |        |
+| GET       | /redirectByRole              | 200          | Retourne la page attribué a chaque type d'utilisateur |        |
+| GET       | /admin/users/create          | 201          | Crée un compte utilisateur |        |
+|           |                              | 404          |               | Ressource non trouvée |
+|           |                              | 500          |               | Erreur interne du serveur |
+| POST      | /admin/users                 |              | Renvoi les données liées au compte utilisateur              |        |
+| GET       | /profile                     | 200          | Retourne la page profile de l'utilisateur |        |
+| GET       | /admin                       | 200          | Retourne l'acceuil administrateur |        |
+| GET       | /logout                      | 200          | Déconnecte l'utilisateur et retourne la page de connexion |        |
+| GET       | /fichePresence/:id?          | 200          | Retourne la fiche de présence demandé |        |
+|           |                              | 500          |               | Erreur interne du serveur |
+| POST      | /fichePresence/:id?          | 200          | Génère le PDF de la fiche de présence |        |
+|           |                              | 500          |               | Erreur interne du serveur |
 
 ## Technologies utilisées : 
 
