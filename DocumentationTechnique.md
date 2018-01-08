@@ -248,38 +248,55 @@ Cette route sert a générer le PDF sur le serveur. Route accessible uniquement 
 
 | **HTTP verb** | **URL**                  | **Response URL** | **Response body** | **Reason** |
 |-----------|------------------------------|--------------|---------------|--------|
-| GET       | /app/Routes/enseignantRoutes | 200          | retourne toutes les séances de l'enseignant|       |
-|           |                              | 500          |               | pas de contenu     |
-| PUT       | /app/Routes/enseignantRoutes | 500          |               |        |
-| GET       | /app/Routes/etudiantRoutes   |              |               |        |
-| POST      | /app/Routes/etudiantRoutes   |              |               |        |
-| GET       | /app/Routes/matieresRoute    |              |               |        |
-| POST      | /app/Routes/matieresRoute    |              |               |        |
-| PUT       | /app/Routes/matieresRoute    |              |               |        |
-| DELETE    | /app/Routes/matieresRoute    |              |               |        |
-| GET       | /app/Routes/promosRoute      |              |               |        |
-| POST      | /app/Routes/promosRoute      |              |               |        |
-| PUT       | /app/Routes/promosRoute      |              |               |        |
-| DELETE    | /app/Routes/promosRoute      |              |               |        |
-| GET       | /app/Routes/seancesRoute     |              |               |        |
-| POST      | /app/Routes/seancesRoute     |              |               |        |
-| PUT       | /app/Routes/seancesRoute     |              |               |        |
-| DELETE    | /app/Routes/seancesRoute     |              |               |        |
-| GET       | /app/Routes/usersRoute       |              |               |        |
-| PUT       | /app/Routes/usersRoute       |              |               |        |
-| DELETE    | /app/Routes/usersRoute       |              |               |        |
-| GET       | /app/Routes/routes           |              |               |        |
-| GET       | /app/Routes/routes           |              |               |        |
-| POST      | /app/Routes/routes           |              |               |        |
-| GET       | /app/Routes/routes           |              |               |        |
-| GET       | /app/Routes/routes           |              |               |        |
-| POST      | /app/Routes/routes           |              |               |        |
-| GET       | /app/Routes/routes           |              |               |        |
-| GET       | /app/Routes/routes           |              |               |        |
-| GET       | /app/Routes/routes           |              |               |        |
-| GET       | /app/Routes/fichePresenceRoutes |              |               |        |
-| POST      | /app/Routes/fichePresenceRoutes |              |               |        |
-|           |                              |              |               |        |
+| GET       | /enseignant/seance           | 200          | retourne toutes les séances de l'enseignant |     |
+|           |                              | 500          |               | pas de contenu |
+| PUT       | /enseignant/seance/:id?      | 500          |               |        |
+| GET       | /etudiant/seance/:id?        | 200          |               |        |
+|           |                              | 404          |               |        |
+|           |                              | 500          |               |        |
+| POST      | /etudiant/seance/:id?        | 201          |               |        |
+|           |                              | 500          |               |        |
+| GET       | /admin/matieres/:id?         | 200          |               |        |
+|           |                              | 404          |               |        |
+|           |                              | 500          |               |        |
+| POST      | /admin/matieres              | 201          |               |        |
+|           |                              | 500          |               |        |
+| PUT       | /admin/matieres/:id?         | 500          |               |        |
+| DELETE    | /admin/matieres/:id?         | 500          |               |        |
+| GET       | /admin/promotions/:id?       | 200          |               |        |
+|           |                              | 404          |               |        |
+|           |                              | 500          |               |        |
+| POST      | /admin/promotions            | 201          |               |        |
+|           |                              | 500          |               |        |
+| PUT       | /admin/promotions/:id?       | 500          |               |        |
+| DELETE    | /admin/promotions/:id?       | 500          |               |        |
+| GET       | /admin/seances/:id?          | 200          |               |        |
+|           |                              | 404          |               |        |
+|           |                              | 500          |               |        |
+| POST      | /admin/seances               | 201          |               |        |
+|           |                              | 500          |               |        |
+| PUT       | /admin/seances/:id?          | 500          |               |        |
+| DELETE    | /admin/seances/:id?          | 500          |               |        |
+| GET       | /admin/users/:id?            | 200          |               |        |
+|           |                              | 404          |               |        |
+|           |                              | 500          |               |        |
+| PUT       | /admin/users/:id?            | 500          |               |        |
+| DELETE    | /admin/users/:id?            | 500          |               |        |
+| GET       | /                            | 200          |               |        |
+| GET       | /login                       | 200          |               |        |
+| POST      | /login                       |              |               |        |
+| GET       | /redirectByRole              | 200          |               |        |
+| GET       | /admin/users/create          | 201          |               |        |
+|           |                              | 404          |               |        |
+|           |                              | 500          |               |        |
+| POST      | /admin/users                 |              |               |        |
+| GET       | /profile                     | 200          |               |        |
+| GET       | /admin                       | 200          |               |        |
+| GET       | /logout                      | 200          |               |        |
+| GET       | /fichePresence/:id?          | 200          |               |        |
+|           |                              | 500          |               |        |
+| POST      | /fichePresence/:id?          | 200          |               |        |
+|           |                              | 500          |               |        |
 
 ## Technologies utilisées : 
 
