@@ -84,3 +84,11 @@ function CachePromo() {
         document.getElementById("promovisible").style.visibility = "hidden";
     }
 }
+
+function chargeListEtudiant() {
+    $("#switch").toggleClass("trombi");
+    if(!($("#switch").hasClass("trombi")))
+        $("#listEtu").load("listEtuStandard");
+    else
+        $("#listEtu").load("listEtuTrombinoscope");
+}

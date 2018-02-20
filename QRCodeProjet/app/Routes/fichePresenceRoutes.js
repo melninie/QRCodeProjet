@@ -106,7 +106,7 @@ router.post('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, 
 
         }
         else {
-            res.status(200).render('validerPresence.ejs', {
+            res.status(200).render('Enseignant/validerPresence.ejs', {
                 page_title: "validerPresence", seance: [],
                 chemin: "enseignant/seance/"
             });

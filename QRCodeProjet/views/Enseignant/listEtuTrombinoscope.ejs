@@ -1,0 +1,54 @@
+
+<script>
+    function executeQuery() {
+        $.ajax({
+            url: 'http://localhost:8080/enseignant/listEtuTrombinoscope',
+            type: 'get',
+            success: function(data) { $("#refreshTROMBI").html(data); }
+        });
+    }
+
+    $('#refreshTROMBI').ready(function() {
+        setTimeout(executeQuery, 1000 * 25);
+    });
+</script>
+
+
+<div id="refreshTROMBI">
+    <h2>Liste étudiants : <br> Vue Trombinoscope :</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nom </th>
+            <th>Prenom </th>
+            <th>Présent </th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for(var i=0; i < etudiants.length ; i++) { %>
+            <tr>
+                <td><%= etudiants[i].nomU %></td>
+                <td><%= etudiants[i].prenomU %></td>
+                <td>
+                    <% if(badge[i] != 0) { %>
+                        <span id="SignOK" class="glyphicon glyphicon-ok"></span>
+                    <% } else { %>
+                        <span id="SignKO" class="glyphicon glyphicon-ok"></span>
+                    <% } %>
+                </td>
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+    <% if(seance[0].valideS ==0) { %>
+        <form id="form">
+            <div class="form-group">
+                <label>Commentaire</label>
+                <textarea class="form-control" name="commentaire"><%=(seance[0].commentaire)%></textarea>
+            </div>
+            <div class="pull-right">
+                <a href="/<%= chemin %>" class="btn btn-success btn-lg" style="margin-bottom:10px;" onclick="modifyItem('<%= seance[0].idS %>', '<%= chemin %>')">Valider séance</a>
+            </div>
+        </form>
+    <% } %>
+</div>
