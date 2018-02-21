@@ -20,10 +20,14 @@ router.get('/listEtuTrombinoscope', function(req, res, next) {CheckLog(req, res,
 
 router.put('/seance/:id?', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res)
 {
+    console.log("OIUYTGHJKIUYGBNJUYTFVBNJHGFVBNHGV");
+
     if (req.param("id"))
     {
         var commentaire = req.body.commentaire;
         var id = req.param("id");
+        console.log(id);
+        console.log(commentaire);
 
         var query = Seance.ValiderSeance(id, commentaire, function (err, rows) {
             if (err)
@@ -56,12 +60,17 @@ function FactoryEnseignant (req, res, vue)
 
                 rows2.forEach(function (element) {
                     var query3 = Seance.ObtBadgeEtuSeance(element.id, rows[0].idS, function (err, rows3) {
+
+                       // console.log(rows3);
+
                         if (err)
                             res.status(500).render('errorRequest.ejs', {page_title: "Error", ressource: "/enseignant/seance"});
                         if (rows3.length == 0)
                             rowsbadge.push(0);
                         else
-                            rowsbadge.push(1);
+                            rowsbadge.push(moment(rows3[0].dateSignB).format("HH:mm:ss"));
+
+                        console.log(rowsbadge);
 
                         if (rowsbadge.length == rows2.length) {
                             res.status(200).render(vue, {

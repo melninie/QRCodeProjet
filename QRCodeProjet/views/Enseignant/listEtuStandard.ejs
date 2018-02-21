@@ -8,7 +8,7 @@
     }
 
     $('#refreshSTAND').ready(function() {
-        setTimeout(executeQuery, 1000 * 25);
+        setTimeout(executeQuery, 1000 * 60);
     });
 </script>
 
@@ -28,20 +28,21 @@
             <tr>
                 <td><%= etudiants[i].nomU %></td>
                 <td><%= etudiants[i].prenomU %></td>
-                <td>
-                    <% if(badge[i] != 0) { %>
+                <% if(badge[i] != 0) { %>
+                    <td>
                         <span id="SignOK" class="glyphicon glyphicon-ok"></span>
-                    <% } else { %>
+                    </td>
+                    <td>
+                        <%= badge[i] %>
+                    </td>
+                <% } else { %>
+                    <td>
                         <span id="SignKO" class="glyphicon glyphicon-ok"></span>
-                    <% } %>
-                </td>
-                <td>
-                    <% if(badge[i] != 0) { %>
-                        <%= badge[i].dateSignB %>
-                    <% } else { %>
-                        null
-                    <% } %>
-                </td>
+                    </td>
+                    <td>
+                        ...
+                    </td>
+                <% } %>
             </tr>
         <% } %>
         </tbody>

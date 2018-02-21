@@ -9,7 +9,7 @@
     }
 
     $('#refreshTROMBI').ready(function() {
-        setTimeout(executeQuery, 1000 * 25);
+        setTimeout(executeQuery, 1000 * 60);
     });
 </script>
 
@@ -20,7 +20,7 @@
         <tbody>
             <% for(var i=0; i < etudiants.length ; i++) { %>
                 <% if(badge[i] != 0) { %>
-                    <img id="SignOKTrombinoscope" class="image-cropper" src="../assets/files/imgProfileUsers/<%= etudiants[i].imageprofileU %>"></img><td></td>
+                    <img id="SignOKTrombinoscope" class="image-cropper" src="/files/imgProfileUsers/<%= etudiants[i].imageprofileU %>"></img><td></td>
                     <!--<span id="SignOK" class="glyphicon glyphicon-ok"></span>-->
                 <% } else { %>
                     <img id="SignKOTrombinoscope" class="image-cropper" src='/files/imgProfileUsers/<%= etudiants[i].imageprofileU %>'></img><td></td>
