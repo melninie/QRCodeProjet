@@ -31,7 +31,7 @@ var Seance={
     },
 
     ObtEtudiantEnseignant:function(idSeance, callback){
-        return connection.query("SELECT u.id, u.nomU, u.prenomU from seance s "
+        return connection.query("SELECT u.id, u.nomU, u.prenomU, imageprofileU from seance s "
             + "inner join matiere m on s.matiereS=m.idM "
             + "inner join promotion p on m.promotionS=p.idP "
             + "inner join users u on p.idP=u.promotionU "

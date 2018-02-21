@@ -17,27 +17,16 @@
 <div id="refreshTROMBI">
     <h2>Liste étudiants : <br> Vue Trombinoscope :</h2>
     <table class="table">
-        <thead>
-        <tr>
-            <th>Nom </th>
-            <th>Prenom </th>
-            <th>Présent </th>
-        </tr>
-        </thead>
         <tbody>
-        <% for(var i=0; i < etudiants.length ; i++) { %>
-            <tr>
-                <td><%= etudiants[i].nomU %></td>
-                <td><%= etudiants[i].prenomU %></td>
-                <td>
-                    <% if(badge[i] != 0) { %>
-                        <span id="SignOK" class="glyphicon glyphicon-ok"></span>
-                    <% } else { %>
-                        <span id="SignKO" class="glyphicon glyphicon-ok"></span>
-                    <% } %>
-                </td>
-            </tr>
-        <% } %>
+            <% for(var i=0; i < etudiants.length ; i++) { %>
+                <% if(badge[i] != 0) { %>
+                    <img id="SignOKTrombinoscope" class="image-cropper" src="../assets/files/imgProfileUsers/<%= etudiants[i].imageprofileU %>"></img><td></td>
+                    <!--<span id="SignOK" class="glyphicon glyphicon-ok"></span>-->
+                <% } else { %>
+                    <img id="SignKOTrombinoscope" class="image-cropper" src='/files/imgProfileUsers/<%= etudiants[i].imageprofileU %>'></img><td></td>
+                    <!--<span id="SignKOTrombinoscope" class="glyphicon glyphicon-ok"></span>-->
+                <% } %>
+            <% } %>
         </tbody>
     </table>
     <% if(seance[0].valideS ==0) { %>

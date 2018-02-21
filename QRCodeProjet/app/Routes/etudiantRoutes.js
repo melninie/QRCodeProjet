@@ -96,7 +96,8 @@ router.post('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "
     if(req.params.id) {
         var seance = req.params.id;
         var utilisateur = req.user.id;
-        var query = Etudiant.Signer(seance, utilisateur, function (err, rows) {
+        var date = new Date();
+        var query = Etudiant.Signer(seance, utilisateur, date, function (err, rows) {
             if (err)
                 res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/etudiant/seance"}+ req.param("id"));
             else

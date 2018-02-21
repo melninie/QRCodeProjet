@@ -124,3 +124,20 @@ body {
         background-color: #049283;
     }
 }
+
+#SignOKTrombinoscope{
+    border: 7px solid #76d04b;
+}
+#SignKOTrombinoscope{
+    border: 7px solid #ff3333;
+}
+.image-cropper {
+    overflow:hidden;
+    width: 140px;
+    height: 140px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+}

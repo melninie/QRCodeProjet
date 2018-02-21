@@ -20,6 +20,7 @@
             <th>Nom </th>
             <th>Prenom </th>
             <th>Présent </th>
+            <th>Date/Heure </th>
         </tr>
         </thead>
         <tbody>
@@ -32,6 +33,13 @@
                         <span id="SignOK" class="glyphicon glyphicon-ok"></span>
                     <% } else { %>
                         <span id="SignKO" class="glyphicon glyphicon-ok"></span>
+                    <% } %>
+                </td>
+                <td>
+                    <% if(badge[i] != 0) { %>
+                        <%= badge[i].dateSignB %>
+                    <% } else { %>
+                        null
                     <% } %>
                 </td>
             </tr>
