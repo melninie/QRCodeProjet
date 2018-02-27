@@ -24,12 +24,12 @@ var async = require('async');
                         var query1 = Matiere.ObtAllMatieresOrdonneM(function (err, rows) {
                             if (err)
                             {
-                                res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/" + req.param("id")});
+                                res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/seances/" + req.param("id")});
                                 return false;
                             }
                             if (rows.length <= 0) {
                                 res.status(404).render('errorRessource.ejs', {
-                                    page_title: "Error",
+                                    page_title: "Error", role:req.user.roleU,
                                     ressource: "/admin/seances/" + req.param("id")
                                 });
                                 return false;
@@ -43,12 +43,12 @@ var async = require('async');
                         var query2 = User.ObtAllEnseignants(function (err, rows2) {
                             if (err)
                             {
-                                res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/" + req.param("id")});
+                                res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/seances/" + req.param("id")});
                                 return false;
                             }
                             if (rows2.length <= 0) {
                                 res.status(404).render('errorRessource.ejs', {
-                                    page_title: "Error",
+                                    page_title: "Error", role:req.user.roleU,
                                     ressource: "/admin/seances/" + req.param("id")
                                 });
                                 return false;
@@ -60,7 +60,7 @@ var async = require('async');
                     }
                 ], function (err) {
                     if (err)
-                        res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/" + req.param("id")});
+                        res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/seances/" + req.param("id")});
                     else
                         res.status(200).render('Seances/createSeance.ejs', {page_title: "createSeance", matieres:data.table1, enseignants:data.table2, chemin:"admin/seances/"});
                 });
@@ -71,12 +71,12 @@ var async = require('async');
                         var query = Seance.ObtSeanceId(req.param("id"), function (err, rows) {
                             if (err)
                             {
-                                res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/" + req.param("id")});
+                                res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/seances/" + req.param("id")});
                                 return false;
                             }
                             if (rows.length <= 0) {
                                 res.status(404).render('errorRessource.ejs', {
-                                    page_title: "Error",
+                                    page_title: "Error", role:req.user.roleU,
                                     ressource: "/admin/seances/" + req.param("id")
                                 });
                                 return false;
@@ -94,12 +94,12 @@ var async = require('async');
                         var query2 = Matiere.ObtAllMatieres(function (err, rows2) {
                             if (err)
                             {
-                                res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/" + req.param("id")});
+                                res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/seances/" + req.param("id")});
                                 return false;
                             }
                             if (rows2.length <= 0) {
                                 res.status(404).render('errorRessource.ejs', {
-                                    page_title: "Error",
+                                    page_title: "Error", role:req.user.roleU,
                                     ressource: "/admin/seances/" + req.param("id")
                                 });
                                 return false;
@@ -113,12 +113,12 @@ var async = require('async');
                         var query2 = User.ObtAllEnseignants(function (err, rows3) {
                             if (err)
                             {
-                                res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/" + req.param("id")});
+                                res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/seances/" + req.param("id")});
                                 return false;
                             }
                             if (rows3.length <= 0) {
                                 res.status(404).render('errorRessource.ejs', {
-                                    page_title: "Error",
+                                    page_title: "Error", role:req.user.roleU,
                                     ressource: "/admin/seances/" + req.param("id")
                                 });
                                 return false;
@@ -130,7 +130,7 @@ var async = require('async');
                     }
                 ], function (err) {
                     if (err)
-                        res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/" + req.param("id")});
+                        res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/seances/" + req.param("id")});
                     else
                         res.status(200).render('Seances/detailSeance.ejs', {page_title: "detailSeance", seance: data.table1, matieres: data.table2, enseignants: data.table3, chemin: "admin/seances/"});
                 });
@@ -144,7 +144,7 @@ var async = require('async');
                     {
                         if(err)
                         {
-                            res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/"});
+                            res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/seances/"});
                             return false;
                         }
                         if (rows.length != 0) {
@@ -162,7 +162,7 @@ var async = require('async');
                     var query2 = Matiere.ObtAllMatieresOrdonneM(function (err, rows2) {
                         if (err)
                         {
-                            res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/"});
+                            res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/seances/"});
                             return false;
                         }
 
@@ -174,7 +174,7 @@ var async = require('async');
                     var query3 = User.ObtAllEnseignants(function (err, rows3) {
                         if (err)
                         {
-                            res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/"});
+                            res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/seances/"});
                             return false;
                         }
 
@@ -184,7 +184,7 @@ var async = require('async');
                 }
             ], function(err){
                 if(err)
-                    res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/"});
+                    res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/seances/"});
                 else
                     res.status(200).render('Seances/allSeances.ejs',{page_title:"allSeance", seances:data2.table1, matieres:data2.table2, enseignants:data2.table3, chemin:"admin/seances/", moment: moment});
             });
@@ -195,7 +195,7 @@ var async = require('async');
     {
         var query = Seance.PostSeance(req.body.nom, req.body.date, req.body.hDebut, req.body.hFin, req.body.matiere, req.body.user, function (err, rows) {
             if (err)
-                res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/"});
+                res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/seances/"});
 
             else
                 res.status(201).redirect('/admin/seances');
@@ -216,7 +216,7 @@ var async = require('async');
 
             var query = Seance.PutSeanceId(req.param("id"), nomS, dateS, heureDebut, heureFin, commentaire, matiere, user, function (err, rows) {
                 if (err)
-                    res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/" + req.param("id")});
+                    res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/seances/" + req.param("id")});
             });
         }
     });
@@ -226,7 +226,7 @@ var async = require('async');
         if(req.param("id")) {
             var query = Seance.DelSeanceId(req.param("id"), function (err, rows) {
                 if (err)
-                    res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/seances/" + req.param("id")});
+                    res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/seances/" + req.param("id")});
            });
         }
     });

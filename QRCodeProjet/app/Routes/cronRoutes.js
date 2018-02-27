@@ -29,7 +29,7 @@ module.exports = {
         var tabEnseignantSeance = [];
         var query = Seance.CronSeanceEnseignant(date, function(err,rows) {
             if (err)
-                res.status(500).render('errorRequest.ejs', {page_title: "Error", ressource: "/enseignant/seance"});
+                res.status(500).render('errorRequest.ejs', {page_title: "Error", role:req.user.roleU, ressource: "/enseignant/seance"});
 
 
             rows.forEach(function (element, index, array) {

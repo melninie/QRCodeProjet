@@ -27,13 +27,27 @@ router.put('/seance/:id?', function(req, res, next){ CheckLog(req, res, next, "E
 
         var query = Seance.ValiderSeance(id, commentaire, function (err, rows) {
             if (err)
-                res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/enseignant/seance"}+ req.param("id"));
+                res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/enseignant/seance"}+ req.param("id"));
         });
     }
 });
 
 router.get('/profile', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res) {
     res.status(200).render('profile.ejs', { user : req.user });
+});
+
+router.get('/edtJournee', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res) {
+
+    var date= moment(new Date()).format("YYYY-MM-DD");
+
+    var query = Seance.EdtEnseignant(req.user.id, date, function (err, rows) {
+        if (err)
+            res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/enseignant/edtJournee"});
+        else
+        {
+            res.status(200).render('edtJournee.ejs', {page_title: "EDT_Journée_Enseignant", seance: rows});
+        }
+    });
 });
 
 module.exports = router;
@@ -44,7 +58,7 @@ function FactoryEnseignant (req, res, vue)
     var query = Seance.ObtSeanceEnseignant(req.user.id, function(err,rows)
     {
         if(err)
-            res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/enseignant/seance"});
+            res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/enseignant/seance"});
         if(rows.length != 0) {
 
             rows.forEach(function (element) {
@@ -54,7 +68,7 @@ function FactoryEnseignant (req, res, vue)
 
             var query2 = Seance.ObtEtudiantEnseignant(rows[0].idS, function (err, rows2) {
                 if (err)
-                    res.status(500).render('errorRequest.ejs', {page_title: "Error", ressource: "/enseignant/seance"});
+                    res.status(500).render('errorRequest.ejs', {page_title: "Error", role:req.user.roleU, ressource: "/enseignant/seance"});
 
                 var rowsbadge = [];
 
@@ -62,7 +76,7 @@ function FactoryEnseignant (req, res, vue)
                     var query3 = Seance.ObtBadgeEtuSeance(element.id, rows[0].idS, function (err, rows3) {
 
                         if (err)
-                            res.status(500).render('errorRequest.ejs', {page_title: "Error", ressource: "/enseignant/seance"});
+                            res.status(500).render('errorRequest.ejs', {page_title: "Error", role:req.user.roleU, ressource: "/enseignant/seance"});
                         if (rows3.length == 0)
                             rowsbadge.push(0);
                         else

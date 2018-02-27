@@ -4,7 +4,13 @@
         <% include layout %>
     </head>
     <body>
-        <% include menu %>
+        <% if (role == "ETUDIANT"){ %>
+            <% include Menus/MenuEtudiant %>
+        <% } else if (role == "ENSEIGNANT"){ %>
+            <% include Menus/MenuEnseignant %>
+        <% } else { %>
+            <% include Menu %>
+        <% } %>
         <div class="container">
             <h1> ERREUR TRAITEMENT</h1>
             <h2> Une erreur est survenue en cours d'opération sur la ressource <%= ressource %>.</h2>

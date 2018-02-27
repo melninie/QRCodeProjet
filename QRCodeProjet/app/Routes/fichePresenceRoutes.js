@@ -20,7 +20,7 @@ router.get('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, n
     else {
         var query = Promo.ObtAllPromos(function (err, rows) {
             if (err)
-                res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/fichePresence/"});
+                res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/fichePresence/"});
             else
                 res.status(200).render('FichePresence/formulaire.ejs', {page_title: "fichePresence", promos: rows, chemin:"admin/fichePresence/"});
         });
@@ -41,7 +41,7 @@ router.post('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, 
     var query = Seance.ObtSeancesFiche(promo, date, function(err,rows)
     {
         if(err)
-            res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/fichePresence"});
+            res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/fichePresence"});
 
         if(rows.length != 0) {
 
@@ -52,7 +52,7 @@ router.post('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, 
 
                 var query2 = Seance.ObtEtudiantEnseignant(seance.idS, function (err2, rows2) {
                     if (err2)
-                        res.status(500).render('errorRequest.ejs', {page_title: "Error", ressource: "/admin/fichePresence"});
+                        res.status(500).render('errorRequest.ejs', {page_title: "Error", role:req.user.roleU, ressource: "/admin/fichePresence"});
 
                     rows2.forEach(function (etudiant, indexE) {
                         if (!("etu"+etudiant.id in allSeances["lignes"])) {;
@@ -62,7 +62,7 @@ router.post('/fichePresence/:id?', function(req, res, next) {CheckLog(req, res, 
 
                         var query3 = Seance.ObtBadgeEtuSeance(parseInt(etudiant.id), seance.idS, function (err3, rows3) {
                             if (err3)
-                                res.status(500).render('errorRequest.ejs', {page_title: "Error", ressource: "/enseignant/seance"});
+                                res.status(500).render('errorRequest.ejs', {page_title: "Error", role:req.user.roleU, ressource: "/enseignant/seance"});
 
                             if (rows3.length == 0)
                                 allSeances["lignes"]["etu"+etudiant.id].push(0);

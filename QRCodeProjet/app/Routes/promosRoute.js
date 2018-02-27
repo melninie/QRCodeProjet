@@ -20,9 +20,9 @@ router.get('/promotions/:id?', function(req, res, next) {CheckLog(req, res, next
             var query = Promo.ObtPromoId(req.params.id, function(err,rows)
             {
                 if(err)
-                    res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/promos/" + req.param("id")});
+                    res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/promos/" + req.param("id")});
                 if(rows.length <= 0)
-                    res.status(404).render('errorRessource.ejs',{page_title:"Error", ressource:"/admin/promotions/"+req.param("id")});
+                    res.status(404).render('errorRessource.ejs',{page_title:"Error", role:req.user.roleU, ressource:"/admin/promotions/"+req.param("id")});
                 else
                     res.status(200).render('Promos/detailPromo.ejs',{page_title:"detailPromo", promo:rows, chemin:"admin/promotions/"});
             });
@@ -32,7 +32,7 @@ router.get('/promotions/:id?', function(req, res, next) {CheckLog(req, res, next
     else {
         var query = Promo.ObtAllPromos(function (err, rows) {
             if (err)
-                res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/promos/"});
+                res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/promos/"});
             else
                 res.status(200).render('Promos/allPromos.ejs', {page_title: "allPromos", promos: rows, chemin:"admin/promotions/"});
         });
@@ -48,7 +48,7 @@ router.delete('/promotions/:id?', function(req, res, next){ CheckLog(req, res, n
 
                 var query = Promo.DelPromoId(req.param("id"), function (err, rows) {
                     if (err)
-                        res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/promos/" + req.param("id")});
+                        res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/promos/" + req.param("id")});
 
                     parallel_done();
 
@@ -60,7 +60,7 @@ router.delete('/promotions/:id?', function(req, res, next){ CheckLog(req, res, n
                         var query4 = Seance.DelSeanceByMatiere(element.idM, function (err, rows) {
                             if (err)
                                 res.status(500).render('errorRequest.ejs', {
-                                    page_title: "Error",
+                                    page_title: "Error", role:req.user.roleU,
                                     ressource: "/admin/matiere/" + req.param("id")
                                 });
                         });
@@ -69,7 +69,7 @@ router.delete('/promotions/:id?', function(req, res, next){ CheckLog(req, res, n
                     var query3 = Matiere.DelMatiereByPromo(req.param("id"), function (err, rows) {
                         if (err)
                             res.status(500).render('errorRequest.ejs', {
-                                page_title: "Error",
+                                page_title: "Error", role:req.user.roleU,
                                 ressource: "/admin/promos/" + req.param("id")
                             });
                     });
@@ -77,7 +77,7 @@ router.delete('/promotions/:id?', function(req, res, next){ CheckLog(req, res, n
             }
         ], function(err){
             if(err)
-                res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/matiere"});
+                res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/matiere"});
         });
     }
 });
@@ -91,7 +91,7 @@ router.put('/promotions/:id?', function(req, res, next){ CheckLog(req, res, next
         var nomP = req.body.nom;
         var query = Promo.PutPromoId(req.param("id"), nomP, function (err, rows) {
             if (err)
-                res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/promos/" + req.param("id")});
+                res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/promos/" + req.param("id")});
         });
     }
 });
@@ -101,7 +101,7 @@ router.post('/promotions', function(req, res, next){ CheckLog(req, res, next, "A
     var nomP = req.body.nom;
     var query = Promo.AddPromoId(nomP, function (err, rows) {
         if (err)
-            res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/promos/"});
+            res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/promos/"});
 
         res.status(201).redirect('/admin/promotions');
     });

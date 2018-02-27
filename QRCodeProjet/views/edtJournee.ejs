@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>EDT d'aujourd'hui : </title>
+    <% include layout%>
+</head>
+<body>
+    <div id="titre" class="container">
+        <% if(seance.length!=0) { %>
+            <% if(seance[0].roleU == "ETUDIANT") { %>
+                <% include Menus/MenuEtudiant %>
+            <% } else { %>
+                <% include Menus/MenuEnseignant %>
+            <% } %>
+        <% } %>
+        <h2 class="pull-left">Séances d'aujourd'hui : </h2>
+    </div>
+    <div class="container">
+        <br>
+        <br>
+        <% if(seance.length!=0) { %>
+             <% for(var i=0; i<=seance.length-1; i++) { %>
+                <span <% if(seance[i].valideS==0) { %> id="seanceInvalideAjrd" <% } else { %> id="seanceValideAjrd" <% } %> >
+                        <%= seance[i].nomS %>
+                        <%= seance[i].heureDebut %>
+                        <%= seance[i].nomM %>
+                </span>
+                <br>
+                <br>
+            <% } %>
+        <% } else { %>
+            <div class="col-md-5">
+                <div class="container">
+                    Vous n'avez plus de cours aujourd'hui !
+                </div>
+            </div>
+        <% } %>
+    </div>
+</body>
+</html>

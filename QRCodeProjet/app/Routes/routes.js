@@ -45,12 +45,12 @@ module.exports = function(app, passport) {
         var query = Promo.ObtAllPromos(function (err, rows) {
             if (err)
 			{
-				res.status(500).render('errorRequest.ejs', {page_title:"Error", ressource: "/admin/users/"});
+				res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/users/"});
 				return false;
             }
              if(rows.length<=0)
              {
-                 res.status(404).render('errorRessource.ejs', {page_title:"Error", ressource:"/admin/users/create"});
+                 res.status(404).render('errorRessource.ejs', {page_title:"Error", role:req.user.roleU, ressource:"/admin/users/create"});
                  return false;
              }
             res.status(201).render('Users/createUser.ejs', {page_title:"createUser", promos:rows, chemin:"/admin/users/"});
