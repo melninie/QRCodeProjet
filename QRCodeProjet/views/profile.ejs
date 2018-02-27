@@ -12,7 +12,14 @@
 	</div>
 
 	<div class="row">
-        <% include Menus/MenuEtudiant %>
+        <% if (user.roleU == "ETUDIANT"){ %>
+        	<% include Menus/MenuEtudiant %>
+        <% } else if (user.roleU == "ENSEIGNANT"){ %>
+        	<% include Menus/MenuEnseignant %>
+        <% } else { %>
+        	<% include Menu %>
+        <% } %>
+
 		<div class="col-sm-4">
 			<div align="center">
 				<img src="/files/imgProfileUsers/<%= user.imageProfileU %>" style="width:50%"></img><br>
