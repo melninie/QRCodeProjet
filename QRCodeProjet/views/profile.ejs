@@ -7,19 +7,28 @@
 <body>
 <div class="container">
 
-	<div class="page-header text-center">
+	<div class="text-center">
 		<h1>Profil</h1>
 	</div>
 
 	<div class="row">
         <% include Menus/MenuEtudiant %>
-		<div class="col-sm-6">
+		<div class="col-sm-4">
+			<div align="center">
+				<img src="/files/imgProfileUsers/<%= user.imageProfileU %>" style="width:50%"></img><br>
+			</div>
+		</div>
+		<div class="col-sm-8">
 			<div class="well">
-				<h3><span class="fa fa-user"></span> Local</h3>
+				<h3><span class="fa fa-user"></span> </h3>
 				<p>
-					<strong>Username</strong>: <%= user.username %><br>
 					<strong>Nom</strong>: <%= user.nomU %><br>
-					<strong>Prénom</strong>: <%= user.prenomU %>
+					<strong>Prénom</strong>: <%= user.prenomU %><br>
+					<% if (user.roleU == "ETUDIANT"){ %>
+						<strong>Promo</strong>: <%= user.promotionU %>
+                    <% } %>
+
+
 				</p>
 			</div>
 		</div>

@@ -29,7 +29,7 @@ module.exports = function(app, passport) {
 
     	switch(req.user.roleU){
 			case "ETUDIANT":
-				var returnTo = "profile";
+				var returnTo = "etudiant/profile";
 				break;
 			case "ENSEIGNANT":
 				var returnTo = "enseignant/seance";
