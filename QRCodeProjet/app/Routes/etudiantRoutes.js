@@ -106,5 +106,10 @@ router.post('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "
     }
 });
 
+
+router.get('/profile', function(req, res, next){ CheckLog(req, res, next, "ETUDIANT");}, function(req, res) {
+    res.status(200).render('profile.ejs', { user : req.user });
+});
+
 module.exports = router;
 

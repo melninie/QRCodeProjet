@@ -4,19 +4,14 @@
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
             </button>
-            <a class="navbar-brand" href="/admin"></i>&nbsp;UniFlash</a>
+            <a class="navbar-brand" href="/etudiant/profile"></i>&nbsp;UniFlash</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a class="nav-item nav-link" href="/admin/users">Utilisateurs</a></li>
-                <li><a class="nav-item nav-link" href="/admin/matieres">Matières</a></li>
-                <li><a class="nav-item nav-link" href="/admin/seances">Séances</a></li>
-                <li><a class="nav-item nav-link" href="/admin/promotions">Promotions</a></li>
-                <li><a class="nav-item nav-link" href="/admin/fichepresence">PDF</a></li>
+                <li><a class="nav-item nav-link" href="/etudiant/edt">EDT</a></li>
             </ul>
-
             <ul class="nav navbar-nav navbar-right">
-                <li><a class="nav-item nav-link" href="/admin/profile">
+                <li><a class="nav-item nav-link" href="/etudiant/profile">
                         <i class="glyphicon glyphicon-user"></i>&nbsp;Profil</a>
                 </li>
                 <li><a href="/logout" >Déconnexion&nbsp;<i class="glyphicon glyphicon-off"></i></a></li>
@@ -24,7 +19,6 @@
         </div>
     </div>
 </nav>
-
 <script>
     $(document).ready(function() {
         $('a[href="' + this.location.pathname + '"]').parent().addClass('active');

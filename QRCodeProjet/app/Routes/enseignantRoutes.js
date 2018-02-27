@@ -36,6 +36,10 @@ router.put('/seance/:id?', function(req, res, next){ CheckLog(req, res, next, "E
     }
 });
 
+router.get('/profile', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res) {
+    res.status(200).render('profile.ejs', { user : req.user });
+});
+
 module.exports = router;
 
 //requêtes à la base de données
@@ -75,7 +79,7 @@ function FactoryEnseignant (req, res, vue)
                         if (rowsbadge.length == rows2.length) {
                             res.status(200).render(vue, {
                                 page_title: "validerPresence", seance: rows,
-                                etudiants: rows2, badge: rowsbadge, chemin: "enseignant/seance/"
+                                etudiants: rows2, badge: rowsbadge, chemin: "enseignant/seance"
                             });
                         }
                     });
@@ -85,7 +89,7 @@ function FactoryEnseignant (req, res, vue)
         else {
             res.status(200).render(vue, {
                 page_title: "validerPresence", seance: [],
-                chemin: "enseignant/seance/"
+                chemin: "enseignant/seance"
             });
         }
     });

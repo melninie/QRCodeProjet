@@ -63,8 +63,8 @@ module.exports = function(app, passport) {
 		failureFlash : true // allow flash messages
 	}));
 
-	app.get('/profile', function(req, res, next){ CheckLog(req, res, next, "ETUDIANT");}, function(req, res) {
-		res.status(200).render('Etudiant/profile.ejs', { user : req.user });
+	app.get('/admin/profile', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res) {
+		res.status(200).render('profile.ejs', { user : req.user });
 	});
 
     // =====================================
