@@ -97,17 +97,25 @@ var router = require('express').Router();
     });
 
     router.use(fileUpload());
-    router.post('/upload/:img?', function(req, res) {
+    router.post('/upload/:id&:img', function(req, res) {
         if (!req.files)
-            return res.status(400).send('No files were uploaded.');
+            res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/users/" + req.param("id")});
 
         var sampleFile = req.files.sampleFile;
+        var namefile = req.param("img")+'.jpg';
 
-        sampleFile.mv('./assets/files/imgProfileUsers/'+req.param("img")+'.jpg', function(err) {
+        sampleFile.mv('./assets/files/imgProfileUsers/'+namefile, function(err) {
             if (err)
                 return res.status(500).send(err);
 
-            res.send('File uploaded!');
+            console.log('File uploaded!');
+
+            var query = User.PutUserIdImgProfil(req.param("id"), namefile, function (err, rows) {
+                if (err)
+                    res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/users/" + req.param("id")});
+
+                res.status(200).redirect('/admin/users');
+            });
         });
     });
     router.delete('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)

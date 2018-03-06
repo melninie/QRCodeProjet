@@ -18,6 +18,9 @@ var Users={
     PutUserId:function(id, nom, prenom, mail, promo, callback) {
         return connection.query("update users SET nomU=?, prenomU=?, mailU=?, promotionU=? where id=?", [nom, prenom, mail, promo, id], callback)
     },
+    PutUserIdImgProfil:function(id, namefile, callback) {
+        return connection.query("update users SET imageProfileU=? where id=?", [namefile, id], callback)
+    },
 
     DelUserId:function(id) {
         return connection.query("delete from users where id=?", [id])
