@@ -15,15 +15,15 @@
 
 
 <div id="refreshTROMBI">
-    <h2>Liste étudiants : <br> Vue Trombinoscope :</h2>
+    <h2>Liste étudiants :</h2>
     <table class="table">
         <tbody>
             <% for(var i=0; i < etudiants.length ; i++) { %>
                 <% if(badge[i] != 0) { %>
-                    <img id="SignOKTrombinoscope" class="image-cropper" src="/files/imgProfileUsers/<%= etudiants[i].imageprofileU %>"></img><td></td>
+                    <img id="SignOKTrombinoscope" class="image-cropper" src="/files/imgProfileUsers/<%= etudiants[i].imageprofileU %>"></img>&nbsp;&nbsp;<td></td>
                     <!--<span id="SignOK" class="glyphicon glyphicon-ok"></span>-->
                 <% } else { %>
-                    <img id="SignKOTrombinoscope" class="image-cropper" src='/files/imgProfileUsers/<%= etudiants[i].imageprofileU %>'></img><td></td>
+                    <img id="SignKOTrombinoscope" class="image-cropper" src='/files/imgProfileUsers/<%= etudiants[i].imageprofileU %>'></img>&nbsp;&nbsp;<td></td>
                     <!--<span id="SignKOTrombinoscope" class="glyphicon glyphicon-ok"></span>-->
                 <% } %>
             <% } %>
@@ -35,8 +35,8 @@
                 <label>Commentaire</label>
                 <textarea class="form-control" name="commentaire"><%=(seance[0].commentaire)%></textarea>
             </div>
-            <div class="pull-right">
-                <a href="/<%= chemin %>" class="btn btn-success btn-lg" style="margin-bottom:10px;" onclick="modifyItem('<%= seance[0].idS %>', '<%= chemin %>')">Valider séance</a>
+            <div class="pull-left">
+                <a href="/<%= chemin %>" class="btn btn-success btn-lg" style="margin-bottom:10px;" onclick="modifyItem('<%= seance[0].idS %>', '<%= chemin %>/')">Valider séance</a>
             </div>
         </form>
     <% } %>

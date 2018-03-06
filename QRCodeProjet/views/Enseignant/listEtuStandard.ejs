@@ -13,8 +13,8 @@
 </script>
 
 <div id="refreshSTAND">
-    <h2>Liste étudiants : <br> Vue Standard :</h2>
-    <table class="table">
+    <h2>Liste étudiants :</h2>
+    <table class="table" style="background-color: white;">
         <thead>
         <tr>
             <th>Nom </th>
@@ -53,8 +53,8 @@
                 <label>Commentaire</label>
                 <textarea class="form-control" name="commentaire"><%=(seance[0].commentaire)%></textarea>
             </div>
-            <div class="pull-right">
-                <a href="/<%= chemin %>" class="btn btn-success btn-lg" style="margin-bottom:10px;" onclick="modifyItem('<%= seance[0].idS %>', '<%= chemin %>')">Valider séance</a>
+            <div class="pull-left">
+                <a href="/<%= chemin %>" class="btn btn-success btn-lg" style="margin-bottom:10px;" onclick="modifyItem('<%= seance[0].idS %>', '<%= chemin %>/')">Valider séance</a>
             </div>
         </form>
     <% } %>

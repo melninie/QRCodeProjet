@@ -21,7 +21,7 @@
 
         <div class="container" >
             <% if (seance.length == 0){ %>
-            <div class="container list-group-item">
+                <div class="container list-group-item">
                     Il n'y pas de séance à valider.
                 </div>
             <% } else { %>
@@ -42,14 +42,17 @@
                     });
                 </script>
 
-            <button id="switch" type="button" class="btn btn-lg btn-toggle trombi" data-toggle="button" aria-pressed="false" onclick="chargeListEtudiant()">
-                <div class="handle"></div>
-            </button>
-            <script>
-                $("#switchStandard").bootstrapSwitch();
-            </script>
+                <div class="col-md-6">
+                    <button id="switch" type="button" class="btn btn-lg btn-toggle trombi pull-right" data-toggle="button" aria-pressed="false" onclick="chargeListEtudiant()">
+                        <div class="handle"></div>
+                    </button>
+                </div>
 
-            <div id="listEtu"></div>
+                <script>
+                    $("#switchStandard").bootstrapSwitch();
+                </script>
+
+                <div id="listEtu" class="col-md-7" ></div>
 
             <% } %>
         </div>
