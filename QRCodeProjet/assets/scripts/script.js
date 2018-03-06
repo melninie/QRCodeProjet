@@ -73,7 +73,7 @@ function deleteItem(idItem, chemin) {
 function modifyItem(idItem, chemin) {
     $.ajax({
         //url: "http://qrcode.guillaumeperes.fr/"+chemin+"/"+idItem,
-        url:"http://localhost:8080/"+chemin+'/'+idItem,
+        url:"http://localhost:8080/"+chemin+idItem,
         data: $("#form").serialize(),
         type: 'put',
     });

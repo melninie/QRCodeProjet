@@ -1,6 +1,7 @@
 var User=require('../Models/usersModel');
 var Promo=require('../Models/promosModel');
 var CheckLog=require('../CheckLogin');
+const fileUpload = require('express-fileupload');
 
 var router = require('express').Router();
     var async = require('async');
@@ -89,12 +90,26 @@ var router = require('express').Router();
             var promotionU = req.body.promotion;
 
             var query = User.PutUserId(req.param("id"), nomU, prenomU, mailU, promotionU, function (err, rows) {
-                if (err)
-                    res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/users/" + req.param("id")});
+            if (err)
+                res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/users/" + req.param("id")});
             });
         }
     });
 
+    router.use(fileUpload());
+    router.post('/upload/:img?', function(req, res) {
+        if (!req.files)
+            return res.status(400).send('No files were uploaded.');
+
+        var sampleFile = req.files.sampleFile;
+
+        sampleFile.mv('./assets/files/imgProfileUsers/'+req.param("img")+'.jpg', function(err) {
+            if (err)
+                return res.status(500).send(err);
+
+            res.send('File uploaded!');
+        });
+    });
     router.delete('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
     {
         if(req.param("id")) {
