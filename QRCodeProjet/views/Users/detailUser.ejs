@@ -8,9 +8,23 @@
 <body>
 <% include ../Menu %>
     <div class="container">
-        <div class="col-sm-6 col-sm-offset-3">
+        <div align="center">
             <h1><span class="fa fa-sign-in"></span>Modifier l'Utilisateur</h1>
+        </div>
 
+        <div class="col-sm-3 col-md-3">
+            <img src="/files/imgProfileUsers/<%= user[0].imageProfileU %>" style="width:50%"></img><br>
+
+                <form ref='uploadForm'
+                      id='uploadForm'
+                      action='http://localhost:8080/admin/upload/<%= user[0].nomU %>_<%= user[0].prenomU %>_<%= user[0].promotionU %>'
+                      method='post'
+                      encType="multipart/form-data">
+                    <input type="file" name="sampleFile"/><br>
+                    <input type='submit' value='Enregistrer' class="btn btn-primary btn-sm" />
+                </form>
+        </div>
+        <div class="col-sm-6 col-md-6">
             <form id="form" name="usermodif">
                 <div class="form-group">
                     <label>Nom</label>
@@ -44,16 +58,6 @@
         </div>
     </div>
 
-    <div class="container">
-        <form ref='uploadForm'
-              id='uploadForm'
-              action='http://localhost:8080/admin/upload/<%= user[0].nomU %>_<%= user[0].prenomU %>_<%= user[0].promotionU %>'
-              method='post'
-              encType="multipart/form-data">
-            <input type="file" name="sampleFile" />
-            <input type='submit' value='Upload!' />
-        </form>
-    </div>
 </body>
 </html>
 
