@@ -41,7 +41,7 @@ module.exports = function(app, passport) {
         res.status(200).redirect(returnTo);
     });
 
-	app.get('/admin/users/create', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res) {
+		app.get('/admin/users/create', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res) {
         var query = Promo.ObtAllPromos(function (err, rows) {
             if (err)
 			{

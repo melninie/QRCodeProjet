@@ -10,7 +10,7 @@
         <div class="container">
             <span class="pull-left"><h1 class="pull-left">Séances :</h1></span>
             <%if(matieres.length!=0 && enseignants.length!=0) { %>
-                <span class="pull-right"><a href="/<%= chemin %>create"><h1><img class="iconsAction" src="/files/create.PNG"></h1></a></span>
+                <span class="pull-right"><a href="/<%= chemin %>create"><h1><img class="iconsAction" src="/files/IconeAjouter.png"></h1></a></span>
             <% } %>
         </div>
         <div class="container" id="MainMenu">
@@ -41,8 +41,8 @@
                                                     <% if(moment(new Date()).format("YYYY-MM-DD") == seances[j].dateS && moment(new Date()).format("HH:mm") <= seances[j].heureFin
                                                             || moment(new Date()).format("YYYY-MM-DD") < seances[j].dateS) { %>
                                                         <div class="col-md-2">
-                                                            <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= seances[j].idS %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
-                                                            <span class="pull-right"><a href="/<%= chemin %><%= seances[j].idS %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                                                            <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= seances[j].idS %>', '<%= chemin %>')"><img class="iconsAction" src="/files/IconePoubelle.png"></a></span>
+                                                            <span class="pull-right"><a href="/<%= chemin %><%= seances[j].idS %>"><img class="iconsAction" src="/files/IconeEdit.png"></a></span>
                                                         </div>
                                                     <% } %>
                                                 </div>

@@ -10,7 +10,7 @@
         <div class="container">
             <span class="pull-left"><h1 class="pull-left">Matières :</h1></span>
             <% if(promos.length != 0) { %>
-                <span class="pull-right"><a href="/<%= chemin %>create"><h1><img class="iconsAction" src="/files/create.PNG"></h1></a></span>
+                <span class="pull-right"><a href="/<%= chemin %>create"><h1><img class="iconsAction" src="/files/IconeAjouter.png"></h1></a></span>
             <% } %>
         </div>
         <div class="container" id="MainMenu">
@@ -30,8 +30,8 @@
                                                     <div><strong><%=(matieres[j].nomM.toUpperCase())%></strong></div>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <span class="pull-right"><a href="/<%= chemin %>" onclick="confirmBeforeDelete('<%= matieres[j].idM %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
-                                                    <span class="pull-right"><a href="/<%= chemin %><%= matieres[j].idM %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                                                    <span class="pull-right"><a href="/<%= chemin %>" onclick="confirmBeforeDelete('<%= matieres[j].idM %>', '<%= chemin %>')"><img class="iconsAction" src="/files/IconePoubelle.png"></a></span>
+                                                    <span class="pull-right"><a href="/<%= chemin %><%= matieres[j].idM %>"><img class="iconsAction" src="/files/IconeEdit.png"></a></span>
                                                 </div>
                                             </div>
                                         </div>

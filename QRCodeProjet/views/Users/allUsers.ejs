@@ -9,7 +9,7 @@
 
         <div class="container">
             <span class="pull-left"><h1>Utilisateurs :</h1></span>
-            <span class="pull-right"><a href="/<%= chemin %>create"><h1><img class="iconsAction" src="/files/create.PNG"></h1></a></span>
+            <span class="pull-right"><a href="/<%= chemin %>create"><h1><img class="iconsAction" src="/files/IconeAjouter.png"></h1></a></span>
         </div>
         <div class="container" id="MainMenu">
             <div class="list-group panel">
@@ -22,8 +22,8 @@
                                     <div><strong><%=(etudiants[i].nomU.toUpperCase())%>&nbsp;&nbsp;&nbsp;<%=(etudiants[i].prenomU)%></strong>&nbsp;&nbsp;&nbsp;&nbsp;(<small><%=(etudiants[i].nomP)%>)</small></div>
                                 </div>
                                 <div class="col-md-2">
-                                    <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= etudiants[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
-                                    <span class="pull-right"><a href="/<%= chemin %><%= etudiants[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                                    <span class="pull-right"><a href="/<%= chemin %>" onclick="deleteItem('<%= etudiants[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/IconePoubelle.png"></a></span>
+                                    <span class="pull-right"><a href="/<%= chemin %><%= etudiants[i].id %>"><img class="iconsAction" src="/files/IconeEdit.png"></a></span>
                                 </div>
                             </div>
                         </div>
@@ -47,8 +47,8 @@
                                     <div><strong><%=(enseignants[i].nomU.toUpperCase())%>&nbsp;&nbsp;&nbsp;<%=(enseignants[i].prenomU)%></strong></div>
                                 </div>
                                 <div class="col-md-2">
-                                    <span class="pull-right"><a href="/<%= chemin %>" onclick="confirmBeforeDelete('<%= enseignants[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
-                                    <span class="pull-right"><a href="/<%= chemin %><%= enseignants[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                                    <span class="pull-right"><a href="/<%= chemin %>" onclick="confirmBeforeDelete('<%= enseignants[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/IconePoubelle.png"></a></span>
+                                    <span class="pull-right"><a href="/<%= chemin %><%= enseignants[i].id %>"><img class="iconsAction" src="/files/IconeEdit.png"></a></span>
                                 </div>
                             </div>
                         </div>
@@ -73,11 +73,11 @@
                                 </div>
                                 <div class="col-md-2">
                                     <% if(session!=administration[i].id && nbAdmin>1) { %>
-                                        <span class="pull-right"><a href="/<%= chemin %>" onclick="confirmBeforeDelete('<%= administration[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/delete.PNG"></a></span>
+                                        <span class="pull-right"><a href="/<%= chemin %>" onclick="confirmBeforeDelete('<%= administration[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/IconePoubelle.png"></a></span>
                                     <% } else { %>
-                                        <span class="pull-right"><img class="iconsAction" src="/files/deleteGrise.png" disabled></span>
+                                        <span class="pull-right"><img class="iconsAction" src="/files/IconeGrise.png" disabled></span>
                                     <% } %>
-                                    <span class="pull-right"><a href="/<%= chemin %><%= administration[i].id %>"><img class="iconsAction" src="/files/modify.PNG"></a></span>
+                                    <span class="pull-right"><a href="/<%= chemin %><%= administration[i].id %>"><img class="iconsAction" src="/files/IconeEdit.png"></a></span>
                                 </div>
                             </div>
                         </div>

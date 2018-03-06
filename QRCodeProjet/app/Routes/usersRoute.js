@@ -3,7 +3,7 @@ var Promo=require('../Models/promosModel');
 var CheckLog=require('../CheckLogin');
 
 var router = require('express').Router();
-var async = require('async');
+    var async = require('async');
 
     // =====================================
     // USERS ===============================
