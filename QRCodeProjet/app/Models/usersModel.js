@@ -25,5 +25,10 @@ var Users={
     DelUserId:function(id) {
         return connection.query("delete from users where id=?", [id])
     },
+
+    AddUser:function(username, pass, prenom, nom, mail, role, promotion, image, callback) {
+        return connection.query("INSERT INTO users ( username, password, prenomU, nomU, mailU, roleU, promotionU, imageProfileU) values (?,?,?,?,?,?,?,?)", [username, pass, prenom, nom, mail, role, promotion, image], callback);
+
+    }
 };
 module.exports=Users;

@@ -43,20 +43,37 @@ module.exports = function(passport) {
                     return done(err);
                 if (rows.length)
                     return done(null, false, req.flash('signupMessage', 'That mail is already taken.'));
-                else
+                /*else
                 {
-                  var newUserMysql = {
-                      username: req.body.prenom.substring(0, 2) + req.body.nom.substring(0, 4),
-                      password: bcrypt.hashSync(req.body.prenom.substring(0, 2) + req.body.nom.substring(0, 4), null, null),  // use the generateHash function in our user model
-                      prenomU: req.body.prenom,
-                      nomU: req.body.nom,
-                      mailU: req.body.mail,
-                      roleU: req.body.role,
-                      promotionU: req.body.promotion
+                   var query = User.PutUserIdImgProfil(req.param("id"), namefile, function (err, rows) {
+                        if (err)
+                            res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/users/" + req.param("id")});
+
+                        res.status(200).redirect('/admin/users');
+                    });
+
+                    var newUserMysql = {
+                        username: req.body.prenom.substring(0, 2) + req.body.nom.substring(0, 4),
+                        password: bcrypt.hashSync(req.body.prenom.substring(0, 2) + req.body.nom.substring(0, 4), null, null),  // use the generateHash function in our user model
+                        prenomU: req.body.prenom,
+                        nomU: req.body.nom,
+                        mailU: req.body.mail,
+                        roleU: req.body.role,
+                        promotionU: req.body.promotion,
+                        imageProfileU:req.body.sampleFile
                     };
 
                     if(newUserMysql.roleU != "ETUDIANT")
                         newUserMysql.promotionU=null;
+
+                    if (!req.files) {
+                        newUserMysql.imageProfileU="imagePrfileDefault.jpg";
+                    } else {
+
+                        newUserMysql.imageProfileU="";
+
+                    }
+
 
                     var insertQuery = "INSERT INTO users ( username, password, prenomU, nomU, mailU, roleU, promotionU ) values (?,?,?,?,?,?,?)";
 
@@ -65,7 +82,7 @@ module.exports = function(passport) {
                     return done(null, req.user);
 
                     });
-                }
+                }*/
             });
         })
     );

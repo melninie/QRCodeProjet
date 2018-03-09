@@ -1,7 +1,9 @@
 var User=require('../Models/usersModel');
 var Promo=require('../Models/promosModel');
 var CheckLog=require('../CheckLogin');
+
 const fileUpload = require('express-fileupload');
+var bcrypt = require('bcrypt-nodejs');
 
 var router = require('express').Router();
     var async = require('async');
@@ -97,6 +99,66 @@ var router = require('express').Router();
     });
 
     router.use(fileUpload());
+
+    router.post('/createUser', function(req, res) {
+        var username= req.body.prenom.substring(0, 2) + req.body.nom.substring(0, 4);
+        var password= bcrypt.hashSync(req.body.prenom.substring(0, 2) + req.body.nom.substring(0, 4), null, null);  // use the generateHash function in our user model
+        var nomU = req.body.nom;
+        var prenomU = req.body.prenom;
+        var mailU = req.body.mail;
+        var roleU = req.body.role;
+        var promotionU = null;
+        var imgProfileComplement = "";
+
+        if(roleU=="ETUDIANT")
+            promotionU=req.body.promotion;
+
+        if (req.files==null) {
+            if(roleU=="ENSEIGNANT")
+                imgProfileComplement= "Ens";
+            else if(roleU=="ADMIN")
+                imgProfileComplement= "Adm";
+            else
+                imgProfileComplement= promotionU;
+
+            var namefile = nomU+"_"+prenomU+"_"+imgProfileComplement+".jpg";
+
+            var sampleFile = req.files.sampleFile;
+
+            sampleFile.mv('./assets/files/imgProfileUsers/' + namefile, function (err) {
+                if (err)
+                    return res.status(500).send(err);
+
+                console.log('File uploaded!');
+
+                var query = User.AddUser(username, password, prenomU, nomU, mailU, roleU, promotionU, namefile, function (err, rows) {
+                    if (err)
+                        res.status(500).render('errorRequest.ejs', {
+                            page_title: "Error",
+                            role: req.user.roleU,
+                            ressource: "/admin/users/"
+                        });
+
+                    res.status(200).redirect('/admin/users');
+                });
+            });
+        }
+        else {
+            namefile="profileImgDefault.jpeg";
+
+            var query = User.AddUser(username, password, prenomU, nomU, mailU, roleU, promotionU, namefile, function (err, rows) {
+                if (err)
+                    res.status(500).render('errorRequest.ejs', {
+                        page_title: "Error",
+                        role: req.user.roleU,
+                        ressource: "/admin/users/"
+                    });
+
+                res.status(200).redirect('/admin/users');
+            });
+        }
+    });
+
     router.post('/upload/:id&:img', function(req, res) {
         if (!req.files)
             res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/users/" + req.param("id")});
@@ -118,6 +180,7 @@ var router = require('express').Router();
             });
         });
     });
+
     router.delete('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
     {
         if(req.param("id")) {
