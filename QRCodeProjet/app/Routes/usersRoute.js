@@ -113,7 +113,7 @@ var router = require('express').Router();
         if(roleU=="ETUDIANT")
             promotionU=req.body.promotion;
 
-        if (req.files==null) {
+        if (req.files!=null) {
             if(roleU=="ENSEIGNANT")
                 imgProfileComplement= "Ens";
             else if(roleU=="ADMIN")
@@ -124,6 +124,10 @@ var router = require('express').Router();
             var namefile = nomU+"_"+prenomU+"_"+imgProfileComplement+".jpg";
 
             var sampleFile = req.files.sampleFile;
+
+            console.log("---------------");
+            console.log(namefile);
+            console.log(sampleFile);
 
             sampleFile.mv('./assets/files/imgProfileUsers/' + namefile, function (err) {
                 if (err)
