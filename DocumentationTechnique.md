@@ -4,10 +4,28 @@
 
 **GET** https://github.com/melninie/QRCodeProjet/blob/master/QRCodeProjet/app/Routes/enseignantRoutes.js  
 ```js
-router.get('/seance', function(req, res, next) {CheckLog(req, res, next, "ENSEIGNANT");},function(req, res)
+router.get('/seance', function(req, res, next) {CheckLog(req, res, next, "ENSEIGNANT");},function(req, res){
+    FactoryEnseignant(req, res, 'Enseignant/validerPresence.ejs');
+});
 ```
 Requête qui renvoie la vue contenant les informations nécessaires pour l’enseignant, ici l’enseignant pourra consulter la vue 
 de la fiche de présence en question (séance).
+
+**GET** https://github.com/melninie/QRCodeProjet/blob/master/QRCodeProjet/app/Routes/enseignantRoutes.js
+```js
+router.get('/listEtuStandard', function(req, res, next) {CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res) {
+    FactoryEnseignant(req, res, 'Enseignant/listEtuStandard.ejs');
+});
+```
+Revoi la liste des étudiants de façon standard.
+
+**GET** https://github.com/melninie/QRCodeProjet/blob/master/QRCodeProjet/app/Routes/enseignantRoutes.js
+```js
+router.get('/listEtuTrombinoscope', function(req, res, next) {CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res) {
+    FactoryEnseignant(req, res, 'Enseignant/listEtuTrombinoscope.ejs');
+});
+``` 
+Renvoi la liste des étudiants sous forme de trombinoscope. 
 
 **PUT** https://github.com/melninie/QRCodeProjet/blob/master/QRCodeProjet/app/Routes/enseignantRoutes.js  
 ```js
@@ -15,6 +33,20 @@ router.put('/seance/:id?', function(req, res, next){ CheckLog(req, res, next, "E
 ```
 Permet à l’enseignant de valider une séance afin de notifier sa présence lors d'un cours. Il peut aussi émettre un commentaire en même 
 temps.
+
+**GET** https://github.com/melninie/QRCodeProjet/blob/master/QRCodeProjet/app/Routes/enseignantRoutes.js
+```js
+router.get('/profile', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res) {
+    res.status(200).render('profile.ejs', { user : req.user });
+});
+```
+Renvoi vers la page profile de l'enseignant connecté.
+
+**GET** https://github.com/melninie/QRCodeProjet/blob/master/QRCodeProjet/app/Routes/enseignantRoutes.js
+```js
+router.get('/edtJournee', function(req, res, next){ CheckLog(req, res, next, "ENSEIGNANT");}, function(req, res) {
+```
+Renvoi l'emploi du temps de la journée de l'enseignant connecté.
 
 ## ROUTES /etudiant :
 
@@ -31,6 +63,20 @@ router.post('/seance/:id?', function(req, res, next) {CheckLog(req, res, next, "
 ```
 Permet à l’édutiant de modifier une séance afin de valider sa présence lors de cette même séance. Cette route va créer un badge reliant
 l'id de l'étudiant à l'id de la séance.
+
+**GET** https://github.com/melninie/QRCodeProjet/blob/master/QRCodeProjet/app/Routes/etudiantRoutes.js
+```js 
+router.get('/profile', function(req, res, next){ CheckLog(req, res, next, "ETUDIANT");}, function(req, res) {
+    res.status(200).render('profile.ejs', { user : req.user });
+});
+```
+Renvoi vers la page profile de l'étudiant connecté.
+
+**GET** https://github.com/melninie/QRCodeProjet/blob/master/QRCodeProjet/app/Routes/etudiantRoutes.js
+```js
+router.get('/edtJournee', function(req, res, next){ CheckLog(req, res, next, "ETUDIANT");}, function(req, res)
+```
+Renvoi l'emploi du temps de la journée de l'étudiant connecté.
 
 ## ROUTES /admin :
 
@@ -121,6 +167,12 @@ router.put('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "AD
 Permet à l’administration de modifier les caractéristiques d’un utilisateur, il peut modifier son nom, prénom, mail et promotion dans 
 le cas d’un étudiant par exemple.
 
+**POST** https://github.com/melninie/QRCodeProjet/blob/master/QRCodeProjet/app/Routes/usersRoute.js
+```js
+router.post('/upload/:id&:img', function(req, res)
+```
+Permet de mettre a jour la photo de profile de l'utilisateur de type étudiant.
+
 **DELETE** https://github.com/melninie/QRCodeProjet/blob/master/QRCodeProjet/app/Routes/usersRoute.js  
 ```js
 router.delete('/users/:id?', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res)
@@ -198,9 +250,9 @@ https://github.com/melninie/QRCodeProjet/blob/master/QRCodeProjet/app/Routes/rou
 ```js
 app.post('/admin/users', passport.authenticate('local-signup', {
 	successRedirect : '/admin/users',
-		failureRedirect : '/admin/users/create',
-		failureFlash : true // allow flash messages
-	}));
+	failureRedirect : '/admin/users/create',
+	failureFlash : true // allow flash messages
+}));
 ```
 Cette route permet de créer un utilisateur en lui associant un nom de compte et un mot de passe.
 
@@ -208,9 +260,11 @@ Cette route permet de créer un utilisateur en lui associant un nom de compte et
 https://github.com/melninie/QRCodeProjet/blob/master/QRCodeProjet/app/Routes/routes.js    
 **GET** /profile :
 ```js
-app.get('/profile', function(req, res, next){ CheckLog(req, res, next, "ETUDIANT");}, function(req, res) {
+app.get('/admin/profile', function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res) {
+	res.status(200).render('profile.ejs', { user : req.user });
+});
 ```
-Cette route donne accès à la vue profile d’un utilisateur de type étudiant, celui-ci peut ainsi consulter les informations 
+Cette route donne accès à la vue profile d’un utilisateur de type administrateur, celui-ci peut ainsi consulter les informations 
 le concernant.
 
 ### ROUTE accueil administration :
