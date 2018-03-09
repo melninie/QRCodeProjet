@@ -113,7 +113,7 @@ var router = require('express').Router();
         if(roleU=="ETUDIANT")
             promotionU=req.body.promotion;
 
-        if (req.files!=null) {
+        if (Object.keys(req.files).length !== 0) {
             if(roleU=="ENSEIGNANT")
                 imgProfileComplement= "Ens";
             else if(roleU=="ADMIN")
