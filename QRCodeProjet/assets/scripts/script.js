@@ -61,6 +61,14 @@ function confirmBeforeDelete(idItem, chemin) {
         deleteItem(idItem, chemin)
     }
 }
+function confirmBeforeDeleteAdmin(idItem, chemin) {
+    var txt;
+    var r = confirm("Attention, vous êtes sur le point de supprimer un administrateur. Êtes-vous sûr ?");
+    if (r == true) {
+        deleteItem(idItem, chemin)
+    }
+}
+
 
 function deleteItem(idItem, chemin) {
     $.ajax({

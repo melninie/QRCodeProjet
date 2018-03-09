@@ -73,7 +73,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <% if(session!=administration[i].id && nbAdmin>1) { %>
-                                        <span class="pull-right"><a href="/<%= chemin %>" onclick="confirmBeforeDelete('<%= administration[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/IconePoubelle.png"></a></span>
+                                        <span class="pull-right"><a href="/<%= chemin %>" onclick="confirmBeforeDeleteAdmin('<%= administration[i].id %>', '<%= chemin %>')"><img class="iconsAction" src="/files/IconePoubelle.png"></a></span>
                                     <% } else { %>
                                         <span class="pull-right"><img class="iconsAction" src="/files/IconeGrise.png" disabled></span>
                                     <% } %>
