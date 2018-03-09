@@ -77,11 +77,11 @@ var Seance={
 
     EdtEnseignant:function(id, date, callback)
     {
-        return connection.query("select * from seance s inner join matiere m on s.matiereS=m.idM inner join users u on s.userS=u.id where s.userS=? and s.dateS=?", [id, date], callback);
+        return connection.query("select * from seance s inner join matiere m on s.matiereS=m.idM inner join users u on s.userS=u.id where s.userS=? and s.dateS=? order by s.heureDebut", [id, date], callback);
     },
     EdtEtudiant:function(id, date, callback)
     {
-        return connection.query("select * from users u inner join matiere m on u.promotionU=m.promotionS inner join seance s on m.idM=s.matiereS where u.id=? and s.dateS=?", [id, date], callback);
+        return connection.query("select * from users u inner join matiere m on u.promotionU=m.promotionS inner join seance s on m.idM=s.matiereS where u.id=? and s.dateS=? order by s.heureDebut", [id, date], callback);
     }
 };
 module.exports=Seance;

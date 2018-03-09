@@ -20,13 +20,26 @@
         <br>
         <% if(seance.length!=0) { %>
              <% for(var i=0; i<=seance.length-1; i++) { %>
-                <span <% if(seance[i].valideS==0) { %> id="seanceInvalideAjrd" <% } else { %> id="seanceValideAjrd" <% } %> >
-                        <%= seance[i].nomS %>
-                        <%= seance[i].heureDebut %>
-                        <%= seance[i].nomM %>
-                </span>
-                <br>
-                <br>
+                <div class="col-md-6 col-md-offset-1 col-sm-6 col-sm-offset-1">
+                    <div class="panel panel-default">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th style="background-color:<% if(seance[i].valideS==0) { %> indianred <% } else { %> green <% } %>; color: white" class="text-center">
+                                    <%= seance[i].heureDebut %> -
+                                    <%= seance[i].heureFin %>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td style="background-color: white" class="text-center">
+                                    <%= seance[i].nomM %>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+
+
             <% } %>
         <% } else { %>
             <div class="col-md-5">
