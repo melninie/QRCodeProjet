@@ -41,6 +41,10 @@ var Seance={
     ObtBadgeEtuSeance:function(idEtudiant, idSeance, callback){
         return connection.query("SELECT * from badge where utilisateurB=? and seanceB=?", [idEtudiant, idSeance], callback);
     },
+    NbPresentSeance:function(idSeance, callback)
+    {
+        return connection.query("SELECT count(*) AS nbPresent from badge where seanceB=?", [idSeance], callback);
+    },
 
     CheckSeance: function(nom, date, hDebut, hFin, matiere, enseignant, callback){
         return connection.query("SELECT * FROM seance WHERE nomS=? and dateS=? and heureDebut=? and heureFin=? and matiereS=?, userS=?",[nom, date, hDebut, hFin, matiere, enseignant], callback)

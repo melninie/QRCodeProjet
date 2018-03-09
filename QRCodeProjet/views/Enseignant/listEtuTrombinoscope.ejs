@@ -16,8 +16,8 @@
 
 <div id="refreshTROMBI">
     <h2>Liste étudiants :</h2>
-    <table class="table">
-        <tbody>
+    <div class="table">
+        <div>
             <% for(var i=0; i < etudiants.length ; i++) { %>
                 <% if(badge[i] != 0) { %>
                     <img id="SignOKTrombinoscope" class="image-cropper" src="/files/imgProfileUsers/<%= etudiants[i].imageprofileU %>"></img>&nbsp;&nbsp;<td></td>
@@ -27,8 +27,14 @@
                     <!--<span id="SignKOTrombinoscope" class="glyphicon glyphicon-ok"></span>-->
                 <% } %>
             <% } %>
-        </tbody>
-    </table>
+        </div>
+        <br>
+        <br>
+        <div>
+            Nb de présent à cette séance :
+            <%= presence %>
+        </div>
+    </div>
     <% if(seance[0].valideS ==0) { %>
         <form id="form">
             <div class="form-group">

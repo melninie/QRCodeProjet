@@ -83,9 +83,23 @@ function FactoryEnseignant (req, res, vue)
                             rowsbadge.push(moment(rows3[0].dateSignB).format("HH:mm:ss"));
 
                         if (rowsbadge.length == rows2.length) {
-                            res.status(200).render(vue, {
-                                page_title: "validerPresence", seance: rows,
-                                etudiants: rows2, badge: rowsbadge, chemin: "enseignant/seance"
+                            var nbPresent=0;
+
+                            var query2 = Seance.NbPresentSeance(rows[0].idS, function (err, rows4) {
+                                if (err)
+                                    res.status(500).render('errorRequest.ejs', {
+                                        page_title: "Error",
+                                        role: req.user.roleU,
+                                        ressource: "/enseignant/seance"
+                                    });
+
+                                if (rows4.length != 0)
+                                    nbPresent = rows4[0].nbPresent;
+
+                                res.status(200).render(vue, {
+                                    page_title: "validerPresence", seance: rows,
+                                    etudiants: rows2, badge: rowsbadge, presence: nbPresent, chemin: "enseignant/seance"
+                                });
                             });
                         }
                     });
