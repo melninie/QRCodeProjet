@@ -15,8 +15,8 @@ var Users={
         return connection.query("select * from users where id=? Order by nomU, prenomU ASC", [id], callback)
     },
 
-    PutUserId:function(id, nom, prenom, mail, promo, callback) {
-        return connection.query("update users SET nomU=?, prenomU=?, mailU=?, promotionU=? where id=?", [nom, prenom, mail, promo, id], callback)
+    PutUserId:function(id, username, password, nom, prenom, mail, promo, callback) {
+        return connection.query("update users SET username=?, password=?, nomU=?, prenomU=?, mailU=?, promotionU=? where id=?", [username, password, nom, prenom, mail, promo, id], callback)
     },
     PutUserIdImgProfil:function(id, namefile, callback) {
         return connection.query("update users SET imageProfileU=? where id=?", [namefile, id], callback)

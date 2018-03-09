@@ -86,12 +86,14 @@ var router = require('express').Router();
     {
         if (req.param("id"))
         {
+            var username= req.body.prenom.substring(0, 2) + req.body.nom.substring(0, 4);
+            var password= bcrypt.hashSync(req.body.prenom.substring(0, 2) + req.body.nom.substring(0, 4), null, null);  // use the generateHash function in our user model
             var nomU = req.body.nom;
             var prenomU = req.body.prenom;
             var mailU = req.body.mail;
             var promotionU = req.body.promotion;
 
-            var query = User.PutUserId(req.param("id"), nomU, prenomU, mailU, promotionU, function (err, rows) {
+            var query = User.PutUserId(req.param("id"), username, password, nomU, prenomU, mailU, promotionU, function (err, rows) {
             if (err)
                 res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/users/" + req.param("id")});
             });
