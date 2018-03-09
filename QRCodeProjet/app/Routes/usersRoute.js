@@ -159,7 +159,7 @@ var router = require('express').Router();
         }
     });
 
-    router.post('/upload/:id&:img', function(req, res) {
+    router.post('/upload/:id&:img',  function(req, res, next){ CheckLog(req, res, next, "ADMINISTRATION");}, function(req, res) {
         if (!req.files)
             res.status(500).render('errorRequest.ejs', {page_title:"Error", role:req.user.roleU, ressource: "/admin/users/" + req.param("id")});
 
