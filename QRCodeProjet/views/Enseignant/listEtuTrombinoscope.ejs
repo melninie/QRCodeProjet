@@ -2,7 +2,8 @@
 <script>
     function executeQuery() {
         $.ajax({
-            url: 'http://localhost:8080/enseignant/listEtuTrombinoscope',
+            url: "http://qrcode.guillaumeperes.fr/enseignant/listEtuTrombinoscope',
+            //url: 'http://localhost:8080/enseignant/listEtuTrombinoscope',
             type: 'get',
             success: function(data) { $("#refreshTROMBI").html(data); }
         });

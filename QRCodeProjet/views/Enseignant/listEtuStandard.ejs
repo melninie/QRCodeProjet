@@ -1,7 +1,8 @@
 <script>
     function executeQuery() {
         $.ajax({
-            url: 'http://localhost:8080/enseignant/listEtuStandard',
+            url: "http://qrcode.guillaumeperes.fr/enseignant/listEtuStandard',
+            //url: 'http://localhost:8080/enseignant/listEtuStandard',
             type: 'get',
             success: function(data) { $("#refreshSTAND").html(data); }
         });
