@@ -80,7 +80,7 @@ function deleteItem(idItem, chemin) {
 
 function modifyItem(idItem, chemin) {
     $.ajax({
-        url: "http://qrcode.guillaumeperes.fr/"+chemin+idItem,
+        url: "http://qrcode.guillaumeperes.fr/admin/matieres/4",
         //url:"http://localhost:8080/"+chemin+idItem,
         data: $("#form").serialize(),
         type: 'put',
